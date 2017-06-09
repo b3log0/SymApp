@@ -1,12 +1,18 @@
 import React from 'react';
 import {
     Text,
-    View
+    View,
+    Image
 } from 'react-native';
 
 class SettingScreen extends React.Component {
     static navigationOptions = {
-        title: 'Setting',
+        tabBarIcon: ({ tintColor }) => (
+            <Image
+                source={require('../images/setting.png')}
+                style={[{tintColor: tintColor}]}
+            />
+        )
     };
     render() {
         return (

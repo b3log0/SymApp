@@ -7,13 +7,13 @@ import {
     Image
 } from 'react-native';
 
-class ListScreen extends React.Component {
+class NotificationScreen extends React.Component {
     static navigationOptions = {
         title: null,
         showLabel: false,
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={require('../images/addfile.png')}
+                source={require('../images/feed.png')}
                 style={[styles.icon, {tintColor: tintColor}]}
             />
         )
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ListScreen;
+export default NotificationScreen;
