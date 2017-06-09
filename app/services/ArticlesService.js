@@ -1,12 +1,6 @@
-import axios from 'axios';
+import config from '../config/symphony'
 
-const getList = axios.get('https://hacpai.com/api/v2/articles/latest?p=1')
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+const getList = fetch(`${config.api}articles/latest?p=1`);
 
 export default {
     getList

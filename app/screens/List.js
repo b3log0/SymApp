@@ -3,7 +3,9 @@ import {
     FlatList,
     Text,
     View,
-    Button
+    Button,
+    ActivityIndicator,
+    ListView
 } from 'react-native';
 
 import articleList from '../styles/article-list'
@@ -14,33 +16,43 @@ class ListScreen extends Component {
         header: null
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true
+        }
+    };
+
+    componentDidMount() {
+        return Article.getList().then((response) => {
+            let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+            this.setState({
+                isLoading: false,
+                dataSource: ds.cloneWithRows(response.data.articles),
+            }, function () {
+                // do something with new state
+            });
+        })
+    };
+
     render() {
+        if (this.state.isLoading) {
+            return (
+                <View style={{flex: 1, paddingTop: 20}}>
+                    <ActivityIndicator />
+                </View>
+            );
+        }
+
         return (
-            <View style={articleList.container}>
-                <FlatList
-                    data={[
-                        {key: 'Devin'},
-                        {key: 'Jackson'},
-                        {key: 'James'},
-                        {key: 'Joel'},
-                        {key: 'John'},
-                        {key: 'Jillian'},
-                        {key: 'Jimmy'},
-                        {key: 'Julie'},
-                    ]}
-                    renderItem={({item}) => <View>
-                        <Text style={articleList.item}>{item.key}</Text>
-                        <Button
-                            onPress={() => this.props.navigation.navigate('Detail', {user: 'Vanessa'})}
-                            title="Chat with Lucy"
-                        />
-                    </View>}
+            <View style={{flex: 1, paddingTop: 20}}>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) => <Text>{rowData.articleTitle}</Text>}
                 />
             </View>
         );
     }
 }
-
-// Article.getList();
 
 export default ListScreen;
