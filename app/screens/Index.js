@@ -3,8 +3,9 @@ import {
     Image
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import ListScreen from './list';
-import DetailScreen from './detail';
+
+import ListScreen from './List';
+import DetailScreen from './Detail';
 
 
 const IndexScreen = StackNavigator({

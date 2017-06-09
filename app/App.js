@@ -2,10 +2,10 @@ import React from 'react';
 
 import {TabNavigator} from "react-navigation";
 
-import IndexScreen from './screens/index'
-import SettingScreen from './screens/setting'
-import NotificationScreen from './screens/notification'
-import Style from './style/variablels'
+import IndexScreen from './screens/Index'
+import SettingScreen from './screens/Setting'
+import NotificationScreen from './screens/Notification'
+import Style from './styles/variablels'
 
 const SymApp = TabNavigator({
     Index: {screen: IndexScreen},

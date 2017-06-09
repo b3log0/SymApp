@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
     Button
 } from 'react-native';
 
-class DetailScreen extends React.Component {
+class DetailScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         const {state, setParams} = navigation;
         const isInfo = state.params.mode === 'info';

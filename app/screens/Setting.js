@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
     Image
 } from 'react-native';
 
-class SettingScreen extends React.Component {
+class SettingScreen extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
             <Image
