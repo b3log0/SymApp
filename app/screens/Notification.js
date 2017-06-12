@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
     Text,
@@ -8,13 +7,15 @@ import {
     Image
 } from 'react-native';
 
+import common from '../styles/common';
+
 class NotificationScreen extends Component {
     static navigationOptions = {
         showLabel: false,
         tabBarIcon: ({ tintColor }) => (
             <Image
                 source={require('../images/feed.png')}
-                style={[styles.icon, {tintColor: tintColor}]}
+                style={[common.navgation, {tintColor: tintColor}]}
             />
         )
     };

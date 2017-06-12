@@ -5,7 +5,8 @@ import {TabNavigator} from "react-navigation";
 import IndexScreen from './screens/Index'
 import SettingScreen from './screens/Setting'
 import NotificationScreen from './screens/Notification'
-import Style from './styles/variablels'
+import variablels from './styles/variablels'
+import common from './styles/common'
 
 const SymApp = TabNavigator({
     Index: {screen: IndexScreen},
@@ -14,12 +15,14 @@ const SymApp = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     tabBarOptions: {
+        showIcon: true,
         showLabel: false,
         activeTintColor: '#fff',
-        inactiveTintColor: Style.COLOR.fade,
+        inactiveTintColor: variablels.COLOR.fade,
         style: {
-            backgroundColor: Style.THEME.primary,
+            backgroundColor: variablels.THEME.primary,
         },
+        iconStyle: common.navgation
     },
 });
 

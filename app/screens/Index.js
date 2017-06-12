@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 
 import ListScreen from './List';
 import DetailScreen from './Detail';
+import common from '../styles/common';
 
 
 const IndexScreen = StackNavigator({
@@ -17,7 +18,7 @@ IndexScreen.navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
         <Image
             source={require('../images/article.png')}
-            style={[{tintColor: tintColor}]}
+            style={[{tintColor: tintColor}, common.navgation]}
         />
     )
 }

@@ -5,12 +5,14 @@ import {
     Image
 } from 'react-native';
 
+import common from '../styles/common';
+
 class SettingScreen extends Component {
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
             <Image
                 source={require('../images/setting.png')}
-                style={[{tintColor: tintColor}]}
+                style={[common.navgation, {tintColor: tintColor}]}
             />
         )
     };
