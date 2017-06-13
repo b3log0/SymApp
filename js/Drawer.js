@@ -3,9 +3,8 @@
  */
 
 import React from 'react';
-import { Button, Platform, ScrollView, StyleSheet } from 'react-native';
+import { Button, Platform, ScrollView, StyleSheet, Text } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SampleText from './SampleText';
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -25,11 +24,7 @@ const InboxScreen = ({ navigation }) => (
 InboxScreen.navigationOptions = {
   drawerLabel: 'Inbox',
   drawerIcon: ({ tintColor }) => (
-    <MaterialIcons
-      name="move-to-inbox"
-      size={24}
-      style={{ color: tintColor }}
-    />
+    <Text style={{ color: tintColor }}>move-to-inbox</Text>
   ),
 };
 
@@ -39,7 +34,7 @@ const DraftsScreen = ({ navigation }) => (
 DraftsScreen.navigationOptions = {
   drawerLabel: 'Drafts',
   drawerIcon: ({ tintColor }) => (
-    <MaterialIcons name="drafts" size={24} style={{ color: tintColor }} />
+  <Text style={{ color: tintColor }}>drafts</Text>
   ),
 };
 

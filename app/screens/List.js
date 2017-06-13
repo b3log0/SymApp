@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-    FlatList,
     Text,
     View,
     RefreshControl,

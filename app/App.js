@@ -13,6 +13,7 @@ const SymApp = TabNavigator({
     Notification: {screen: NotificationScreen},
     Setting: {screen: SettingScreen},
 }, {
+  lazy: true,
     tabBarPosition: 'bottom',
     tabBarOptions: {
         showIcon: true,

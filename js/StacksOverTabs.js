@@ -3,10 +3,9 @@
  */
 
 import React from 'react';
-import { Button, ScrollView } from 'react-native';
+import { Button, ScrollView, Text } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import SampleText from './SampleText';
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -56,11 +55,9 @@ const TabNav = TabNavigator(
         title: 'Welcome',
         tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-home' : 'ios-home-outline'}
-            size={26}
+          <Text
             style={{ color: tintColor }}
-          />
+          >{focused ? 'ios-home' : 'ios-home-outline'}</Text>
         ),
       },
     },
@@ -70,11 +67,9 @@ const TabNav = TabNavigator(
       navigationOptions: {
         title: 'Settings',
         tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={26}
-            style={{ color: tintColor }}
-          />
+          <Text
+        style={{ color: tintColor }}
+>{focused ? 'ios-settings' : 'settings-home-outline'}</Text>
         ),
       },
     },
