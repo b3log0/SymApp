@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Text,
+  Button,
   Image,
   View
 } from 'react-native';
@@ -19,10 +19,12 @@ class SettingScreen extends Component {
   };
 
   render() {
-    const { params } = this.props.navigation.state;
     return (
       <View>
-        <Text>Chat with {params.user}</Text>
+        <Button
+          onPress={() => this.props.navigation.navigate('Detail', { user: 'Vanessa' })}
+          title="Chat with Lucy"
+        />
       </View>
     );
   }

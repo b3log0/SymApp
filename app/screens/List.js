@@ -5,15 +5,24 @@ import {
   RefreshControl,
   ActivityIndicator,
   InteractionManager,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 import Article from '../actions/Articles';
 import LoadMoreFooter from '../components/LoadMoreFooter';
+import articlePng from '../images/article.png';
+import common from '../styles/common';
 
 class ListScreen extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={articlePng}
+        style={[{ tintColor }, common.navgation]}
+      />
+    )
   };
 
   constructor(props) {

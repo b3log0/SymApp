@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -38,6 +38,10 @@ class NotificationScreen extends Component {
         style={[common.navgation, { tintColor }]}
       />
     )
+  };
+
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
   };
 
   render() {

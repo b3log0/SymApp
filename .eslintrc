@@ -1,18 +1,10 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb-base",
-  "env": {
-    "jest": true
-  },
   "plugins": [
     "react",
     "react-native"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "rules": {
     "react/jsx-uses-vars": 2,
     "react/jsx-uses-react": 2,
@@ -27,6 +19,23 @@
       "error",
       {
         "allowAfterThis": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/forbid-prop-types": [
+      1,
+      {
+        "forbid": [
+          "object"
+        ]
       }
     ]
   },

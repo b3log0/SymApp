@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Text,
   View,
@@ -21,6 +21,11 @@ class DetailScreen extends Component {
       )
     };
   };
+
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  };
+
   render() {
     const { params } = this.props.navigation.state;
     return (

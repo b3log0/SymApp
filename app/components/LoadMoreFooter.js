@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import {
   View,
   Text,
@@ -19,7 +19,15 @@ const styles = StyleSheet.create({
   }
 });
 
-class LoadMoreFooter extends Component {
+class LoadMoreFooter extends PureComponent {
+  static propTypes = {
+    isLoadAll: PropTypes.bool
+  }
+
+  static defaultProps = {
+    isLoadAll: false
+  };
+
   render() {
     return (
       <View style={styles.footer}>
