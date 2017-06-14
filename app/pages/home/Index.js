@@ -1,37 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import {
-  Button,
-  Image,
-  View
-} from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-import { icon } from '../../styles';
-import settingPng from '../../images/setting.png';
+import Navigation from './Navigation';
+import DetailScreen from '../Detail';
 
-class SettingScreen extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={settingPng}
-        style={[icon.normal, { tintColor }]}
-      />
-    )
-  };
+const IndexScreen = StackNavigator({
+  Navigation: { screen: Navigation },
+  Detail: { screen: DetailScreen }
+});
 
-  static propTypes = {
-    navigation: PropTypes.object.isRequired
-  }
-
-  render() {
-    return (
-      <View>
-        <Button
-          onPress={() => this.props.navigation.navigate('Detail', { user: 'Vanessa' })}
-          title="Chat with Lucy"
-        />
-      </View>
-    );
-  }
-}
-
-export default SettingScreen;
+export default IndexScreen;

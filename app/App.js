@@ -3,8 +3,7 @@ import { TabNavigator } from 'react-navigation';
 import IndexScreen from './pages/Index';
 import SettingScreen from './pages/home/Index';
 import NotificationScreen from './pages/notifications/Index';
-import variablels from './styles/variables';
-import { icon } from './styles';
+import { icon, color, theme } from './styles';
 
 const SymApp = TabNavigator({
   Index: { screen: IndexScreen },
@@ -16,10 +15,10 @@ const SymApp = TabNavigator({
   tabBarOptions: {
     showIcon: true,
     showLabel: false,
-    activeTintColor: '#fff',
-    inactiveTintColor: variablels.COLOR.fade,
+    activeTintColor: color.white,
+    inactiveTintColor: color.fade,
     style: {
-      backgroundColor: variablels.THEME.primary
+      backgroundColor: theme.primary
     },
     iconStyle: icon.normal
   }
