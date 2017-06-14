@@ -24,7 +24,7 @@ const MyNavScreen = ({ navigation, banner }) => (
         onPress={() =>
           navigation.setParams({
             headerVisible: !navigation.state.params ||
-              !navigation.state.params.headerVisible,
+              !navigation.state.params.headerVisible
           })}
       />}
     <Button onPress={() => navigation.goBack(null)} title="Go back" />
@@ -35,7 +35,7 @@ const MyHomeScreen = ({ navigation }) => (
   <MyNavScreen banner="Home Screen" navigation={navigation} />
 );
 MyHomeScreen.navigationOptions = {
-  title: 'Welcome',
+  title: 'Welcome'
 };
 
 const MyProfileScreen = ({ navigation }) => (
@@ -45,50 +45,50 @@ const MyProfileScreen = ({ navigation }) => (
   />
 );
 MyProfileScreen.navigationOptions = ({ navigation }) => ({
-  title: `${navigation.state.params.name}'s Profile!`,
+  title: `${navigation.state.params.name}'s Profile!`
 });
 
 const ProfileNavigator = StackNavigator(
   {
     Home: {
-      screen: MyHomeScreen,
+      screen: MyHomeScreen
     },
     Profile: {
       path: 'people/:name',
-      screen: MyProfileScreen,
-    },
+      screen: MyProfileScreen
+    }
   },
   {
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   }
 );
 
 const MyHeaderTestScreen = ({ navigation }) => (
-  <MyNavScreen banner={`Full screen view`} navigation={navigation} />
+  <MyNavScreen banner={'Full screen view'} navigation={navigation} />
 );
 MyHeaderTestScreen.navigationOptions = ({ navigation }) => {
   const headerVisible =
     navigation.state.params && navigation.state.params.headerVisible;
   return {
     header: headerVisible ? undefined : null,
-    title: 'Now you see me',
+    title: 'Now you see me'
   };
 };
 
 const ModalStack = StackNavigator(
   {
     Home: {
-      screen: MyHomeScreen,
+      screen: MyHomeScreen
     },
     ProfileNavigator: {
-      screen: ProfileNavigator,
+      screen: ProfileNavigator
     },
-    HeaderTest: { screen: MyHeaderTestScreen },
+    HeaderTest: { screen: MyHeaderTestScreen }
   },
   {
-    mode: 'modal',
+    mode: 'modal'
   }
 );
 

@@ -26,7 +26,7 @@ const MyHomeScreen = ({ navigation }) => (
   <MyNavScreen banner="Home Screen" navigation={navigation} />
 );
 MyHomeScreen.navigationOptions = {
-  title: 'Welcome',
+  title: 'Welcome'
 };
 
 const MyPhotosScreen = ({ navigation }) => (
@@ -36,7 +36,7 @@ const MyPhotosScreen = ({ navigation }) => (
   />
 );
 MyPhotosScreen.navigationOptions = {
-  title: 'Photos',
+  title: 'Photos'
 };
 
 const MyProfileScreen = ({ navigation }) => (
@@ -46,7 +46,7 @@ const MyProfileScreen = ({ navigation }) => (
   />
 );
 
-MyProfileScreen.navigationOptions = props => {
+MyProfileScreen.navigationOptions = (props) => {
   const { navigation } = props;
   const { state, setParams } = navigation;
   const { params } = state;
@@ -60,22 +60,22 @@ MyProfileScreen.navigationOptions = props => {
         onPress={() =>
           setParams({ mode: params.mode === 'edit' ? '' : 'edit' })}
       />
-    ),
+    )
   };
 };
 
 const SimpleStack = StackNavigator({
   Home: {
-    screen: MyHomeScreen,
+    screen: MyHomeScreen
   },
   Profile: {
     path: 'people/:name',
-    screen: MyProfileScreen,
+    screen: MyProfileScreen
   },
   Photos: {
     path: 'photos/:name',
-    screen: MyPhotosScreen,
-  },
+    screen: MyPhotosScreen
+  }
 });
 
 export default SimpleStack;

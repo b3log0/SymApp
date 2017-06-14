@@ -58,8 +58,8 @@ const TabNav = TabNavigator(
           <Text
             style={{ color: tintColor }}
           >{focused ? 'ios-home' : 'ios-home-outline'}</Text>
-        ),
-      },
+        )
+      }
     },
     SettingsTab: {
       screen: MySettingsScreen,
@@ -68,36 +68,36 @@ const TabNav = TabNavigator(
         title: 'Settings',
         tabBarIcon: ({ tintColor, focused }) => (
           <Text
-        style={{ color: tintColor }}
->{focused ? 'ios-settings' : 'settings-home-outline'}</Text>
-        ),
-      },
-    },
+            style={{ color: tintColor }}
+          >{focused ? 'ios-settings' : 'settings-home-outline'}</Text>
+        )
+      }
+    }
   },
   {
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
 );
 
 const StacksOverTabs = StackNavigator({
   Root: {
-    screen: TabNav,
+    screen: TabNav
   },
   NotifSettings: {
     screen: MyNotificationsSettingsScreen,
     navigationOptions: {
-      title: 'Notifications',
-    },
+      title: 'Notifications'
+    }
   },
   Profile: {
     screen: MyProfileScreen,
     path: '/people/:name',
     navigationOptions: ({ navigation }) => {
-      title: `${navigation.state.params.name}'s Profile!`;
-    },
-  },
+      `${navigation.state.params.name}'s Profile!`;
+    }
+  }
 });
 
 export default StacksOverTabs;

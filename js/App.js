@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  View,
+  View
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -26,27 +26,27 @@ const ExampleRoutes = {
   SimpleStack: {
     name: 'Stack Example',
     description: 'A card stack',
-    screen: SimpleStack,
+    screen: SimpleStack
   },
   SimpleTabs: {
     name: 'Tabs Example',
     description: 'Tabs following platform conventions',
-    screen: SimpleTabs,
+    screen: SimpleTabs
   },
   Drawer: {
     name: 'Drawer Example',
     description: 'Android-style drawer navigation',
-    screen: Drawer,
+    screen: Drawer
   },
   TabsInDrawer: {
     name: 'Drawer + Tabs Example',
     description: 'A drawer combined with tabs',
-    screen: TabsInDrawer,
+    screen: TabsInDrawer
   },
   CustomTabs: {
     name: 'Custom Tabs',
     description: 'Custom tabs with tab router',
-    screen: CustomTabs,
+    screen: CustomTabs
   },
   ModalStack: {
     name: Platform.OS === 'ios'
@@ -55,30 +55,30 @@ const ExampleRoutes = {
     description: Platform.OS === 'ios'
       ? 'Stack navigation with modals'
       : 'Dynamically showing and hiding the header',
-    screen: ModalStack,
+    screen: ModalStack
   },
   StacksInTabs: {
     name: 'Stacks in Tabs',
     description: 'Nested stack navigation in tabs',
-    screen: StacksInTabs,
+    screen: StacksInTabs
   },
   StacksOverTabs: {
     name: 'Stacks over Tabs',
     description: 'Nested stack navigation that pushes on top of tabs',
-    screen: StacksOverTabs,
+    screen: StacksOverTabs
   },
   LinkStack: {
     name: 'Link in Stack',
     description: 'Deep linking into a route in stack',
     screen: SimpleStack,
-    path: 'people/Jordan',
+    path: 'people/Jordan'
   },
   LinkTabs: {
     name: 'Link to Settings Tab',
     description: 'Deep linking into a route in tab',
     screen: SimpleTabs,
-    path: 'settings',
-  },
+    path: 'settings'
+  }
 };
 
 const MainScreen = ({ navigation }) => (
@@ -109,8 +109,8 @@ const AppNavigator = StackNavigator(
   {
     ...ExampleRoutes,
     Index: {
-      screen: MainScreen,
-    },
+      screen: MainScreen
+    }
   },
   {
     initialRouteName: 'Index',
@@ -120,7 +120,7 @@ const AppNavigator = StackNavigator(
    * Use modal on iOS because the card mode comes from the right,
    * which conflicts with the drawer example gesture
    */
-    mode: Platform.OS === 'ios' ? 'modal' : 'card',
+    mode: Platform.OS === 'ios' ? 'modal' : 'card'
   }
 );
 
@@ -132,22 +132,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#ddd'
   },
   image: {
     width: 120,
     height: 120,
     alignSelf: 'center',
     marginBottom: 20,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#444',
+    color: '#444'
   },
   description: {
     fontSize: 13,
-    color: '#999',
-  },
+    color: '#999'
+  }
 });

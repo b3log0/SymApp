@@ -1,7 +1,7 @@
 import {
-    AppRegistry,
+  AppRegistry
 } from 'react-native';
 
-import App from './app/App'
+import App from './app/App';
 
 AppRegistry.registerComponent('SymApp', () => App);

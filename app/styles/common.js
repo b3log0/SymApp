@@ -1,7 +1,7 @@
 const navgation = {
-    height: 20,
-    width: 20
+  height: 20,
+  width: 20
 };
 export default {
-    navgation
+  navgation
 };

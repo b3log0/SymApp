@@ -1,18 +1,10 @@
-import config from '../config/symphony'
+import config from '../config/symphony';
 
-const getList = (currentPage) => {
-    return fetch(`${config.api}articles/latest?p=${currentPage}`)
-        .then((response) => {
-            return response.json()
-        })
-        .then((response) => {
-            return Promise.resolve(response)
-        })
-        .catch((error) => {
-            return Promise.reject(error)
-        })
-};
+const getList = currentPage => fetch(`${config.api}articles/latest?p=${currentPage}`)
+  .then(response => response.json())
+  .then(response => Promise.resolve(response))
+  .catch(error => Promise.reject(error));
 
 export default {
-    getList
-}
+  getList
+};

@@ -16,9 +16,9 @@ const TabsInDrawer = DrawerNavigator({
         label: 'Simple Tabs',
         icon: ({ tintColor }) => (
           <Text style={{ color: tintColor }}>filter-1</Text>
-        ),
-      }),
-    },
+        )
+      })
+    }
   },
   StacksOverTabs: {
     screen: StacksOverTabs,
@@ -27,16 +27,16 @@ const TabsInDrawer = DrawerNavigator({
         label: 'Stacks Over Tabs',
         icon: ({ tintColor }) => (
           <Text style={{ color: tintColor }}>filter-2</Text>
-        ),
-      }),
-    },
-  },
+        )
+      })
+    }
+  }
 });
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  },
+    marginTop: Platform.OS === 'ios' ? 20 : 0
+  }
 });
 
 export default TabsInDrawer;

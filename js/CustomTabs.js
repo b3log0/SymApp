@@ -10,13 +10,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import {
   createNavigator,
   createNavigationContainer,
   TabRouter,
-  addNavigationHelpers,
+  addNavigationHelpers
 } from 'react-navigation';
 import SampleText from './SampleText';
 
@@ -70,7 +70,7 @@ const CustomTabView = ({ router, navigation }) => {
       <ActiveScreen
         navigation={addNavigationHelpers({
           ...navigation,
-          state: routes[index],
+          state: routes[index]
         })}
       />
     </View>
@@ -81,20 +81,20 @@ const CustomTabRouter = TabRouter(
   {
     Home: {
       screen: MyHomeScreen,
-      path: '',
+      path: ''
     },
     Notifications: {
       screen: MyNotificationsScreen,
-      path: 'notifications',
+      path: 'notifications'
     },
     Settings: {
       screen: MySettingsScreen,
-      path: 'settings',
-    },
+      path: 'settings'
+    }
   },
   {
     // Change this to start on a different tab
-    initialRouteName: 'Home',
+    initialRouteName: 'Home'
   }
 );
 
@@ -104,11 +104,11 @@ const CustomTabs = createNavigationContainer(
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
+    marginTop: Platform.OS === 'ios' ? 20 : 0
   },
   tabContainer: {
     flexDirection: 'row',
-    height: 48,
+    height: 48
   },
   tab: {
     flex: 1,
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
     margin: 4,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 4,
-  },
+    borderRadius: 4
+  }
 });
 
 export default CustomTabs;

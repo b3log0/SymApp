@@ -17,6 +17,6 @@ export default SampleText;
 
 const styles = StyleSheet.create({
   sampleText: {
-    margin: 14,
-  },
+    margin: 14
+  }
 });

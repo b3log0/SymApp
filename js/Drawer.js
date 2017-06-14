@@ -25,7 +25,7 @@ InboxScreen.navigationOptions = {
   drawerLabel: 'Inbox',
   drawerIcon: ({ tintColor }) => (
     <Text style={{ color: tintColor }}>move-to-inbox</Text>
-  ),
+  )
 };
 
 const DraftsScreen = ({ navigation }) => (
@@ -34,33 +34,33 @@ const DraftsScreen = ({ navigation }) => (
 DraftsScreen.navigationOptions = {
   drawerLabel: 'Drafts',
   drawerIcon: ({ tintColor }) => (
-  <Text style={{ color: tintColor }}>drafts</Text>
-  ),
+    <Text style={{ color: tintColor }}>drafts</Text>
+  )
 };
 
 const DrawerExample = DrawerNavigator(
   {
     Inbox: {
       path: '/',
-      screen: InboxScreen,
+      screen: InboxScreen
     },
     Drafts: {
       path: '/sent',
-      screen: DraftsScreen,
-    },
+      screen: DraftsScreen
+    }
   },
   {
     initialRouteName: 'Drafts',
     contentOptions: {
-      activeTintColor: '#e91e63',
-    },
+      activeTintColor: '#e91e63'
+    }
   }
 );
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  },
+    marginTop: Platform.OS === 'ios' ? 20 : 0
+  }
 });
 
 export default DrawerExample;

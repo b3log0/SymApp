@@ -29,8 +29,8 @@ const MyHomeScreen = ({ navigation }) => (
 MyHomeScreen.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ tintColor, focused }) => (
-     <Text>{focused ? 'ios-home' : 'ios-home-outline'}</Text>
-  ),
+    <Text>{focused ? 'ios-home' : 'ios-home-outline'}</Text>
+  )
 };
 
 const MyPeopleScreen = ({ navigation }) => (
@@ -40,8 +40,8 @@ const MyPeopleScreen = ({ navigation }) => (
 MyPeopleScreen.navigationOptions = {
   tabBarLabel: 'People',
   tabBarIcon: ({ tintColor, focused }) => (
-      <Text>{focused ? 'ios-people' : 'ios-people-outline'}</Text>
-  ),
+    <Text>{focused ? 'ios-people' : 'ios-people-outline'}</Text>
+  )
 };
 
 const MyChatScreen = ({ navigation }) => (
@@ -51,8 +51,8 @@ const MyChatScreen = ({ navigation }) => (
 MyChatScreen.navigationOptions = {
   tabBarLabel: 'Chat',
   tabBarIcon: ({ tintColor, focused }) => (
-  <Text>{focused ? 'ios-chatboxes' : 'ios-chatboxes-outline'}</Text>
-  ),
+    <Text>{focused ? 'ios-chatboxes' : 'ios-chatboxes-outline'}</Text>
+  )
 };
 
 const MySettingsScreen = ({ navigation }) => (
@@ -62,40 +62,40 @@ const MySettingsScreen = ({ navigation }) => (
 MySettingsScreen.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ tintColor, focused }) => (
-      <Text>{focused ? 'ios-settings' : 'ios-settings-outline'}</Text>
-  ),
+    <Text>{focused ? 'ios-settings' : 'ios-settings-outline'}</Text>
+  )
 };
 
 const SimpleTabs = TabNavigator(
   {
     Home: {
       screen: MyHomeScreen,
-      path: '',
+      path: ''
     },
     People: {
       screen: MyPeopleScreen,
-      path: 'cart',
+      path: 'cart'
     },
     Chat: {
       screen: MyChatScreen,
-      path: 'chat',
+      path: 'chat'
     },
     Settings: {
       screen: MySettingsScreen,
-      path: 'settings',
-    },
+      path: 'settings'
+    }
   },
   {
     tabBarOptions: {
-      activeTintColor: Platform.OS === 'ios' ? '#e91e63' : '#fff',
-    },
+      activeTintColor: Platform.OS === 'ios' ? '#e91e63' : '#fff'
+    }
   }
 );
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  },
+    marginTop: Platform.OS === 'ios' ? 20 : 0
+  }
 });
 
 export default SimpleTabs;

@@ -3,20 +3,29 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "lint": "eslint . --fix --format=node_modules/eslint-formatter-pretty --quiet",
     "start": "node node_modules/react-native/local-cli/cli.js start --port 8080",
     "test": "jest",
     "ios": "react-native run-ios",
     "android": "react-native run-android"
   },
   "dependencies": {
+    "mobx": "^3.1.15",
     "mobx-react": "^4.2.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.0",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "babel-jest": "20.0.3",
     "babel-preset-react-native": "1.9.2",
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react-native": "^2.3.2",
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12"
   },

@@ -51,16 +51,16 @@ const MainTab = StackNavigator({
     screen: MyHomeScreen,
     path: '/',
     navigationOptions: {
-      title: 'Welcome',
-    },
+      title: 'Welcome'
+    }
   },
   Profile: {
     screen: MyProfileScreen,
     path: '/people/:name',
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.name}'s Profile!`,
-    }),
-  },
+      title: `${navigation.state.params.name}'s Profile!`
+    })
+  }
 });
 
 const SettingsTab = StackNavigator({
@@ -68,15 +68,15 @@ const SettingsTab = StackNavigator({
     screen: MySettingsScreen,
     path: '/',
     navigationOptions: () => ({
-      title: 'Settings',
-    }),
+      title: 'Settings'
+    })
   },
   NotifSettings: {
     screen: MyNotificationsSettingsScreen,
     navigationOptions: {
-      title: 'Notifications',
-    },
-  },
+      title: 'Notifications'
+    }
+  }
 });
 
 const StacksInTabs = TabNavigator(
@@ -88,8 +88,8 @@ const StacksInTabs = TabNavigator(
         tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor, focused }) => (
           <Text style={{ color: tintColor }}>{focused ? 'ios-home' : 'ios-home-outline'}</Text>
-        ),
-      },
+        )
+      }
     },
     SettingsTab: {
       screen: SettingsTab,
@@ -98,14 +98,14 @@ const StacksInTabs = TabNavigator(
         tabBarLabel: 'Settings',
         tabBarIcon: ({ tintColor, focused }) => (
           <Text style={{ color: tintColor }}>{focused ? 'ios-settings' : 'ios-settings-outline'}</Text>
-        ),
-      },
-    },
+        )
+      }
+    }
   },
   {
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
 );
 
