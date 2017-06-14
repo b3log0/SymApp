@@ -12,7 +12,7 @@ import {
 import Article from '../actions/Articles';
 import LoadMoreFooter from '../components/LoadMoreFooter';
 import articlePng from '../images/article.png';
-import common from '../styles/common';
+import { utils, list, icon } from '../styles';
 
 class ListScreen extends Component {
   static navigationOptions = {
@@ -20,7 +20,7 @@ class ListScreen extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={articlePng}
-        style={[{ tintColor }, common.navgation]}
+        style={[{ tintColor }, icon.normal]}
       />
     )
   };
@@ -111,14 +111,14 @@ class ListScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={utils.statusBar}>
           <ActivityIndicator />
         </View>
       );
     }
 
     return (
-      <View style={{ flex: 1, paddingTop: 20 }}>
+      <View style={utils.statusBar}>
         <ListView
           dataSource={this.state.dataSource}
           onEndReached={() => this._toEnd()}
@@ -133,7 +133,7 @@ class ListScreen extends Component {
           }
           renderRow={rowData =>
             (<View>
-              <Text style={{ height: 50 }}>{rowData.articleTitle}</Text>
+              <Text style={list.lineHeight}>{rowData.articleTitle}</Text>
             </View>)}
         />
       </View>

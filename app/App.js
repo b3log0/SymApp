@@ -1,10 +1,10 @@
 import { TabNavigator } from 'react-navigation';
 
-import IndexScreen from './screens/Index';
-import SettingScreen from './screens/Setting';
-import NotificationScreen from './screens/Notification';
+import IndexScreen from './pages/Index';
+import SettingScreen from './pages/home/Index';
+import NotificationScreen from './pages/notifications/Index';
 import variablels from './styles/variables';
-import common from './styles/common';
+import { icon } from './styles';
 
 const SymApp = TabNavigator({
   Index: { screen: IndexScreen },
@@ -21,7 +21,7 @@ const SymApp = TabNavigator({
     style: {
       backgroundColor: variablels.THEME.primary
     },
-    iconStyle: common.navgation
+    iconStyle: icon.normal
   }
 });
 

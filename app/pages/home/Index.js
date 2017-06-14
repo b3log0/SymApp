@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Button,
   Image,
   View
 } from 'react-native';
 
-import common from '../styles/common';
-import settingPng from '../images/setting.png';
+import { icon } from '../../styles';
+import settingPng from '../../images/setting.png';
 
 class SettingScreen extends Component {
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={settingPng}
-        style={[common.navgation, { tintColor }]}
+        style={[icon.normal, { tintColor }]}
       />
     )
   };
+
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  }
 
   render() {
     return (

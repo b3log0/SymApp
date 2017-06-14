@@ -1,5 +1,5 @@
 const api = 'https://hacpai.com/api/v2/';
+const theme = 'sky';
 
-export default {
-  api
-};
+export { api };
+export { theme };
