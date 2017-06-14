@@ -30,17 +30,17 @@ const styles = StyleSheet.create({
 });
 
 class NotificationScreen extends Component {
-    static navigationOptions = {
-      showLabel: false,
-      tabBarIcon: ({ tintColor }) => (
-        <Image
-          source={feedPng}
-          style={[common.navgation, { tintColor }]}
-        />
-      )
-    };
+  static navigationOptions = {
+    showLabel: false,
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={feedPng}
+        style={[common.navgation, { tintColor }]}
+      />
+    )
+  };
 
-    render() {
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>

@@ -3,7 +3,7 @@ import { TabNavigator } from 'react-navigation';
 import IndexScreen from './screens/Index';
 import SettingScreen from './screens/Setting';
 import NotificationScreen from './screens/Notification';
-import variablels from './styles/variablels';
+import variablels from './styles/variables';
 import common from './styles/common';
 
 const SymApp = TabNavigator({

@@ -10,7 +10,9 @@
     "android": "react-native run-android"
   },
   "dependencies": {
+
     "mobx": "^3.1.15",
+    "mobx-logger": "^0.6.0",
     "mobx-react": "^4.2.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.0",
@@ -23,6 +25,7 @@
     "eslint": "^4.0.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^2.3.2",
