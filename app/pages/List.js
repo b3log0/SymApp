@@ -5,7 +5,8 @@ import {
   RefreshControl,
   ActivityIndicator,
   InteractionManager,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 import Article from '../actions/Articles';
@@ -119,10 +120,29 @@ class List extends Component {
               onRefresh={() => this._onRefresh()}
             />
           }
-          renderRow={rowData =>
-            (<View>
-              <Text style={list.lineHeight}>{rowData.articleTitle}</Text>
-            </View>)}
+          renderRow={(rowData) => {
+            let thumbanilImg = <Text style={utils.empty} />;
+            if (rowData.articleThumbnailURL !== '') {
+              thumbanilImg = (<Image
+                style={{ height: 30, width: 100 }}
+                source={{ uri: rowData.articleThumbnailURL }}
+              />);
+            }
+            return (<View style={list.normal}>
+              {thumbanilImg}
+              <Text style={list.title}>{rowData.articleTitle}</Text>
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Image
+                  source={{ uri: rowData.articleAuthorThumbnailURL48 }}
+                  style={{ height: 30, width: 30 }}
+                />
+                <Text>
+                  {rowData.articleAuthorName} {rowData.cmtTimeAgo}发帖
+                </Text>
+              </View>
+              <Text style={list.content}>{rowData.articlePreviewContent}</Text>
+            </View>);
+          }}
         />
       </View>
     );
