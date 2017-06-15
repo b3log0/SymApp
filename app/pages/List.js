@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
   RefreshControl,
@@ -13,6 +13,11 @@ import ListItem from '../components/article/ListItem';
 import { utils } from '../styles';
 
 class List extends Component {
+
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
