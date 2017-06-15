@@ -119,7 +119,7 @@ class List extends Component {
               onRefresh={() => this._onRefresh()}
             />
           }
-          renderRow={rowData => (<ListItem rowData={rowData} />)}
+          renderRow={rowData => (<ListItem rowData={rowData} navigation={this.props.navigation} />)}
         />
       </View>
     );
