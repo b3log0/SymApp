@@ -2,7 +2,7 @@
   "name": "SymApp",
   "version": "0.0.1",
   "private": true,
-  "pre-commit": "yarn lint",
+  "pre-commit": "lint",
   "scripts": {
     "lint": "eslint . --fix --format=node_modules/eslint-formatter-pretty --quiet",
     "start": "node node_modules/react-native/local-cli/cli.js start --port 8080",
