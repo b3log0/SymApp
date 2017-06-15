@@ -1,24 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import {
   View,
-  Button,
-  Image
+  Button
 } from 'react-native';
 
-import { icon } from '../../styles';
-import feedPng from '../../images/feed.png';
-
-class NotificationScreen extends Component {
-  static navigationOptions = {
-    showLabel: false,
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={feedPng}
-        style={[icon.normal, { tintColor }]}
-      />
-    )
-  };
-
+class Notification extends PureComponent {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   };
@@ -35,4 +21,4 @@ class NotificationScreen extends Component {
   }
 }
 
-export default NotificationScreen;
+export default Notification;

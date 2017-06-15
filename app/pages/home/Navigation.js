@@ -1,26 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import {
   Button,
-  Image,
   View
 } from 'react-native';
 
-import { icon } from '../../styles';
-import settingPng from '../../images/setting.png';
 
-class Navigation extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={settingPng}
-        style={[icon.normal, { tintColor }]}
-      />
-    )
-  };
+class Navigation extends PureComponent {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired
-  }
+  };
 
   render() {
     return (

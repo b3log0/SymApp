@@ -1,27 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import {
   Text,
-  View,
-  Button
+  View
 } from 'react-native';
 
-class DetailScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { state, setParams } = navigation;
-    const isInfo = state.params.mode === 'info';
-    const { user } = state.params;
-    return {
-      title: isInfo ? `${user}'s Contact Info` : `Chat with ${state.params.user}`,
-      tabBarVisible: false,
-      headerRight: (
-        <Button
-          title={isInfo ? 'Done' : `${user}'s info`}
-          onPress={() => setParams({ mode: isInfo ? 'none' : 'info' })}
-        />
-      )
-    };
-  };
-
+class Detail extends PureComponent {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   };
@@ -36,4 +19,4 @@ class DetailScreen extends Component {
   }
 }
 
-export default DetailScreen;
+export default Detail;
