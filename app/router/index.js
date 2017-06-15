@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import List from '../pages/List';
-import Detail from '../pages//Detail';
+import Article from '../pages/Article';
 import Navigation from '../pages/home/Navigation';
 import Notification from '../pages/notifications/Index';
 import { icon, color, theme } from '../styles';
@@ -28,8 +28,8 @@ const IndexStack = StackNavigator({
       />)
     }
   },
-  Detail: {
-    screen: Detail,
+  Article: {
+    screen: Article,
     navigationOptions: ({ navigation }) => {
       const { state, setParams } = navigation;
       const isInfo = state.params.mode === 'info';
@@ -59,7 +59,7 @@ const HomeStack = StackNavigator({
       )
     }
   },
-  Detail: { screen: Detail }
+  Article: { screen: Article }
 });
 
 const Root = TabNavigator({
