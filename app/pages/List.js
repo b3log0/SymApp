@@ -6,62 +6,37 @@ import {
   InteractionManager,
   ListView
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
-import Article from '../actions/Articles';
+import Articles from '../actions/Articles';
 import LoadMoreFooter from '../components/LoadMoreFooter';
 import ListItem from '../components/article/ListItem';
 import { utils } from '../styles';
 
+@inject('pagination', 'articles')
+@observer
 class List extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: true,
-      articles: [],
-      dataSource: [],
-      pagination: {},
-      currentPage: 1
-    };
-  }
-
   componentDidMount() {
-    return Article.getList(this.state.currentPage).then((response) => {
-      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-      this.setState({
-        isLoading: false,
-        dataSource: ds.cloneWithRows(response.data.articles),
-        pagination: response.data.pagination,
-        articles: response.data.articles
-      }, () => {
-        // do something with new state
-      });
-    });
+    const { pagination, articles } = this.props;
+    articles.setIsLoading(true);
+    Articles.getList(pagination.pageIndex + 1);
   }
 
   _onRefresh() {
     this.setState({ isLoading: true });
-    Article.getList(1).then((response) => {
-      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-      this.setState({
-        isLoading: false,
-        dataSource: ds.cloneWithRows(response.data.articles),
-        pagination: response.data.pagination,
-        articles: response.data.articles
-      }, () => {
-        // do something with new state
-      });
-    });
+    const { pagination } = this.props;
+    Articles.getList(pagination.pageIndex + 1);
   }
 
   _toEnd() {
-    const { articles, isLoading, pagination } = this.state;
+    const { pagination, articles } = this.props;
     // ListView滚动到底部，根据是否正在加载更多 是否正在刷新 是否已加载全部来判断是否执行加载更多
-    if (isLoading || articles.length > 20 * pagination.paginationPageCount) {
+    if (articles.isLoading || articles.length > 20 * pagination.pageTotal) {
       return;
     }
     InteractionManager.runAfterInteractions(() => {
@@ -71,29 +46,18 @@ class List extends Component {
   }
 
   _loadMoreData() {
-    const { articles, currentPage } = this.state;
-    Article.getList(currentPage + 1).then((response) => {
-      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-      this.setState({
-        isLoading: false,
-        dataSource: ds.cloneWithRows(articles.concat(response.data.articles)),
-        pagination: response.data.pagination,
-        articles: articles.concat(response.data.articles),
-        currentPage: currentPage + 1
-      }, () => {
-        // do something with new state
-      });
-    });
+    const { pagination } = this.props;
+    Articles.getList(pagination.pageIndex + 1);
   }
 
   _renderFooter() {
-    const { articles, isLoading, pagination } = this.state;
+    const { articles, pagination } = this.props;
     // 通过当前product数量和刷新状态（是否正在下拉刷新）来判断footer的显示
-    if (articles.length < 1 || isLoading) {
+    if (articles.length < 1 || articles.isLoading) {
       return null;
     }
 
-    if (articles.length < 20 * pagination.paginationPageCount) {
+    if (articles.length < 20 * pagination.pageTotal) {
       // 还有更多，默认显示‘正在加载更多...’
       return <LoadMoreFooter />;
     }
@@ -102,7 +66,8 @@ class List extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { articles } = this.props;
+    if (articles.isLoading) {
       return (
         <View style={utils.statusBar}>
           <ActivityIndicator />
@@ -113,14 +78,14 @@ class List extends Component {
     return (
       <View style={utils.statusBar}>
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={articles.listDS}
           onEndReached={() => this._toEnd()}
           onEndReachedThreshold={10}
           renderFooter={() => this._renderFooter()}
           enableEmptySections
           refreshControl={
             <RefreshControl
-              refreshing={this.state.isLoading}
+              refreshing={articles.isLoading}
               onRefresh={() => this._onRefresh()}
             />
           }

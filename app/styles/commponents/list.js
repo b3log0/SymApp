@@ -33,6 +33,7 @@ export default {
   },
   thumbnailImg: {
     flex: 1,
-    height: 100
+    height: 100,
+    marginBottom: 5
   }
 };
