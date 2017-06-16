@@ -13,17 +13,19 @@ import LoadMoreFooter from '../components/LoadMoreFooter';
 import ListItem from '../components/article/ListItem';
 import { utils } from '../styles';
 
-@inject('pagination', 'articles')
+@inject('pagination', 'entity')
 @observer
 class List extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    pagination: PropTypes.object.isRequired,
+    entity: PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    const { pagination, articles } = this.props;
-    articles.setIsLoading(true);
+    const { pagination, entity } = this.props;
+    entity.setIsLoading(true);
     Articles.getList(pagination.pageIndex + 1);
   }
 
@@ -34,9 +36,9 @@ class List extends Component {
   }
 
   _toEnd() {
-    const { pagination, articles } = this.props;
+    const { pagination, entity } = this.props;
     // ListView滚动到底部，根据是否正在加载更多 是否正在刷新 是否已加载全部来判断是否执行加载更多
-    if (articles.isLoading || articles.length > 20 * pagination.pageTotal) {
+    if (entity.isLoading || entity.length > 20 * pagination.pageTotal) {
       return;
     }
     InteractionManager.runAfterInteractions(() => {
@@ -51,13 +53,13 @@ class List extends Component {
   }
 
   _renderFooter() {
-    const { articles, pagination } = this.props;
+    const { entity, pagination } = this.props;
     // 通过当前product数量和刷新状态（是否正在下拉刷新）来判断footer的显示
-    if (articles.length < 1 || articles.isLoading) {
+    if (entity.length < 1 || entity.isLoading) {
       return null;
     }
 
-    if (articles.length < 20 * pagination.pageTotal) {
+    if (entity.length < 20 * pagination.pageTotal) {
       // 还有更多，默认显示‘正在加载更多...’
       return <LoadMoreFooter />;
     }
@@ -66,8 +68,8 @@ class List extends Component {
   }
 
   render() {
-    const { articles } = this.props;
-    if (articles.isLoading) {
+    const { entity } = this.props;
+    if (entity.isLoading) {
       return (
         <View style={utils.statusBar}>
           <ActivityIndicator />
@@ -78,14 +80,14 @@ class List extends Component {
     return (
       <View style={utils.statusBar}>
         <ListView
-          dataSource={articles.listDS}
+          dataSource={entity.listDS}
           onEndReached={() => this._toEnd()}
           onEndReachedThreshold={10}
           renderFooter={() => this._renderFooter()}
           enableEmptySections
           refreshControl={
             <RefreshControl
-              refreshing={articles.isLoading}
+              refreshing={entity.isLoading}
               onRefresh={() => this._onRefresh()}
             />
           }

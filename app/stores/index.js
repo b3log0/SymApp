@@ -1,7 +1,7 @@
 import { useStrict } from 'mobx';
 import { enableLogging } from 'mobx-logger';
 
-import articles from './Articles';
+import entity from './Entity';
 import pagination from './Pagination';
 
 useStrict(true);
@@ -16,6 +16,6 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 export default {
-  articles,
+  entity,
   pagination
 };

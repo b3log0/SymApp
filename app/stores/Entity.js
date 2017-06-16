@@ -1,7 +1,7 @@
 import { ListView } from 'react-native';
 import { observable, computed, action } from 'mobx';
 
-class Articles {
+class Entity {
   @observable list
   @observable isLoading
 
@@ -25,6 +25,6 @@ class Articles {
 }
 
 
-const articles = new Articles();
-export default articles;
-export { Articles };
+const entity = new Entity();
+export default entity;
+export { Entity };

@@ -1,21 +1,20 @@
 import ArticlesService from '../services/ArticlesService';
 
 import paginationStore from '../stores/Pagination';
-import articleStore from '../stores/Articles';
+import entityStore from '../stores/Entity';
 
 const getList = pageIndex => ArticlesService.getList(pageIndex)
   .then((response) => {
-
-    articleStore.setIsLoading(false);
+    entityStore.setIsLoading(false);
 
     const data = response.data;
 
     paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
     if (pageIndex === 1) {
-      articleStore.setList(data.articles);
+      entityStore.setList(data.articles);
     } else {
-      articleStore.setList(articleStore.list.concat(data.articles));
+      entityStore.setList(entityStore.list.concat(data.articles));
     }
   })
   .catch((error) => {
