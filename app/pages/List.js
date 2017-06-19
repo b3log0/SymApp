@@ -24,15 +24,15 @@ class List extends Component {
   }
 
   componentDidMount() {
-    const { pagination, entity } = this.props;
+    const { entity } = this.props;
     entity.setIsLoading(true);
-    Articles.getList(pagination.pageIndex + 1);
+    Articles.getList(1);
   }
 
   _onRefresh() {
-    this.setState({ isLoading: true });
-    const { pagination } = this.props;
-    Articles.getList(pagination.pageIndex + 1);
+    const { entity } = this.props;
+    entity.setIsLoading(true);
+    Articles.getList(1);
   }
 
   _toEnd() {

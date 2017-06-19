@@ -1,7 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import {
-  Text,
-  View
+  WebView
 } from 'react-native';
 
 class Detail extends PureComponent {
@@ -12,9 +11,10 @@ class Detail extends PureComponent {
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View>
-        <Text>Chat with {params.user}</Text>
-      </View>
+      <WebView
+        ref={(web) => { this.injectWebView = web; }}
+        source={{ uri: `https://hacpai.com/article/${params.oId}` }}
+      />
     );
   }
 }

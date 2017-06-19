@@ -8,10 +8,13 @@ import {
   Button
 } from 'react-native';
 
+import userAction from '../actions/User';
 import List from '../pages/List';
 import Article from '../pages/Article';
 import Navigation from '../pages/home/Navigation';
 import Notification from '../pages/notifications/Index';
+import Login from '../pages/verify/Login';
+import HomeStack from '../pages/home/HomeStack';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -48,19 +51,23 @@ const IndexStack = StackNavigator({
   }
 });
 
-const HomeStack = StackNavigator({
-  Navigation: { screen: Navigation,
-    navigationOptions: {
-      tabBarIcon: obj => (
-        <Image
-          source={settingPng}
-          style={[icon.normal, { tintColor: obj.tintColor }]}
-        />
-      )
-    }
-  },
-  Article: { screen: Article }
-});
+// const HomeStack = StackNavigator({
+//   Navigation: {
+//     screen: Navigation
+//   },
+//   Login: {
+//     screen: Login,
+//     navigationOptions: {
+//       header: null,
+//       tabBarVisible: false
+//     }
+//   },
+//   Article: { screen: Article }
+// }, {
+//   initialRouteName: () => {
+//     userAction.isLogin().then(isLogin => isLogin ? 'Navigation' : 'Login');
+//   }
+// });
 
 const Root = TabNavigator({
   Index: { screen: IndexStack },
@@ -76,7 +83,15 @@ const Root = TabNavigator({
     }
   },
   Home: {
-    screen: HomeStack
+    screen: HomeStack,
+    navigationOptions: {
+      tabBarIcon: obj => (
+        <Image
+          source={settingPng}
+          style={[icon.normal, { tintColor: obj.tintColor }]}
+        />
+      )
+    }
   }
 }, {
   lazy: true,
@@ -89,7 +104,10 @@ const Root = TabNavigator({
     style: {
       backgroundColor: theme.primary
     },
-    iconStyle: icon.normal
+    iconStyle: icon.normal,
+    indicatorStyle: {
+      height: 0
+    }
   }
 });
 

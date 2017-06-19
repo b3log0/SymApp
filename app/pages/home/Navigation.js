@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import {
   Button,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -10,6 +11,8 @@ class Navigation extends PureComponent {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   };
+
+
 
   render() {
     return (
