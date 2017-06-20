@@ -5,7 +5,7 @@ export default {
   blueLighter: '#f1f7fe',
   red: '#d23f31',
   redLight: '#ffdce0',
-  green: '#569e3d',
+  green: '#60b044',
   fade: '#999',
   gray: '#666',
   black: '#3b3e43',

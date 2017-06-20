@@ -9,7 +9,7 @@ class Detail extends PureComponent {
   };
 
   render() {
-    const { params } = this.props.navigation.state;
+
     return (
       <WebView
         ref={(web) => { this.injectWebView = web; }}
@@ -20,3 +20,4 @@ class Detail extends PureComponent {
 }
 
 export default Detail;
+const { params } = this.props.navigation.state;

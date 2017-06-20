@@ -19,11 +19,10 @@ class HomeStack extends Component {
 
   render() {
     const { user } = this.props;
-    if (user.name === '') {
-      return (<Login />);
+    if (user.isLogin) {
+      return (<Navigation />);
     }
-
-    return (<Navigation />);
+    return (<Login />);
   }
 }
 

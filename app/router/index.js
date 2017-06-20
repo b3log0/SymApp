@@ -8,12 +8,9 @@ import {
   Button
 } from 'react-native';
 
-import userAction from '../actions/User';
 import List from '../pages/List';
 import Article from '../pages/Article';
-import Navigation from '../pages/home/Navigation';
 import Notification from '../pages/notifications/Index';
-import Login from '../pages/verify/Login';
 import HomeStack from '../pages/home/HomeStack';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
@@ -51,24 +48,6 @@ const IndexStack = StackNavigator({
   }
 });
 
-// const HomeStack = StackNavigator({
-//   Navigation: {
-//     screen: Navigation
-//   },
-//   Login: {
-//     screen: Login,
-//     navigationOptions: {
-//       header: null,
-//       tabBarVisible: false
-//     }
-//   },
-//   Article: { screen: Article }
-// }, {
-//   initialRouteName: () => {
-//     userAction.isLogin().then(isLogin => isLogin ? 'Navigation' : 'Login');
-//   }
-// });
-
 const Root = TabNavigator({
   Index: { screen: IndexStack },
   Notification: { screen: Notification,
@@ -96,6 +75,7 @@ const Root = TabNavigator({
 }, {
   lazy: true,
   tabBarPosition: 'bottom',
+  swipeEnabled: false,
   tabBarOptions: {
     showIcon: true,
     showLabel: false,

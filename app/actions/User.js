@@ -6,16 +6,13 @@ import userStore from '../stores/User';
 
 const isLogin = async () => {
   try {
-    const userName = await AsyncStorage.getItem('@UserStore:name');
-    if (userName !== null) {
-      userStore.setName(userName);
-      return true;
+    const isLoginStorage = await AsyncStorage.getItem('@UserStore:isLogin');
+    if (isLoginStorage !== null) {
+      userStore.setIsLogin(true);
     }
-    userStore.setName('');
-    return false;
+    userStore.setIsLogin(false);
   } catch (error) {
-    userStore.setName('');
-    return false;
+    userStore.setIsLogin(false);
   }
 };
 
