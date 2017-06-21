@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import User from '../../actions/User';
-import Navigation from './Navigation';
+import HomeNavigation from './Navigation';
 import Login from '../verify/Login';
 
 @inject('user')
@@ -20,7 +20,7 @@ class HomeStack extends Component {
   render() {
     const { user } = this.props;
     if (user.isLogin) {
-      return (<Navigation />);
+      return (<HomeNavigation />);
     }
     return (<Login />);
   }

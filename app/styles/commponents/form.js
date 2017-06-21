@@ -1,9 +1,13 @@
 import color from '../common/color';
 
 export default {
+  wrap: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   logo: {
     marginBottom: 50,
-    marginTop: 50,
+    marginTop: 150,
     alignSelf: 'center'
   },
   input: {

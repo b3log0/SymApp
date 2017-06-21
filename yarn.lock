@@ -903,6 +903,10 @@ big-integer@^1.6.7:
   version "1.6.23"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.23.tgz#e85d508220c74e3f43a4ce72eed51f3da4db94d1"
 
+blueimp-md5@^2.7.0:
+  version "2.7.0"
+  resolved "http://registry.npm.taobao.org/blueimp-md5/download/blueimp-md5-2.7.0.tgz#7f518e0dd70467fefe28ecba398916092f2a02a9"
+
 body-parser@~1.13.3:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.13.3.tgz#c08cf330c3358e151016a05746f13f029c97fa97"

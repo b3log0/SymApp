@@ -30,7 +30,8 @@ class List extends Component {
   }
 
   _onRefresh = () => {
-    this.setState({ isLoading: true });
+    const { entity } = this.props;
+    entity.setIsLoading(true);
     Articles.getList(1);
   }
 

@@ -1,24 +1,36 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Button,
-  View,
-  AsyncStorage
+  View
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
+import userAction from '../../actions/User';
+import Login from '../verify/Login';
 
-class Navigation extends PureComponent {
+@inject('user')
+@observer
+class Navigation extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
+  }
+
+  _logout = () => {
+    userAction.logout();
   };
 
-
-
   render() {
+    const { user } = this.props;
+
+    if (user.isLogin) {
+      return (<Login />);
+    }
+
     return (
       <View>
         <Button
-          onPress={() => this.props.navigation.navigate('Detail', { user: 'Vanessa' })}
+          onPress={() => this._logout}
           title="Chat with Lucy"
         />
       </View>
