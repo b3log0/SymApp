@@ -44,7 +44,7 @@ const login = (name, password) => {
 };
 
 const logout = () => {
-  AsyncStorage.removeItem('@UserStore:isLogin', ()=> {
+  AsyncStorage.removeItem('@UserStore:isLogin', () => {
     userStore.setName('');
     userStore.setIsLogin(false);
   });

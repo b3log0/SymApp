@@ -1,9 +1,9 @@
-import ArticlesService from '../services/ArticlesService';
+import FetchService from '../services/FetchService';
 
 import paginationStore from '../stores/Pagination';
 import entityStore from '../stores/Entity';
 
-const getDetail = pageIndex => ArticlesService.getList(id)
+const getDetail = pageIndex => FetchService.get(pageIndex)
   .then((response) => {
     entityStore.setIsLoading(false);
 
