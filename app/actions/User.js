@@ -16,6 +16,11 @@ const isLogin = async () => {
   }
 };
 
+const login = () => {
+
+};
+
 export default {
-  isLogin
+  isLogin,
+  login
 };

@@ -1,10 +1,10 @@
 import { api } from '../config/symphony';
 
-const getList = currentPage => fetch(`${api}articles/latest?p=${currentPage}`)
+const get = uri => fetch(`${api}${uri}`)
   .then(response => response.json())
   .then(response => Promise.resolve(response))
   .catch(error => Promise.reject(error));
 
 export default {
-  getList
+  get
 };

@@ -9,6 +9,7 @@ class Detail extends PureComponent {
   };
 
   render() {
+    const { params } = this.props.navigation.state;
 
     return (
       <WebView
@@ -20,4 +21,3 @@ class Detail extends PureComponent {
 }
 
 export default Detail;
-const { params } = this.props.navigation.state;

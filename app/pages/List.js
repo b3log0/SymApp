@@ -29,13 +29,12 @@ class List extends Component {
     Articles.getList(1);
   }
 
-  _onRefresh() {
-    const { entity } = this.props;
-    entity.setIsLoading(true);
+  _onRefresh = () => {
+    this.setState({ isLoading: true });
     Articles.getList(1);
   }
 
-  _toEnd() {
+  _toEnd = () => {
     const { pagination, entity } = this.props;
     // ListView滚动到底部，根据是否正在加载更多 是否正在刷新 是否已加载全部来判断是否执行加载更多
     if (entity.isLoading || entity.length > 20 * pagination.pageTotal) {
@@ -47,12 +46,12 @@ class List extends Component {
     });
   }
 
-  _loadMoreData() {
+  _loadMoreData = () => {
     const { pagination } = this.props;
     Articles.getList(pagination.pageIndex + 1);
   }
 
-  _renderFooter() {
+  _renderFooter = () => {
     const { entity, pagination } = this.props;
     // 通过当前product数量和刷新状态（是否正在下拉刷新）来判断footer的显示
     if (entity.length < 1 || entity.isLoading) {
@@ -81,14 +80,14 @@ class List extends Component {
       <View style={utils.statusBar}>
         <ListView
           dataSource={entity.listDS}
-          onEndReached={() => this._toEnd()}
+          onEndReached={() => this._toEnd}
           onEndReachedThreshold={10}
-          renderFooter={() => this._renderFooter()}
+          renderFooter={() => this._renderFooter}
           enableEmptySections
           refreshControl={
             <RefreshControl
               refreshing={entity.isLoading}
-              onRefresh={() => this._onRefresh()}
+              onRefresh={this._onRefresh}
             />
           }
           renderRow={rowData => (<ListItem rowData={rowData} navigation={this.props.navigation} />)}

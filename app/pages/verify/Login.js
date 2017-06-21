@@ -1,15 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   View,
-  Text,
+  Button,
   TextInput,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
 
-import { utils, form, icon } from '../../styles';
-import logoPng from '../../images/logo.png'
+import userAction from '../../actions/User';
+import { utils, form, icon, color } from '../../styles';
+import logoPng from '../../images/logo.png';
 
 class Login extends Component {
+
+  _login = () => {
+    userAction.login();
+  }
 
   render() {
     return (
@@ -18,18 +24,29 @@ class Login extends Component {
           source={logoPng}
           style={[icon.big, form.logo]}
         />
-        <TextInput
-          style={form.input}
-          underlineColorAndroid="transparent"
-          placeholder="用户名／邮箱"
-        />
-        <TextInput
-          style={form.input}
-          underlineColorAndroid="transparent"
-          placeholder="密码"
-          secureTextEntry
-        />
-        <Text>login</Text>
+        <KeyboardAvoidingView
+          behavior="padding"
+        >
+          <TextInput
+            style={form.input}
+            underlineColorAndroid="transparent"
+            placeholder="用户名／邮箱"
+          />
+          <TextInput
+            style={form.input}
+            underlineColorAndroid="transparent"
+            placeholder="密码"
+            secureTextEntry
+          />
+          <View style={form.button}>
+            <Button
+              onPress={this._login}
+              color={color.green}
+              title="登录"
+              accessibilityLabel="登录"
+            />
+          </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }

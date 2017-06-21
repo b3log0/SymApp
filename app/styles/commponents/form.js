@@ -17,6 +17,8 @@ export default {
     alignSelf: 'center'
   },
   button: {
-
+    width: 250,
+    flex: 1,
+    alignSelf: 'center'
   }
 };
