@@ -11,11 +11,13 @@ const isLogin = async () => {
   try {
     const isLoginStorage = await AsyncStorage.getItem('@UserStore:isLogin');
     if (isLoginStorage !== null) {
-      return userStore.setIsLogin(true);
+      userStore.setIsLogin(true);
+      return true;
     }
-    return userStore.setIsLogin(false);
+    return false;
   } catch (error) {
-    return userStore.setIsLogin(false);
+    console.error(error);
+    return false;
   }
 };
 
@@ -25,30 +27,44 @@ const login = (name, password) => {
     userPassword: md5(password)
     // "captcha": "" // 正常登录不用带该字段，登录失败次数过多时必填
   };
-  fetchService.post('login', formData)
+
+  return fetchService.post('login', formData)
     .then((response) => {
       if (response.sc === 0) {
-        AsyncStorage.setItem('@UserStore:isLogin', 'true', () => {
-          userStore.setName(response.userName);
-          userStore.setIsLogin(true);
-        });
+        AsyncStorage.setItem('@UserStore:isLogin', 'true');
+        AsyncStorage.setItem('@UserStore:name', response.userName);
+        userStore.setName(response.userName);
+        userStore.setIsLogin(true);
       } else {
         Alert.alert(
           response.msg
         );
       }
+
+      return Promise.resolve(response.sc);
     })
     .catch((error) => {
       console.error(error);
     });
 };
 
-const logout = () => {
-  AsyncStorage.removeItem('@UserStore:isLogin', () => {
-    userStore.setName('');
-    userStore.setIsLogin(false);
-  });
-};
+const logout = () => fetchService.post('logout')
+    .then((response) => {
+      if (response.sc === 0) {
+        AsyncStorage.removeItem('@UserStore:isLogin');
+        userStore.setIsLogin(false);
+        userStore.setPassword('');
+        userStore.setName('');
+      } else {
+        Alert.alert(
+          response.msg
+        );
+      }
+      return Promise.resolve(response.sc);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
 export default {
   isLogin,

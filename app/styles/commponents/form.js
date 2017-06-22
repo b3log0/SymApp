@@ -3,11 +3,11 @@ import color from '../common/color';
 export default {
   wrap: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: '100%'
   },
   logo: {
     marginBottom: 50,
-    marginTop: 150,
     alignSelf: 'center'
   },
   input: {
@@ -22,7 +22,6 @@ export default {
   },
   button: {
     width: 250,
-    flex: 1,
     alignSelf: 'center'
   }
 };

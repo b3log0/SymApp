@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-import HomeNavigation from '../home/Navigation';
 import userAction from '../../actions/User';
 import { form, icon, color } from '../../styles';
 import logoPng from '../../images/logo.png';
@@ -12,7 +11,8 @@ const {
   Image,
   Button,
   TextInput,
-  View
+  View,
+  AsyncStorage
 } = ReactNative;
 
 @inject('user')
@@ -20,28 +20,36 @@ const {
 class Login extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired
-  }
+    user: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired
+  };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      name: '',
-      password: ''
+      name: ''
     };
   }
 
+  componentWillMount() {
+    const { user } = this.props;
+    AsyncStorage.getItem('@UserStore:name', (key, value) => {
+      user.name = value;
+      this.setState({ name: value });
+    });
+  }
+
   _login = () => {
-    userAction.login(this.state.name, this.state.password);
-    this.render();
+    const { user } = this.props;
+    userAction.login(user.name, user.password).then((sc) => {
+      if (sc === 0) {
+        this.props.navigation.goBack();
+      }
+    });
   }
 
   render() {
     const { user } = this.props;
-
-    if (user.isLogin) {
-      return (<HomeNavigation />);
-    }
 
     return (
       <KeyboardAvoidingView behavior="padding" style={form.wrap}>
@@ -51,10 +59,12 @@ class Login extends Component {
         />
         <TextInput
           style={form.input}
+          value={this.state.name}
           underlineColorAndroid="transparent"
           placeholder="用户名／邮箱"
-          onChangeText={(value) => {
-            this.setState({ name: value });
+          onChangeText={(text) => {
+            this.setState({ name: text });
+            user.name = text;
           }}
         />
         <TextInput
@@ -62,8 +72,8 @@ class Login extends Component {
           underlineColorAndroid="transparent"
           placeholder="密码"
           secureTextEntry
-          onChangeText={(value) => {
-            this.setState({ password: value });
+          onChangeText={(text) => {
+            user.password = text;
           }}
         />
         <View style={form.button}>

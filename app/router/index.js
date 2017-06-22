@@ -11,7 +11,8 @@ import {
 import List from '../pages/List';
 import Article from '../pages/Article';
 import Notification from '../pages/notifications/Index';
-import HomeStack from '../pages/home/HomeStack';
+import HomeNavigation from '../pages/home/Navigation';
+import Login from '../pages/verify/Login';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -19,14 +20,7 @@ import settingPng from '../images/setting.png';
 
 const IndexStack = StackNavigator({
   List: {
-    screen: List,
-    navigationOptions: {
-      header: null,
-      tabBarIcon: obj => (<Image
-        source={articlePng}
-        style={[icon.normal, { tintColor: obj.tintColor }]}
-      />)
-    }
+    screen: List
   },
   Article: {
     screen: Article,
@@ -48,25 +42,44 @@ const IndexStack = StackNavigator({
   }
 });
 
-const Root = TabNavigator({
-  Index: { screen: IndexStack },
-  Notification: { screen: Notification,
-    navigationOptions: {
-      showLabel: false,
-      tabBarIcon: obj => (
-        <Image
-          source={feedPng}
-          style={[icon.normal, { tintColor: obj.tintColor }]}
-        />
-      )
-    }
+const HomeStack = StackNavigator({
+  HomeNavigation: {
+    screen: HomeNavigation
   },
+  Login: {
+    screen: Login
+  }
+});
+
+const Root = TabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
       tabBarIcon: obj => (
         <Image
           source={settingPng}
+          style={[icon.normal, { tintColor: obj.tintColor }]}
+        />
+      )
+    }
+  },
+  Index: {
+    screen: IndexStack,
+    navigationOptions: {
+      header: null,
+      tabBarIcon: obj => (<Image
+        source={articlePng}
+        style={[icon.normal, { tintColor: obj.tintColor }]}
+      />)
+    }
+  },
+  Notification: {
+    screen: Notification,
+    navigationOptions: {
+      showLabel: false,
+      tabBarIcon: obj => (
+        <Image
+          source={feedPng}
           style={[icon.normal, { tintColor: obj.tintColor }]}
         />
       )

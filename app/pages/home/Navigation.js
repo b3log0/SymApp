@@ -3,38 +3,39 @@ import {
   Button,
   View
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
 
 import userAction from '../../actions/User';
-import Login from '../verify/Login';
 
-@inject('user')
-@observer
 class Navigation extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired
+  };
+
+  componentWillMount() {
+    userAction.isLogin().then((isLogin) => {
+      if (!isLogin) {
+        this.props.navigation.navigate('Login');
+      }
+    });
   }
 
   _logout = () => {
-    userAction.logout();
+    userAction.logout().then((sc) => {
+      if (sc === 0) {
+        this.props.navigation.navigate('Login');
+      }
+    });
   };
 
   render() {
-    const { user } = this.props;
-
-    if (user.isLogin) {
-      return (<Login />);
-    }
-
     return (
       <View>
         <Button
-          onPress={() => this._logout}
-          title="Chat with Lucy"
+          onPress={this._logout}
+          title="Logout"
         />
-      </View>
-    );
+      </View>);
   }
 }
 

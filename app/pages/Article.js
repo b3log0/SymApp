@@ -13,7 +13,6 @@ class Detail extends PureComponent {
 
     return (
       <WebView
-        ref={(web) => { this.injectWebView = web; }}
         source={{ uri: `https://hacpai.com/article/${params.oId}` }}
       />
     );
