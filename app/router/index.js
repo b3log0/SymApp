@@ -13,6 +13,7 @@ import Article from '../pages/Article';
 import Notification from '../pages/notifications/Index';
 import HomeNavigation from '../pages/home/Navigation';
 import Login from '../pages/verify/Login';
+import webViewStore from '../stores/WebView';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -20,7 +21,10 @@ import settingPng from '../images/setting.png';
 
 const IndexStack = StackNavigator({
   List: {
-    screen: List
+    screen: List,
+    navigationOptions: {
+      header: null
+    }
   },
   Article: {
     screen: Article,
@@ -40,29 +44,32 @@ const IndexStack = StackNavigator({
       };
     }
   }
+}, {
+  headerMode: 'screen',
+  onTransitionStart: () => {
+    webViewStore.setScrollEnabled(false);
+  },
+  onTransitionEnd: () => {
+    webViewStore.setScrollEnabled(true);
+  }
 });
 
 const HomeStack = StackNavigator({
   HomeNavigation: {
-    screen: HomeNavigation
+    screen: HomeNavigation,
+    navigationOptions: {
+      header: null
+    }
   },
   Login: {
-    screen: Login
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
   }
 });
 
 const Root = TabNavigator({
-  Home: {
-    screen: HomeStack,
-    navigationOptions: {
-      tabBarIcon: obj => (
-        <Image
-          source={settingPng}
-          style={[icon.normal, { tintColor: obj.tintColor }]}
-        />
-      )
-    }
-  },
   Index: {
     screen: IndexStack,
     navigationOptions: {
@@ -80,6 +87,17 @@ const Root = TabNavigator({
       tabBarIcon: obj => (
         <Image
           source={feedPng}
+          style={[icon.normal, { tintColor: obj.tintColor }]}
+        />
+      )
+    }
+  },
+  Home: {
+    screen: HomeStack,
+    navigationOptions: {
+      tabBarIcon: obj => (
+        <Image
+          source={settingPng}
           style={[icon.normal, { tintColor: obj.tintColor }]}
         />
       )

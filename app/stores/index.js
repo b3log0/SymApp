@@ -4,11 +4,12 @@ import { enableLogging } from 'mobx-logger';
 import entity from './Entity';
 import pagination from './Pagination';
 import user from './User';
+import webView from './WebView';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
   enableLogging({
-    predicate: () => __DEV__ && Boolean(global.navigator.userAgent),
+    predicate: () =>  true,
     action: true,
     reaction: true,
     transaction: true,
@@ -19,5 +20,6 @@ if (process.env.NODE_ENV === 'dev') {
 export default {
   entity,
   pagination,
-  user
+  user,
+  webView
 };

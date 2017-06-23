@@ -3,13 +3,17 @@ import {
   Button,
   View
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
 import userAction from '../../actions/User';
 
+@inject('user')
+@observer
 class Navigation extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -29,11 +33,13 @@ class Navigation extends Component {
   };
 
   render() {
+    const { user } = this.props;
+
     return (
       <View>
         <Button
           onPress={this._logout}
-          title="Logout"
+          title={'登出'}
         />
       </View>);
   }
