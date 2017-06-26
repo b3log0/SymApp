@@ -13,7 +13,7 @@ import { utils, module } from '../../styles';
 
 @inject('user')
 @observer
-class Navigation extends Component {
+class SettingNavigation extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
@@ -40,56 +40,58 @@ class Navigation extends Component {
     const { user } = this.props;
 
     return (
-      <ScrollView style={utils.statusBar}>
+      <ScrollView>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text >帖子[开发中]</Text>
+            <Text>基本信息[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>回帖[开发中]</Text>
+            <Text>头像[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>匿贴[开发中]</Text>
+            <Text>密码[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>匿回[开发中]</Text>
+            <Text>功能[开发中]</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注帖子[开发中]</Text>
+            <Text>位置[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注用户[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注标签[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>收藏帖子[开发中]</Text>
+            <Text>隐私[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>关注者[开发中]</Text>
+            <Text>数据[开发中]</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
+          <TouchableOpacity style={module.list} onPress={this._goView}>
+            <Text>邀请[开发中]</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>积分[开发中]</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={module.list} onPress={this._goView}>
+            <Text>国际化[开发中]</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>链接熔炉[开发中]</Text>
+            <Text>B3[开发中]</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
-          <TouchableOpacity
-            style={[module.list, module.listLast]}
-            onPress={()=>this.props.navigation.navigate('HomeSettingNavigation')}
-          >
-            <Text>设置</Text>
+          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
+            <Text>帮助[开发中]</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={module.wrap}>
+          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._logout}>
+            <Text>登出</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>);
   }
 }
 
-export default Navigation;
+export default SettingNavigation;

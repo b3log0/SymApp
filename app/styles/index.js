@@ -6,6 +6,7 @@ import tabs from './commponents/tabs';
 import load from './commponents/load';
 import list from './commponents/list';
 import form from './commponents/form';
+import module from './commponents/module';
 
 export { theme };
 export { color };
@@ -15,3 +16,4 @@ export { load };
 export { list };
 export { utils };
 export { form };
+export { module };

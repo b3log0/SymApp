@@ -7,5 +7,8 @@ export default {
   },
   empty: {
     height: 0
+  },
+  flex: {
+    flex: 1
   }
 };

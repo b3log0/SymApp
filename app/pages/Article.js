@@ -34,7 +34,7 @@ class Article extends Component {
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View style={utils.statusBar} {...this._gestureHandlers}>
+      <View style={utils.flex} {...this._gestureHandlers}>
         <WebView
           scrollEnabled={this.state.scrollEnabled}
           source={{ uri: `https://hacpai.com/article/${params.oId}` }}
