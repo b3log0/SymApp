@@ -7,6 +7,7 @@ import load from './commponents/load';
 import list from './commponents/list';
 import form from './commponents/form';
 import module from './commponents/module';
+import index from './biz';
 
 export { theme };
 export { color };
@@ -17,3 +18,4 @@ export { list };
 export { utils };
 export { form };
 export { module };
+export { index };

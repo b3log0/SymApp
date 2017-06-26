@@ -5,14 +5,16 @@ import {
   ActivityIndicator,
   InteractionManager,
   VirtualizedList,
-  Text
+  Text,
+  Image
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import Articles from '../../actions/Articles';
 import LoadMoreFooter from '../../components/LoadMoreFooter';
 import ListItem from '../../components/article/ListItem';
-import { utils } from '../../styles/index';
+import addfilePng from '../../images/addfile.png';
+import { utils, index } from '../../styles/index';
 
 @inject('pagination', 'entity')
 @observer
@@ -86,12 +88,13 @@ class Index extends Component {
               onRefresh={this._onRefresh}
             />
           }
-          keyExtractor={(item, index) => String(index)}
+          keyExtractor={(item, i) => String(i)}
           getItemCount={items => items.length}
-          getItem={(items, index) => items[index]}
+          getItem={(items, i) => items[i]}
           renderItem={rowData =>
             (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
         />
+        <Image source={addfilePng} style={index.addIcon} />
       </View>
     );
   }
