@@ -10,7 +10,7 @@ import {
 
 import List from '../pages/List';
 import Article from '../pages/Article';
-import Notification from '../pages/notifications/Index';
+import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
 import HomeSettingNavigation from '../pages/home/SettingNavigation';
 import Login from '../pages/verify/Login';
@@ -71,6 +71,23 @@ const HomeStack = StackNavigator({
   headerMode: 'screen'
 });
 
+const NotificationsStack = StackNavigator({
+  NotificationNavigation: {
+    screen: NotificationNavigation,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
+  }
+}, {
+  headerMode: 'screen'
+});
+
 const Root = TabNavigator({
   Index: {
     screen: IndexStack,
@@ -83,7 +100,7 @@ const Root = TabNavigator({
     }
   },
   Notification: {
-    screen: Notification,
+    screen: NotificationsStack,
     navigationOptions: {
       showLabel: false,
       tabBarIcon: obj => (

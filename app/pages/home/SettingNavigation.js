@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Button,
   ScrollView,
   TouchableOpacity,
   Text,
@@ -9,7 +8,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import userAction from '../../actions/User';
-import { utils, module } from '../../styles';
+import { module } from '../../styles';
 
 @inject('user')
 @observer

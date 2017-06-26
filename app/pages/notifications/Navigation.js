@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  Button,
   ScrollView,
   TouchableOpacity,
   Text,
@@ -34,49 +35,27 @@ class Navigation extends Component {
       <ScrollView style={utils.statusBar}>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>帖子[开发中]</Text>
+            <Text>收到的回帖[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>回帖[开发中]</Text>
+            <Text>收到的回复[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>匿贴[开发中]</Text>
+            <Text>提及我的[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>匿回[开发中]</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注帖子[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注用户[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注标签[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>收藏帖子[开发中]</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>关注者[开发中]</Text>
+            <Text>我关注的[开发中]</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>积分[开发中]</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>链接熔炉[开发中]</Text>
+          <TouchableOpacity style={module.list} onPress={this._goView}>
+            <Text>同城[开发中]</Text>
           </TouchableOpacity>
-        </View>
-        <View style={module.wrap}>
-          <TouchableOpacity
-            style={[module.list, module.listLast]}
-            onPress={() => this.props.navigation.navigate('HomeSettingNavigation')}
-          >
-            <Text>设置</Text>
+          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
+            <Text>系统[开发中]</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>);
