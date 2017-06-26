@@ -13,7 +13,6 @@ import Article from '../pages/Article';
 import Notification from '../pages/notifications/Index';
 import HomeNavigation from '../pages/home/Navigation';
 import Login from '../pages/verify/Login';
-import webViewStore from '../stores/WebView';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -45,13 +44,7 @@ const IndexStack = StackNavigator({
     }
   }
 }, {
-  headerMode: 'screen',
-  onTransitionStart: () => {
-    webViewStore.setScrollEnabled(false);
-  },
-  onTransitionEnd: () => {
-    webViewStore.setScrollEnabled(true);
-  }
+  headerMode: 'screen'
 });
 
 const HomeStack = StackNavigator({

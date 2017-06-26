@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Button,
-  View
+  ScrollView
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
@@ -36,12 +36,13 @@ class Navigation extends Component {
     const { user } = this.props;
 
     return (
-      <View>
+      <ScrollView>
+
         <Button
           onPress={this._logout}
           title={'登出'}
         />
-      </View>);
+      </ScrollView>);
   }
 }
 
