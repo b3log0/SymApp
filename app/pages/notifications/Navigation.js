@@ -5,18 +5,14 @@ import {
   Text,
   View
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
 
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 
-@inject('user')
-@observer
 class Navigation extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -28,8 +24,6 @@ class Navigation extends Component {
   }
 
   render() {
-    const { user } = this.props;
-
     return (
       <ScrollView style={utils.statusBar}>
         <View style={module.wrap}>

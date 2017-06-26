@@ -5,18 +5,14 @@ import {
   Text,
   View
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
 
 import userAction from '../../actions/User';
 import { module } from '../../styles';
 
-@inject('user')
-@observer
 class SettingNavigation extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -36,8 +32,6 @@ class SettingNavigation extends Component {
   };
 
   render() {
-    const { user } = this.props;
-
     return (
       <ScrollView>
         <View style={module.wrap}>
