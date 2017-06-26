@@ -40,10 +40,11 @@ class ListItem extends Component {
               style={list.avatar}
             />
             <Text style={list.infoText}>
-              {rowData.articleAuthorName} {rowData.cmtTimeAgo}发帖
-          </Text>
+              {rowData.articleAuthorName}
+            </Text>
           </View>
           <Text style={list.content}>{rowData.articlePreviewContent}</Text>
+          <Text style={list.infoText}>{rowData.cmtTimeAgo}</Text>
         </TouchableOpacity>
       </View>
     );

@@ -12,7 +12,7 @@ export default {
     borderBottomColor: color.fade,
     padding: 10
   },
-  listLast:  {
+  listLast: {
     borderBottomWidth: 0
   }
 };

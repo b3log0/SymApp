@@ -10,6 +10,7 @@ import {
 
 import List from '../pages/List';
 import Article from '../pages/Article';
+import Other from '../pages/other/Index';
 import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
 import HomeSettingNavigation from '../pages/home/SettingNavigation';
@@ -18,6 +19,7 @@ import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
 import settingPng from '../images/setting.png';
+import compassPng from '../images/compass.png';
 
 const IndexStack = StackNavigator({
   List: {
@@ -92,9 +94,17 @@ const Root = TabNavigator({
   Index: {
     screen: IndexStack,
     navigationOptions: {
-      header: null,
       tabBarIcon: obj => (<Image
         source={articlePng}
+        style={[icon.normal, { tintColor: obj.tintColor }]}
+      />)
+    }
+  },
+  Other: {
+    screen: Other,
+    navigationOptions: {
+      tabBarIcon: obj => (<Image
+        source={compassPng}
         style={[icon.normal, { tintColor: obj.tintColor }]}
       />)
     }
@@ -102,7 +112,6 @@ const Root = TabNavigator({
   Notification: {
     screen: NotificationsStack,
     navigationOptions: {
-      showLabel: false,
       tabBarIcon: obj => (
         <Image
           source={feedPng}

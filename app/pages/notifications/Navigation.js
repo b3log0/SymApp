@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Button,
   ScrollView,
   TouchableOpacity,
   Text,
@@ -26,7 +25,7 @@ class Navigation extends Component {
         this.props.navigation.navigate('Login');
       }
     });
-  };
+  }
 
   render() {
     const { user } = this.props;

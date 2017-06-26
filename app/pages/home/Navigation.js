@@ -25,7 +25,7 @@ class Navigation extends Component {
         this.props.navigation.navigate('Login');
       }
     });
-  };
+  }
 
   render() {
     const { user } = this.props;
