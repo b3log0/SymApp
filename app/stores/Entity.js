@@ -1,5 +1,4 @@
-import { ListView } from 'react-native';
-import { observable, computed, action } from 'mobx';
+import { observable, action } from 'mobx';
 
 class Entity {
   @observable list

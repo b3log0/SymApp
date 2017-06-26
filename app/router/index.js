@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import Index from '../pages/index/Index';
+import Post from '../pages/home/Post';
 import Article from '../pages/Article';
 import Other from '../pages/other/Index';
 import NotificationNavigation from '../pages/notifications/Navigation';
@@ -26,6 +27,19 @@ const IndexStack = StackNavigator({
     screen: Index,
     navigationOptions: {
       header: null
+    }
+  },
+  Post: {
+    screen: Post,
+    navigationOptions: {
+      title: '发帖',
+      tabBarVisible: false,
+      headerRight: (
+        <Button
+          title={'提交'}
+          onPress={this._post}
+        />
+      )
     }
   },
   Article: {

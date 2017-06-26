@@ -6,7 +6,8 @@ import {
   InteractionManager,
   VirtualizedList,
   Text,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
@@ -14,7 +15,7 @@ import Articles from '../../actions/Articles';
 import LoadMoreFooter from '../../components/LoadMoreFooter';
 import ListItem from '../../components/article/ListItem';
 import addfilePng from '../../images/addfile.png';
-import { utils, index } from '../../styles/index';
+import { utils, index, icon } from '../../styles/index';
 
 @inject('pagination', 'entity')
 @observer
@@ -94,7 +95,11 @@ class Index extends Component {
           renderItem={rowData =>
             (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
         />
-        <Image source={addfilePng} style={index.addIcon} />
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Post')} style={index.addIconWrap}>
+          <View >
+            <Image style={[index.addIcon, icon.normal]} source={addfilePng} />
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
