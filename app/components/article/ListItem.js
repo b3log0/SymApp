@@ -44,7 +44,6 @@ class ListItem extends Component {
             </Text>
           </View>
           <Text style={list.content}>{rowData.articlePreviewContent}</Text>
-          <Text style={list.infoText}>{rowData.cmtTimeAgo}</Text>
         </TouchableOpacity>
       </View>
     );

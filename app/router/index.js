@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-native';
 
-import List from '../pages/List';
+import Index from '../pages/index/Index';
 import Article from '../pages/Article';
 import Other from '../pages/other/Index';
 import NotificationNavigation from '../pages/notifications/Navigation';
@@ -22,8 +22,8 @@ import settingPng from '../images/setting.png';
 import compassPng from '../images/compass.png';
 
 const IndexStack = StackNavigator({
-  List: {
-    screen: List,
+  Index: {
+    screen: Index,
     navigationOptions: {
       header: null
     }
