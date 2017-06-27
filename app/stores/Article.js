@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 class Article {
   @observable title
@@ -9,6 +9,18 @@ class Article {
     this.title = '';
     this.content = '';
     this.tags = '';
+  }
+
+  @action setTitle = (title) => {
+    this.title = title;
+  }
+
+  @action setContent = (content) => {
+    this.content = content;
+  }
+
+  @action setTags = (tags) => {
+    this.tags = tags;
   }
 
 }

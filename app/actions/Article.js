@@ -16,6 +16,7 @@ const getDetail = pageIndex => FetchService.get(pageIndex)
     // } else {
     //   entityStore.setList(entityStore.list.concat(data.articles));
     // }
+    console.log(response);
   })
   .catch((error) => {
     console.error(error);
@@ -25,16 +26,18 @@ const getDetail = pageIndex => FetchService.get(pageIndex)
 const post = formData => FetchService.post('article', formData)
   .then((response) => {
     if (response.sc === 0) {
-      AsyncStorage.removeItem('@ArticleStore');
-      articleStore.title = '';
-      articleStore.tags = '';
-      articleStore.content = '';
-
-    }
-    Alert.alert(
+      AsyncStorage.removeItem('@ArticleStore:title');
+      AsyncStorage.removeItem('@ArticleStore:content');
+      AsyncStorage.removeItem('@ArticleStore:tags');
+      articleStore.setContent('');
+      articleStore.setTags('');
+      articleStore.setTitle('');
+    } else {
+      Alert.alert(
         response.msg
       );
-    return Promise.resolve(response.msg);
+    }
+    return Promise.resolve(response.sc);
   })
   .catch((error) => {
     console.error(error);

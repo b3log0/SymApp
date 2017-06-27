@@ -27,7 +27,7 @@ class Other extends Component {
     return (
       <ScrollView style={utils.statusBar}>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
+          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
             <Text>Other[开发中]</Text>
           </TouchableOpacity>
         </View>

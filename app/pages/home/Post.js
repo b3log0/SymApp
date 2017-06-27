@@ -3,6 +3,7 @@ import ReactNative from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
+import userAction from '../../actions/User';
 import { post, utils, icon } from '../../styles';
 import uploadPng from '../../images/upload.png';
 import atPng from '../../images/at.png';
@@ -17,10 +18,8 @@ const {
   TouchableOpacity,
   Alert,
   Button,
-  Modal,
-  Text
-}
-= ReactNative;
+  Modal
+} = ReactNative;
 
 @inject('article')
 @observer
@@ -42,18 +41,30 @@ class Post extends Component {
   }
 
   componentWillMount() {
-    const { article } = this.props;
-    AsyncStorage.getItem('@ArticleStore:title', (key, value) => {
-      article.title = value;
-      this.setState({ title: value });
-    });
-    AsyncStorage.getItem('@ArticleStore:content', (key, value) => {
-      article.content = value;
-      this.setState({ content: value });
-    });
-    AsyncStorage.getItem('@ArticleStore:tags', (key, value) => {
-      article.tags = value;
-      this.setState({ tags: value });
+    userAction.isLogin().then((isLogin) => {
+      if (!isLogin) {
+        this.props.navigation.navigate('Login');
+      } else {
+        const { article } = this.props;
+        AsyncStorage.getItem('@ArticleStore:title', (key, value) => {
+          if (value) {
+            article.title = value;
+            this.setState({ title: value });
+          }
+        });
+        AsyncStorage.getItem('@ArticleStore:content', (key, value) => {
+          if (value) {
+            article.content = value;
+            this.setState({ content: value });
+          }
+        });
+        AsyncStorage.getItem('@ArticleStore:tags', (key, value) => {
+          if (value) {
+            article.tags = value;
+            this.setState({ tags: value });
+          }
+        });
+      }
     });
   }
 
@@ -65,6 +76,12 @@ class Post extends Component {
       articleTags: article.tags
     }).then((msg) => {
       if (msg === 0) {
+        this.setState({
+          title: '',
+          content: '',
+          tags: '',
+          showTag: false
+        });
         this.props.navigation.goBack();
       }
     });
@@ -75,7 +92,7 @@ class Post extends Component {
 
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.flex}>
-        <Modal animationType="fade" visible={this.state.showTag} >
+        <Modal visible={this.state.showTag}>
           <TextInput
             style={[utils.statusBar, post.content]}
             underlineColorAndroid="transparent"

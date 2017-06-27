@@ -53,6 +53,12 @@ const IndexStack = StackNavigator({
         )
       };
     }
+  },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
   }
 }, {
   headerMode: 'screen'
