@@ -46,7 +46,7 @@ class Login extends Component {
         this.props.navigation.goBack();
       }
     });
-  }
+  };
 
   render() {
     const { user } = this.props;

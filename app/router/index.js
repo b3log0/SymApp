@@ -33,13 +33,7 @@ const IndexStack = StackNavigator({
     screen: Post,
     navigationOptions: {
       title: '发帖',
-      tabBarVisible: false,
-      headerRight: (
-        <Button
-          title={'提交'}
-          onPress={this._post}
-        />
-      )
+      tabBarVisible: false
     }
   },
   Article: {

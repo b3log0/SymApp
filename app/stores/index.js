@@ -4,6 +4,7 @@ import { enableLogging } from 'mobx-logger';
 import entity from './Entity';
 import pagination from './Pagination';
 import user from './User';
+import article from './Article';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -19,5 +20,6 @@ if (process.env.NODE_ENV === 'dev') {
 export default {
   entity,
   pagination,
-  user
+  user,
+  article
 };
