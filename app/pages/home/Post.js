@@ -3,7 +3,6 @@ import ReactNative from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
-import userAction from '../../actions/User';
 import { post, utils, icon } from '../../styles';
 import uploadPng from '../../images/upload.png';
 import atPng from '../../images/at.png';
@@ -41,29 +40,23 @@ class Post extends Component {
   }
 
   componentWillMount() {
-    userAction.isLogin().then((isLogin) => {
-      if (!isLogin) {
-        this.props.navigation.navigate('Login');
-      } else {
-        const { article } = this.props;
-        AsyncStorage.getItem('@ArticleStore:title', (key, value) => {
-          if (value) {
-            article.title = value;
-            this.setState({ title: value });
-          }
-        });
-        AsyncStorage.getItem('@ArticleStore:content', (key, value) => {
-          if (value) {
-            article.content = value;
-            this.setState({ content: value });
-          }
-        });
-        AsyncStorage.getItem('@ArticleStore:tags', (key, value) => {
-          if (value) {
-            article.tags = value;
-            this.setState({ tags: value });
-          }
-        });
+    const { article } = this.props;
+    AsyncStorage.getItem('@ArticleStore:title', (key, value) => {
+      if (value) {
+        article.title = value;
+        this.setState({ title: value });
+      }
+    });
+    AsyncStorage.getItem('@ArticleStore:content', (key, value) => {
+      if (value) {
+        article.content = value;
+        this.setState({ content: value });
+      }
+    });
+    AsyncStorage.getItem('@ArticleStore:tags', (key, value) => {
+      if (value) {
+        article.tags = value;
+        this.setState({ tags: value });
       }
     });
   }

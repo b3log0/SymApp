@@ -3,12 +3,14 @@ import { observable, action } from 'mobx';
 class User {
   @observable name
   @observable isLogin
+  @observable showLogin
   @observable password
 
   constructor() {
     this.name = '';
     this.password = '';
     this.isLogin = false;
+    this.showLogin = false;
   }
 
   @action setName = (name) => {
@@ -21,6 +23,10 @@ class User {
 
   @action setPassword = (password) => {
     this.password = password;
+  }
+
+  @action setShowLogin = (showLogin) => {
+    this.showLogin = showLogin;
   }
 }
 

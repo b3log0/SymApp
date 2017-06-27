@@ -15,18 +15,10 @@ class SettingNavigation extends Component {
     navigation: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
-    userAction.isLogin().then((isLogin) => {
-      if (!isLogin) {
-        this.props.navigation.navigate('Login');
-      }
-    });
-  }
-
   _logout = () => {
     userAction.logout().then((sc) => {
       if (sc === 0) {
-        this.props.navigation.navigate('Login');
+        this.props.navigation.goBack();
       }
     });
   };

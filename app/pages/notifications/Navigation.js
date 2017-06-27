@@ -3,29 +3,39 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
-  View
+  View,
+  Modal
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
+import Login from '../verify/Login';
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 
+@inject('user')
+@observer
 class Navigation extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
+  _goView = () => {
+    const { user } = this.props;
     userAction.isLogin().then((isLogin) => {
       if (!isLogin) {
-        this.props.navigation.navigate('Login');
+        user.setShowLogin(true);
       }
     });
-  }
+  };
 
   render() {
+    const { user } = this.props;
     return (
       <ScrollView style={utils.statusBar}>
+        <Modal visible={user.showLogin}>
+          <Login />
+        </Modal>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>收到的回帖[开发中]</Text>

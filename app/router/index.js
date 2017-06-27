@@ -53,12 +53,6 @@ const IndexStack = StackNavigator({
         )
       };
     }
-  },
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null
-    }
   }
 }, {
   headerMode: 'screen'
@@ -90,12 +84,6 @@ const HomeStack = StackNavigator({
 const NotificationsStack = StackNavigator({
   NotificationNavigation: {
     screen: NotificationNavigation,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Login: {
-    screen: Login,
     navigationOptions: {
       header: null
     }

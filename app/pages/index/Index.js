@@ -7,24 +7,28 @@ import {
   VirtualizedList,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
+import userAction from '../../actions/User';
 import Articles from '../../actions/Articles';
+import Login from '../verify/Login';
 import LoadMoreFooter from '../../components/LoadMoreFooter';
 import ListItem from '../../components/article/ListItem';
 import addfilePng from '../../images/addfile.png';
 import { utils, index, icon } from '../../styles/index';
 
-@inject('pagination', 'entity')
+@inject('pagination', 'entity', 'user')
 @observer
 class Index extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -66,7 +70,7 @@ class Index extends Component {
   };
 
   render() {
-    const { entity } = this.props;
+    const { entity, user } = this.props;
     if (entity.isLoading) {
       return (
         <View style={utils.statusBar}>
@@ -77,6 +81,9 @@ class Index extends Component {
 
     return (
       <View style={utils.statusBar}>
+        <Modal visible={user.showLogin}>
+          <Login noCancel={false} />
+        </Modal>
         <VirtualizedList
           data={entity.list}
           onEndReached={this._toEnd}
@@ -95,7 +102,18 @@ class Index extends Component {
           renderItem={rowData =>
             (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
         />
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Post')} style={index.addIconWrap}>
+        <TouchableOpacity
+          onPress={() => {
+            userAction.isLogin().then((isLogin) => {
+              if (isLogin) {
+                this.props.navigation.navigate('Post');
+              } else {
+                user.setShowLogin(true);
+              }
+            });
+          }}
+          style={index.addIconWrap}
+        >
           <View >
             <Image style={[index.addIcon, icon.normal]} source={addfilePng} />
           </View>

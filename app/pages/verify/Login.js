@@ -20,8 +20,7 @@ const {
 class Login extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired,
-    navigation: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -43,7 +42,7 @@ class Login extends Component {
     const { user } = this.props;
     userAction.login(user.name, user.password).then((sc) => {
       if (sc === 0) {
-        this.props.navigation.goBack();
+        user.setShowLogin(false);
       }
     });
   };
@@ -82,6 +81,16 @@ class Login extends Component {
             color={color.green}
             title="登录"
             accessibilityLabel="登录"
+          />
+        </View>
+        <View style={form.button}>
+          <Button
+            onPress={() => {
+              user.setShowLogin(false);
+            }}
+            color={color.green}
+            title="取消"
+            accessibilityLabel="取消"
           />
         </View>
       </KeyboardAvoidingView>
