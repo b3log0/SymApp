@@ -1,24 +1,24 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
   Text
 } from 'react-native';
+import { inject } from 'mobx-react';
 
 import { load } from '../styles';
 
-class LoadMoreFooter extends PureComponent {
+@inject('entity')
+class LoadMoreFooter extends Component {
   static propTypes = {
-    isLoadAll: PropTypes.bool
-  };
-
-  static defaultProps = {
-    isLoadAll: false
+    entity: PropTypes.object.isRequired
   };
 
   render() {
+    const { entity } = this.props;
+
     return (
       <View style={load.footer.content}>
-        <Text style={load.footer.title}>{this.props.isLoadAll ? '已加载全部' : '正在加载更多……'}</Text>
+        <Text style={load.footer.title}>{entity.isLoadAll ? '已加载全部' : '正在加载更多……'}</Text>
       </View>
     );
   }

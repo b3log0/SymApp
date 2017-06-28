@@ -57,9 +57,11 @@ class List extends Component {
       return <Text style={utils.empty} />;
     }
     if (pagination.pageIndex < pagination.pageTotal) {
-      return <LoadMoreFooter />;
+      entity.setIsLoadAll(false);
+    } else {
+      entity.setIsLoadAll(true);
     }
-    return <LoadMoreFooter isLoadAll />;
+    return <LoadMoreFooter />;
   };
 
   render() {
