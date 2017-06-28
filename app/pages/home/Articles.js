@@ -1,19 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { inject } from 'mobx-react';
+import React, { PureComponent, PropTypes } from 'react';
 
 import List from '../../components/article/List';
 
-@inject('user')
-class Articles extends Component {
+class Articles extends PureComponent {
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired
   };
 
   render() {
-    const { user } = this.props;
     return (
-      <List navigation={this.props.navigation} pathname={`user/${user.name}/articles`} />
+      <List navigation={this.props.navigation} />
     );
   }
 }

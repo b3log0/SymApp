@@ -2,23 +2,27 @@ import fetchService from '../services/FetchService';
 import paginationStore from '../stores/Pagination';
 import entityStore from '../stores/Entity';
 
-const getList = (pathname, pageIndex) => fetchService.get(`${pathname}?p=${pageIndex}`)
-  .then((response) => {
-    entityStore.setIsLoading(false);
 
-    const data = response.data;
+const getList = (pageIndex) => {
+  console.log(entityStore.pathname);
+  return fetchService.get(`${entityStore.pathname}?p=${pageIndex}`)
+    .then((response) => {
+      entityStore.setIsLoading(false);
 
-    paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
+      const data = response.data;
 
-    if (pageIndex === 1) {
-      entityStore.setList(data.articles);
-    } else {
-      entityStore.setList(entityStore.list.concat(data.articles));
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+      paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
+
+      if (pageIndex === 1) {
+        entityStore.setList(data.articles);
+      } else {
+        entityStore.setList(entityStore.list.concat(data.articles));
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
 
 export default {
   getList

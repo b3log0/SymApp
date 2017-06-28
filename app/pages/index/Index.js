@@ -13,20 +13,26 @@ import List from '../../components/article/List';
 import addfilePng from '../../images/addfile.png';
 import { utils, index, icon } from '../../styles/index';
 
-@inject('pagination', 'entity', 'user')
+@inject('entity', 'user')
 @observer
 class Index extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    entity: PropTypes.object.isRequired
   };
+
+  componentWillMount() {
+    const { entity } = this.props;
+    entity.setPathname('articles/latest');
+  }
 
   _goPost = () => {
     const { user } = this.props;
     userAction.isLogin().then((isLogin) => {
       if (isLogin) {
-        this.props.navigation.navigate('Post');
+        this.props.navigation.navigate('IndexPost');
       } else {
         user.setShowLogin(true);
       }
@@ -40,7 +46,7 @@ class Index extends Component {
         <Modal visible={user.showLogin}>
           <Login />
         </Modal>
-        <List navigation={this.props.navigation} pathname={'articles/latest'} />
+        <List navigation={this.props.navigation} />
         <TouchableOpacity
           onPress={this._goPost}
           style={index.addIconWrap}

@@ -21,20 +21,19 @@ class List extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired,
-    pathname: PropTypes.string.isRequired
+    entity: PropTypes.object.isRequired
   };
 
   componentWillMount() {
     const { entity } = this.props;
     entity.setIsLoading(true);
-    articlesAction.getList(this.props.pathname, 1);
+    articlesAction.getList(1);
   }
 
   _onRefresh = () => {
     const { entity } = this.props;
     entity.setIsLoading(true);
-    articlesAction.getList(this.props.pathname, 1);
+    articlesAction.getList(1);
   };
 
   _toEnd = () => {
@@ -49,7 +48,7 @@ class List extends Component {
 
   _loadMoreData = () => {
     const { pagination } = this.props;
-    articlesAction.getList(this.props.pathname, pagination.pageIndex + 1);
+    articlesAction.getList(pagination.pageIndex + 1);
   };
 
   _renderFooter = () => {

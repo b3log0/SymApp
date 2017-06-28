@@ -76,7 +76,8 @@ const HomeStack = StackNavigator({
   HomeArticles: {
     screen: HomeArticles,
     navigationOptions: {
-      title: '我的发帖'
+      title: '我的发帖',
+      tabBarVisible: false
     }
   },
   Article: IndexArticleScreen

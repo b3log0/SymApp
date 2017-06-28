@@ -12,13 +12,14 @@ import Login from '../verify/Login';
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 
-@inject('user')
+@inject('user', 'entity')
 @observer
 class Navigation extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    entity: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -26,9 +27,16 @@ class Navigation extends Component {
   }
 
   _goView = (routerName) => {
-    const { user } = this.props;
+    const { user, entity } = this.props;
     userAction.isLogin().then((isLogin) => {
       if (isLogin) {
+        switch (routerName) {
+          case 'HomeArticles':
+            entity.setPathname(`user/${user.name}/articles`);
+            break;
+          default:
+            break;
+        }
         this.props.navigation.navigate(routerName);
       } else {
         user.setShowLogin(true);
@@ -60,7 +68,7 @@ class Navigation extends Component {
         </Modal>
         <View style={module.wrap}>
           <TouchableOpacity style={module.list} onPress={() => { this._goView('HomeArticles'); }}>
-            <Text>帖子[开发中]</Text>
+            <Text>帖子</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>回帖[开发中]</Text>
