@@ -6,7 +6,6 @@ import indexListStore from '../stores/IndexList';
 
 const getList = pageIndex => fetchService.get(`${entityStore.pathname}?p=${pageIndex}`)
     .then((response) => {
-      console.log(pageIndex);
       entityStore.setIsLoading(false);
 
       const data = response.data;
@@ -25,7 +24,6 @@ const getList = pageIndex => fetchService.get(`${entityStore.pathname}?p=${pageI
 
 const getIndex = pageIndex => fetchService.get(`articles/latest?p=${pageIndex}`)
     .then((response) => {
-      console.log(pageIndex, 'article');
       indexListStore.setIsLoading(false);
 
       const data = response.data;
