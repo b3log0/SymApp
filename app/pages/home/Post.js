@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
 import { post, utils, icon } from '../../styles';
@@ -21,7 +21,6 @@ const {
 } = ReactNative;
 
 @inject('article')
-@observer
 class Post extends Component {
 
   static propTypes = {

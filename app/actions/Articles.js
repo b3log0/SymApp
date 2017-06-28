@@ -3,9 +3,7 @@ import paginationStore from '../stores/Pagination';
 import entityStore from '../stores/Entity';
 
 
-const getList = (pageIndex) => {
-  console.log(entityStore.pathname);
-  return fetchService.get(`${entityStore.pathname}?p=${pageIndex}`)
+const getList = pageIndex => fetchService.get(`${entityStore.pathname}?p=${pageIndex}`)
     .then((response) => {
       entityStore.setIsLoading(false);
 
@@ -22,7 +20,6 @@ const getList = (pageIndex) => {
     .catch((error) => {
       console.error(error);
     });
-};
 
 export default {
   getList

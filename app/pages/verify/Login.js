@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 import userAction from '../../actions/User';
 import { form, icon, color } from '../../styles';
@@ -16,7 +16,6 @@ const {
 } = ReactNative;
 
 @inject('user')
-@observer
 class Login extends Component {
 
   static propTypes = {
