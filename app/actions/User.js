@@ -10,8 +10,10 @@ import fetchService from '../services/FetchService';
 const isLogin = async () => {
   try {
     const isLoginStorage = await AsyncStorage.getItem('@UserStore:isLogin');
+    const nameStorage = await AsyncStorage.getItem('@UserStore:name');
     if (isLoginStorage !== null) {
       userStore.setIsLogin(true);
+      userStore.setName(nameStorage);
       return true;
     }
     return false;

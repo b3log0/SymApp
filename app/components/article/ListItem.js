@@ -12,12 +12,12 @@ class ListItem extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     rowData: PropTypes.object.isRequired
-  }
+  };
 
   _goArticle = () => {
     const rowData = this.props.rowData;
     this.props.navigation.navigate('Article', { oId: rowData.oId });
-  }
+  };
 
   render() {
     const rowData = this.props.rowData;

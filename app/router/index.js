@@ -8,52 +8,54 @@ import {
   Button
 } from 'react-native';
 
-import Index from '../pages/index/Index';
-import Post from '../pages/home/Post';
-import Article from '../pages/Article';
+import IndexIndex from '../pages/index/Index';
+import IndexPost from '../pages/home/Post';
+import IndexArticle from '../pages/Article';
 import Other from '../pages/other/Index';
 import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
 import HomeSettingNavigation from '../pages/home/SettingNavigation';
-import Login from '../pages/verify/Login';
+import HomeArticles from '../pages/home/Articles';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
 import settingPng from '../images/setting.png';
 import compassPng from '../images/compass.png';
 
+const IndexArticleScreen = {
+  screen: IndexArticle,
+  navigationOptions: ({ navigation }) => {
+    const { state, setParams } = navigation;
+    const isInfo = state.params.mode === 'info';
+    const { user } = state.params;
+    return {
+      title: isInfo ? `${user}'s Contact Info` : `Chat with ${state.params.user}`,
+      tabBarVisible: false,
+      headerRight: (
+        <Button
+          title={isInfo ? 'Done' : `${user}'s info`}
+          onPress={() => setParams({ mode: isInfo ? 'none' : 'info' })}
+        />
+      )
+    };
+  }
+};
+
 const IndexStack = StackNavigator({
-  Index: {
-    screen: Index,
+  IndexIndex: {
+    screen: IndexIndex,
     navigationOptions: {
       header: null
     }
   },
-  Post: {
-    screen: Post,
+  IndexPost: {
+    screen: IndexPost,
     navigationOptions: {
       title: '发帖',
       tabBarVisible: false
     }
   },
-  Article: {
-    screen: Article,
-    navigationOptions: ({ navigation }) => {
-      const { state, setParams } = navigation;
-      const isInfo = state.params.mode === 'info';
-      const { user } = state.params;
-      return {
-        title: isInfo ? `${user}'s Contact Info` : `Chat with ${state.params.user}`,
-        tabBarVisible: false,
-        headerRight: (
-          <Button
-            title={isInfo ? 'Done' : `${user}'s info`}
-            onPress={() => setParams({ mode: isInfo ? 'none' : 'info' })}
-          />
-        )
-      };
-    }
-  }
+  Article: IndexArticleScreen
 }, {
   headerMode: 'screen'
 });
@@ -71,12 +73,13 @@ const HomeStack = StackNavigator({
       title: '设置'
     }
   },
-  Login: {
-    screen: Login,
+  HomeArticles: {
+    screen: HomeArticles,
     navigationOptions: {
-      header: null
+      title: '我的发帖'
     }
-  }
+  },
+  Article: IndexArticleScreen
 }, {
   headerMode: 'screen'
 });

@@ -25,6 +25,17 @@ class Navigation extends Component {
     userAction.isLogin();
   }
 
+  _goView = (routerName) => {
+    const { user } = this.props;
+    userAction.isLogin().then((isLogin) => {
+      if (isLogin) {
+        this.props.navigation.navigate(routerName);
+      } else {
+        user.setShowLogin(true);
+      }
+    });
+  };
+
   render() {
     const { user } = this.props;
 
@@ -48,7 +59,7 @@ class Navigation extends Component {
           <Login />
         </Modal>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
+          <TouchableOpacity style={module.list} onPress={() => { this._goView('HomeArticles'); }}>
             <Text>帖子[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
