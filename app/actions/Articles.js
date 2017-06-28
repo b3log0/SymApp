@@ -13,9 +13,9 @@ const getList = pageIndex => fetchService.get(`${entityStore.pathname}?p=${pageI
       paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
       if (pageIndex === 1) {
-        entityStore.setList(data.articles);
+        entityStore.setList(data.articles ? data.articles : data.comments);
       } else {
-        entityStore.setList(entityStore.list.concat(data.articles));
+        entityStore.setList(entityStore.list.concat(data.articles ? data.articles : data.comments));
       }
     })
     .catch((error) => {

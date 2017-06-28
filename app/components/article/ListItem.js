@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 import { utils, list } from '../../styles';
 
@@ -19,7 +20,13 @@ class ListItem extends Component {
     this.props.navigation.navigate('Article', { oId: rowData.oId });
   };
 
-  render() {
+  _goComment = () => {
+    const rowData = this.props.rowData;
+    this.props.navigation.navigate('Article',
+      { oId: `${rowData.commentOnArticleId}#${rowData.commenter.oId}` });
+  };
+
+  _genArticleListItem = () => {
     const rowData = this.props.rowData;
 
     let thumbanilImg = <Text style={utils.empty} />;
@@ -47,6 +54,40 @@ class ListItem extends Component {
         </TouchableOpacity>
       </View>
     );
+  };
+
+  _genCommentListItem = () => {
+    const rowData = this.props.rowData;
+    return (
+      <View style={list.normal}>
+        <TouchableOpacity onPress={this._goComment}>
+          <Text style={list.title}>{rowData.commentArticleTitle}</Text>
+          <View style={list.info} >
+            <Image
+              source={{ uri: rowData.commentArticleAuthorThumbnailURL }}
+              style={list.avatar}
+            />
+            <Text style={list.infoText}>
+              {rowData.commentArticleAuthorName}
+            </Text>
+          </View>
+          <HTMLView
+            value={rowData.commentContent}
+            // stylesheet={styles}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  render() {
+    const rowData = this.props.rowData;
+
+    if (typeof (rowData.articleTitle) === 'undefined') {
+      return this._genCommentListItem();
+    }
+
+    return this._genArticleListItem();
   }
 }
 

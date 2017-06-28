@@ -1,11 +1,16 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import List from '../../components/article/List';
 
-class Articles extends PureComponent {
+class Articles extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   };
+
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.stackTitle,
+    tabBarVisible: false
+  });
 
   render() {
     return (

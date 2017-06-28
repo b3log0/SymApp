@@ -26,12 +26,12 @@ class Navigation extends Component {
     userAction.isLogin();
   }
 
-  _goView = (routerName, pathname) => {
+  _goView = (routerName, pathname, stackTitle) => {
     const { user, entity } = this.props;
     userAction.isLogin().then((isLogin) => {
       if (isLogin) {
         entity.setPathname(pathname);
-        this.props.navigation.navigate(routerName);
+        this.props.navigation.navigate(routerName, {stackTitle});
       } else {
         user.setShowLogin(true);
       }
@@ -64,13 +64,18 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeArticles', `user/${user.name}/articles`);
+              this._goView('HomeArticles', `user/${user.name}/articles`, '帖子');
             }}
           >
             <Text>帖子</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>回帖[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/comments`, '回帖');
+            }}
+          >
+            <Text>回帖</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>匿贴[开发中]</Text>
@@ -83,7 +88,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeArticles', `user/${user.name}/watching/articles`);
+              this._goView('HomeArticles', `user/${user.name}/watching/articles`, '关注帖子');
             }}
           >
             <Text>关注帖子</Text>
@@ -97,7 +102,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeArticles', `user/${user.name}/following/articles`);
+              this._goView('HomeArticles', `user/${user.name}/following/articles`, '收藏帖子');
             }}
           >
             <Text>收藏帖子</Text>

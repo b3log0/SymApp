@@ -6,6 +6,7 @@ import pagination from './Pagination';
 import user from './User';
 import article from './Article';
 import indexList from './IndexList';
+import home from './Home';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -23,5 +24,6 @@ export default {
   pagination,
   user,
   article,
-  indexList
+  indexList,
+  home
 };
