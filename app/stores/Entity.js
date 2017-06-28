@@ -4,15 +4,11 @@ class Entity {
   @observable list;
   @observable isLoading;
   @observable pathname;
-  @observable isLoadAll;
-  @observable navigation;
 
   constructor() {
     this.list = [];
     this.isLoading = true;
     this.pathname = '';
-    this.isLoadAll = true;
-    this.navigation = {};
   }
 
   @action setList = (list) => {
@@ -25,14 +21,6 @@ class Entity {
 
   @action setPathname = (pathname) => {
     this.pathname = pathname;
-  };
-
-  @action setIsLoadAll = (isLoadAll) => {
-    this.isLoadAll = isLoadAll;
-  };
-
-  @action setNavigation = (navigation) => {
-    this.navigation = navigation;
   };
 }
 

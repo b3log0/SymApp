@@ -5,6 +5,7 @@ import entity from './Entity';
 import pagination from './Pagination';
 import user from './User';
 import article from './Article';
+import indexList from './IndexList';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -21,5 +22,6 @@ export default {
   entity,
   pagination,
   user,
-  article
+  article,
+  indexList
 };

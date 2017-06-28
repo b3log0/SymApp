@@ -1,8 +1,8 @@
 import { observable, action } from 'mobx';
 
 class Pagination {
-  @observable pageIndex
-  @observable pageTotal
+  @observable pageIndex;
+  @observable pageTotal;
 
   constructor() {
     this.pageIndex = 0;

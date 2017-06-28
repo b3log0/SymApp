@@ -31,7 +31,6 @@ class Navigation extends Component {
     userAction.isLogin().then((isLogin) => {
       if (isLogin) {
         entity.setPathname(pathname);
-        entity.setNavigation(this.props.navigation);
         this.props.navigation.navigate(routerName);
       } else {
         user.setShowLogin(true);

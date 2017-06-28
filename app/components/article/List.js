@@ -20,6 +20,7 @@ class List extends Component {
 
   static propTypes = {
     pagination: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
     entity: PropTypes.object.isRequired
   };
 
@@ -56,11 +57,10 @@ class List extends Component {
       return <Text style={utils.empty} />;
     }
     if (pagination.pageIndex < pagination.pageTotal) {
-      entity.setIsLoadAll(false);
+      return <LoadMoreFooter />;
     } else {
-      entity.setIsLoadAll(true);
+      return <LoadMoreFooter isLoadAll />;
     }
-    return <LoadMoreFooter />;
   };
 
   render() {
@@ -90,7 +90,7 @@ class List extends Component {
         getItemCount={items => items.length}
         getItem={(items, i) => items[i]}
         renderItem={rowData =>
-            (<ListItem rowData={rowData.item} />)}
+            (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
       />
     );
   }

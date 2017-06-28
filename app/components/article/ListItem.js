@@ -5,21 +5,18 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import { inject } from 'mobx-react';
 
 import { utils, list } from '../../styles';
 
-@inject('entity')
 class ListItem extends Component {
   static propTypes = {
-    entity: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
     rowData: PropTypes.object.isRequired
   };
 
   _goArticle = () => {
-    const { entity } = this.props;
     const rowData = this.props.rowData;
-    entity.navigation.navigate('Article', { oId: rowData.oId });
+    this.props.navigation.navigate('Article', { oId: rowData.oId });
   };
 
   render() {
