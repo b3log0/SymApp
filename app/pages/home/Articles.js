@@ -1,15 +1,11 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 
 import List from '../../components/article/List';
 
 class Articles extends PureComponent {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired
-  };
-
   render() {
     return (
-      <List navigation={this.props.navigation} />
+      <List />
     );
   }
 }

@@ -26,17 +26,12 @@ class Navigation extends Component {
     userAction.isLogin();
   }
 
-  _goView = (routerName) => {
+  _goView = (routerName, pathname) => {
     const { user, entity } = this.props;
     userAction.isLogin().then((isLogin) => {
       if (isLogin) {
-        switch (routerName) {
-          case 'HomeArticles':
-            entity.setPathname(`user/${user.name}/articles`);
-            break;
-          default:
-            break;
-        }
+        entity.setPathname(pathname);
+        entity.setNavigation(this.props.navigation);
         this.props.navigation.navigate(routerName);
       } else {
         user.setShowLogin(true);
@@ -67,7 +62,12 @@ class Navigation extends Component {
           <Login />
         </Modal>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={() => { this._goView('HomeArticles'); }}>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/articles`);
+            }}
+          >
             <Text>帖子</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
@@ -81,8 +81,13 @@ class Navigation extends Component {
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注帖子[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/watching/articles`);
+            }}
+          >
+            <Text>关注帖子</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>关注用户[开发中]</Text>
@@ -90,8 +95,13 @@ class Navigation extends Component {
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>关注标签[开发中]</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>收藏帖子[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/following/articles`);
+            }}
+          >
+            <Text>收藏帖子</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
             <Text>关注者[开发中]</Text>

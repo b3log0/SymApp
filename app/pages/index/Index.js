@@ -26,6 +26,7 @@ class Index extends Component {
   componentWillMount() {
     const { entity } = this.props;
     entity.setPathname('articles/latest');
+    entity.setNavigation(this.props.navigation);
   }
 
   _goPost = () => {
@@ -46,7 +47,7 @@ class Index extends Component {
         <Modal visible={user.showLogin}>
           <Login />
         </Modal>
-        <List navigation={this.props.navigation} />
+        <List />
         <TouchableOpacity
           onPress={this._goPost}
           style={index.addIconWrap}

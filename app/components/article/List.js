@@ -19,7 +19,6 @@ import { utils } from '../../styles/index';
 class List extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
     entity: PropTypes.object.isRequired
   };
@@ -91,7 +90,7 @@ class List extends Component {
         getItemCount={items => items.length}
         getItem={(items, i) => items[i]}
         renderItem={rowData =>
-            (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
+            (<ListItem rowData={rowData.item} />)}
       />
     );
   }
