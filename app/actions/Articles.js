@@ -1,9 +1,8 @@
 import fetchService from '../services/FetchService';
-
 import paginationStore from '../stores/Pagination';
 import entityStore from '../stores/Entity';
 
-const getList = pageIndex => fetchService.get(`articles/latest?p=${pageIndex}`)
+const getList = (pathname, pageIndex) => fetchService.get(`${pathname}?p=${pageIndex}`)
   .then((response) => {
     entityStore.setIsLoading(false);
 
