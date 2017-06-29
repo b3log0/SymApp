@@ -30,10 +30,35 @@ class Index extends Component {
     indexList: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageYs: [],
+      isHidden: false
+    };
+  }
+
   componentWillMount() {
     const { indexList } = this.props;
     indexList.setIsLoading(true);
     articlesAction.getIndex(1);
+
+    this._gestureHandlers = {
+      onStartShouldSetResponder: () => true,
+      onResponderGrant: () => {
+        this.setState({ pageYs: [] });
+      },
+      onResponderMove: (evt) => {
+        this.state.pageYs.push(evt.nativeEvent.pageY);
+        if (this.state.pageYs[0] - evt.nativeEvent.pageY > 20) {
+          this.setState({ isHidden: true });
+        } else if (evt.nativeEvent.pageY - this.state.pageYs[0] > 10) {
+          this.setState({ isHidden: false });
+        } else {
+          this.setState({ isHidden: null });
+        }
+      }
+    };
   }
 
   _goPost = () => {
@@ -96,6 +121,7 @@ class Index extends Component {
           <Login />
         </Modal>
         <VirtualizedList
+          {...this._gestureHandlers}
           data={indexList.list}
           onEndReached={this._toEnd}
           onEndReachedThreshold={1}
@@ -113,14 +139,16 @@ class Index extends Component {
           renderItem={rowData =>
             (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
         />
-        <TouchableOpacity
-          onPress={this._goPost}
-          style={index.addIconWrap}
-        >
-          <View >
-            <Image style={[index.addIcon, icon.normal]} source={addfilePng} />
-          </View>
-        </TouchableOpacity>
+        {
+          this.state.isHidden === false ? (<TouchableOpacity
+            onPress={this._goPost}
+            style={index.addIconWrap}
+          >
+            <View >
+              <Image style={[index.addIcon, icon.normal]} source={addfilePng} />
+            </View>
+          </TouchableOpacity>) : null
+        }
       </View>
     );
   }

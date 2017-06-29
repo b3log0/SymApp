@@ -14,5 +14,8 @@ export default {
   },
   listLast: {
     borderBottomWidth: 0
+  },
+  listDesc: {
+    color: color.gray
   }
 };

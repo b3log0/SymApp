@@ -17,13 +17,13 @@ class ListItem extends Component {
 
   _goArticle = () => {
     const rowData = this.props.rowData;
-    this.props.navigation.navigate('Article', { oId: rowData.oId });
+    this.props.navigation.navigate('WebView', { path: `article/${rowData.oId}` });
   };
 
   _goComment = () => {
     const rowData = this.props.rowData;
-    this.props.navigation.navigate('Article',
-      { oId: `${rowData.commentOnArticleId}#${rowData.commenter.oId}` });
+    this.props.navigation.navigate('WebView',
+      { path: `article/${rowData.commentOnArticleId}#${rowData.commenter.oId}` });
   };
 
   _genArticleListItem = () => {

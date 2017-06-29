@@ -6,13 +6,17 @@ import {
   View
 } from 'react-native';
 
-import userAction from '../../actions/User';
-import { module } from '../../styles';
+import userAction from '../../../actions/User';
+import { module } from '../../../styles/index';
 
 class SettingNavigation extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired
+  };
+
+  _goView = (routerName) => {
+    this.props.navigation.navigate(routerName);
   };
 
   _logout = () => {
@@ -66,8 +70,11 @@ class SettingNavigation extends Component {
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>帮助[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => { this._goView('HomeSettingHelp'); }}
+          >
+            <Text>帮助</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>

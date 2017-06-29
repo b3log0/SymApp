@@ -4,9 +4,10 @@ import {
   View
 } from 'react-native';
 
-import { utils } from '../styles';
+import { utils } from '../styles/index';
+import { origin } from '../config/symphony';
 
-class Article extends Component {
+class Web extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired
@@ -37,11 +38,11 @@ class Article extends Component {
       <View style={utils.flex} {...this._gestureHandlers}>
         <WebView
           scrollEnabled={this.state.scrollEnabled}
-          source={{ uri: `https://hacpai.com/article/${params.oId}` }}
+          source={{ uri: `${origin}${params.path}` }}
         />
       </View>
     );
   }
 }
 
-export default Article;
+export default Web;

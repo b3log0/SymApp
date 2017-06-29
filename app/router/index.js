@@ -10,11 +10,12 @@ import {
 
 import IndexIndex from '../pages/index/Index';
 import IndexPost from '../pages/home/Post';
-import IndexArticle from '../pages/Article';
+import Web from '../components/Web';
 import Other from '../pages/other/Index';
 import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
-import HomeSettingNavigation from '../pages/home/SettingNavigation';
+import HomeSettingNavigation from '../pages/home/setting/SettingNavigation';
+import HomeSettingHelp from '../pages/home/setting/Help';
 import HomeArticles from '../pages/home/Articles';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
@@ -22,8 +23,8 @@ import feedPng from '../images/feed.png';
 import settingPng from '../images/setting.png';
 import compassPng from '../images/compass.png';
 
-const IndexArticleScreen = {
-  screen: IndexArticle,
+const WebScreen = {
+  screen: Web,
   navigationOptions: ({ navigation }) => {
     const { state, setParams } = navigation;
     const isInfo = state.params.mode === 'info';
@@ -55,7 +56,7 @@ const IndexStack = StackNavigator({
       tabBarVisible: false
     }
   },
-  Article: IndexArticleScreen
+  WebView: WebScreen
 }, {
   headerMode: 'screen'
 });
@@ -73,10 +74,16 @@ const HomeStack = StackNavigator({
       title: '设置'
     }
   },
+  HomeSettingHelp: {
+    screen: HomeSettingHelp,
+    navigationOptions: {
+      title: '帮助'
+    }
+  },
   HomeArticles: {
     screen: HomeArticles
   },
-  Article: IndexArticleScreen
+  WebView: WebScreen
 }, {
   headerMode: 'screen'
 });
