@@ -93,11 +93,21 @@ class Navigation extends Component {
           >
             <Text>关注帖子</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注用户[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/following/users`, '关注用户');
+            }}
+          >
+            <Text>关注用户</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>关注标签[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/following/tags`, '关注标签');
+            }}
+          >
+            <Text>关注标签</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={module.list}
@@ -107,8 +117,13 @@ class Navigation extends Component {
           >
             <Text>收藏帖子</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>关注者[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => {
+              this._goView('HomeArticles', `user/${user.name}/followers`, '关注者');
+            }}
+          >
+            <Text>关注者</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>

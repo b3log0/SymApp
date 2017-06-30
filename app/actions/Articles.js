@@ -9,13 +9,15 @@ const getList = pageIndex => fetchService.get(`${entityStore.pathname}?p=${pageI
       entityStore.setIsLoading(false);
 
       const data = response.data;
-
       paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
+      // 适配多个接口，根据规则获取数据内容. key: comments, articles, users
+      const keys = Object.keys(data);
+      const key = keys[0] === 'pagination' ? keys[1] : keys[0];
       if (pageIndex === 1) {
-        entityStore.setList(data.articles ? data.articles : data.comments);
+        entityStore.setList(data[key]);
       } else {
-        entityStore.setList(entityStore.list.concat(data.articles ? data.articles : data.comments));
+        entityStore.setList(entityStore.list.concat(data[key]));
       }
     })
     .catch((error) => {

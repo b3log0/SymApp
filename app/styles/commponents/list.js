@@ -7,6 +7,23 @@ export default {
     padding: 10,
     backgroundColor: color.white
   },
+  row: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  rowFirst: {
+    width: 50
+  },
+  rowCenter: {
+    flex: 1
+  },
+  rowLast: {
+    alignItems: 'flex-end',
+    flex: 1
+  },
+  rowTitle: {
+    paddingLeft: 5
+  },
   title: {
     fontWeight: 'bold',
     fontSize: 14
@@ -19,6 +36,11 @@ export default {
     borderRadius: 8,
     height: 16,
     width: 16
+  },
+  avatarBig: {
+    height: 36,
+    width: 36,
+    borderRadius: 18
   },
   info: {
     flex: 1,
