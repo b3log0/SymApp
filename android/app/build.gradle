@@ -111,8 +111,17 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file("../symapp-release-key.keystore")
+            storePassword SYMAPP_RELEASE_STORE_PASSWORD
+            keyAlias "symapp"
+            keyPassword SYMAPP_KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
