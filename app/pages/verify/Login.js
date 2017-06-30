@@ -3,7 +3,7 @@ import ReactNative from 'react-native';
 import { inject } from 'mobx-react';
 
 import userAction from '../../actions/User';
-import { form, icon, color } from '../../styles';
+import { form, icon, color, utils } from '../../styles';
 import logoPng from '../../images/logo.png';
 
 const {
@@ -50,7 +50,7 @@ class Login extends Component {
     const { user } = this.props;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={form.wrap}>
+      <KeyboardAvoidingView behavior="padding" style={utils.verticalCenter}>
         <Image
           source={logoPng}
           style={[icon.big, form.logo]}

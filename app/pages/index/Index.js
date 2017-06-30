@@ -108,7 +108,7 @@ class Index extends Component {
     const { indexList } = this.props;
     if (indexList.isLoading) {
       return (
-        <View style={utils.statusBar}>
+        <View style={utils.verticalCenter}>
           <ActivityIndicator />
         </View>
       );

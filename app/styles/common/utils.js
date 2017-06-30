@@ -10,5 +10,10 @@ export default {
   },
   flex: {
     flex: 1
+  },
+  verticalCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    height: '100%'
   }
 };

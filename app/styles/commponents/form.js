@@ -1,11 +1,6 @@
 import color from '../common/color';
 
 export default {
-  wrap: {
-    flex: 1,
-    justifyContent: 'center',
-    height: '100%'
-  },
   logo: {
     marginBottom: 50,
     alignSelf: 'center'
@@ -22,6 +17,7 @@ export default {
   },
   button: {
     width: 250,
+    marginBottom: 10,
     alignSelf: 'center'
   }
 };

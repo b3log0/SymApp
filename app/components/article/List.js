@@ -66,7 +66,7 @@ class List extends Component {
     const { entity } = this.props;
     if (entity.isLoading) {
       return (
-        <View style={utils.statusBar}>
+        <View style={utils.verticalCenter}>
           <ActivityIndicator />
         </View>
       );
