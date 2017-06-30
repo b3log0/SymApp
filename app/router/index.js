@@ -4,8 +4,7 @@ import {
   StackNavigator
 } from 'react-navigation';
 import {
-  Image,
-  Button
+  Image
 } from 'react-native';
 
 import IndexIndex from '../pages/index/Index';
