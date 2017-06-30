@@ -13,7 +13,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import LoadMoreFooter from '../../components/LoadMoreFooter';
-import ListItem from '../../components/article/ListItem';
+import ListItem from '../../components/item/Item';
 import userAction from '../../actions/User';
 import articlesAction from '../../actions/Articles';
 import Login from '../verify/Login';

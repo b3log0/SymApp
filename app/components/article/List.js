@@ -10,7 +10,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import articlesAction from '../../actions/Articles';
-import ListItem from './ListItem';
+import ListItem from '../item/Item';
 import LoadMoreFooter from '../../components/LoadMoreFooter';
 import { utils } from '../../styles/index';
 
