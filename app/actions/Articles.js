@@ -13,7 +13,12 @@ const getList = async (pageIndex) => {
 
     // 适配多个接口，根据规则获取数据内容. key: comments, articles, users
     const keys = Object.keys(data);
-    const key = keys[0] === 'pagination' ? keys[1] : keys[0];
+    let key = '';
+    keys.forEach((k) => {
+      if (k !== 'pagination' && k !== 'isFollowing') {
+        key = k;
+      }
+    });
     if (pageIndex === 1) {
       entityStore.setList(data[key]);
     } else {

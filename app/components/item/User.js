@@ -48,14 +48,17 @@ class User extends Component {
               {userDesc}
             </Text>
           </View>
-          <View style={list.rowLast}>
-            <Button
-              onPress={() => {
-                Alert.alert('开发中');
-              }}
-              title={rowData.isFollowing ? '取消关注' : '关注'}
-            />
-          </View>
+          {
+            typeof (rowData.isFollowing) === 'undefined' ? null :
+            (<View style={list.rowLast}>
+              <Button
+                onPress={() => {
+                  Alert.alert('开发中');
+                }}
+                title={rowData.isFollowing ? '取消关注' : '关注'}
+              />
+            </View>)
+          }
         </TouchableOpacity>
       </View>
     );
