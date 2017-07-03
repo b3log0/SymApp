@@ -7,6 +7,7 @@ import user from './User';
 import article from './Article';
 import indexList from './IndexList';
 import home from './Home';
+import domain from './Domain';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -25,5 +26,6 @@ export default {
   user,
   article,
   indexList,
-  home
+  home,
+  domain
 };

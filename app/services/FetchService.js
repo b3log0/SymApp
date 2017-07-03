@@ -1,16 +1,27 @@
 import { api } from '../config/symphony';
 
-const get = uri => fetch(`${api}${uri}`)
-  .then(response => response.json())
-  .then(response => Promise.resolve(response))
-  .catch(error => Promise.reject(error));
+const get = async (uri) => {
+  try {
+    let response = await fetch(`${api}${uri}`);
+    response = response.json();
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
-const post = (uri, form) => fetch(`${api}${uri}`, {
-  method: 'POST',
-  body: JSON.stringify(form)
-}).then(response => response.json())
-  .then(response => Promise.resolve(response))
-  .catch(error => Promise.reject(error));
+const post = async (uri, form) => {
+  try {
+    let response = await fetch(`${api}${uri}`, {
+      method: 'POST',
+      body: JSON.stringify(form)
+    });
+    response = response.json();
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
 export default {
   get,

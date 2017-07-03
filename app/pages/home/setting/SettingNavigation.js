@@ -19,12 +19,11 @@ class SettingNavigation extends Component {
     this.props.navigation.navigate(routerName);
   };
 
-  _logout = () => {
-    userAction.logout().then((sc) => {
-      if (sc === 0) {
-        this.props.navigation.goBack();
-      }
-    });
+  _logout = async () => {
+    const sc = await userAction.logout();
+    if (sc === 0) {
+      this.props.navigation.goBack();
+    }
   };
 
   render() {

@@ -1,34 +1,113 @@
 import React, { Component, PropTypes } from 'react';
 import {
   ScrollView,
-  TouchableOpacity,
+  Button,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
+import { inject } from 'mobx-react';
 
-import userAction from '../../actions/User';
-import { utils, module } from '../../styles';
+import domainsAction from '../../actions/Domains';
+import { utils, module, other } from '../../styles';
 
+@inject('domain')
 class Other extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    domain: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
-    userAction.isLogin().then((isLogin) => {
-      if (!isLogin) {
-        this.props.navigation.navigate('Login');
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      domains: []
+    };
+  }
+
+  async componentWillMount() {
+    const domains = await domainsAction.getDomains();
+    this.setState({
+      domains: domains.domains
     });
   }
 
+  _goDomains = (uri, stackTitle) => {
+    const { domain } = this.props;
+    domain.setUri(uri);
+    domain.setTitle(stackTitle);
+    this.props.navigation.navigate('OtherDomain', { stackTitle });
+  };
+
+  _goView = (path) => {
+    this.props.navigation.navigate('WebView', { path });
+  };
+
   render() {
+    const domainsJSX = this.state.domains.map((item) => {
+      const uriArray = item.domainURI.split('/');
+      return (<Button
+        key={item.oId}
+        onPress={() => {
+          this._goDomains(`${uriArray[uriArray.length - 1]}`, item.domainTitle);
+        }}
+        title={item.domainTitle}
+      />);
+    }
+    );
+
     return (
       <ScrollView style={utils.statusBar}>
         <View style={module.wrap}>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>Other[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => { this._goView('activity/checkin'); }}
+          >
+            <Text>领取今日签到奖励</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => { this._goView('activity/yesterday-liveness-reward'); }}
+          >
+            <Text>领取昨日活跃奖励</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => { this._goView('activity/1A0001'); }}
+          >
+            <Text>上证博彩</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => { this._goView('activity/character'); }}
+          >
+            <Text>字</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={other.domains}>
+          {domainsJSX}
+        </View>
+        <View style={module.wrap}>
+          <TouchableOpacity
+            style={module.list}
+          >
+            <Text>优选[开发中]</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={module.list}
+          >
+            <Text>同城[开发中]</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={module.list}
+          >
+            <Text>此刻[开发中]</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+          >
+            <Text>书单[开发中]</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>);

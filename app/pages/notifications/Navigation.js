@@ -20,13 +20,12 @@ class Navigation extends Component {
     user: PropTypes.object.isRequired
   };
 
-  _goView = () => {
+  _goView = async () => {
     const { user } = this.props;
-    userAction.isLogin().then((isLogin) => {
-      if (!isLogin) {
-        user.setShowLogin(true);
-      }
-    });
+    const isLogin = await userAction.isLogin();
+    if (!isLogin) {
+      user.setShowLogin(true);
+    }
   };
 
   render() {

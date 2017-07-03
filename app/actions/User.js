@@ -23,50 +23,52 @@ const isLogin = async () => {
   }
 };
 
-const login = (name, password) => {
+const login = async (name, password) => {
   const formData = {
     userName: name,
     userPassword: md5(password)
     // "captcha": "" // 正常登录不用带该字段，登录失败次数过多时必填
   };
 
-  return fetchService.post('login', formData)
-    .then((response) => {
-      if (response.sc === 0) {
-        AsyncStorage.setItem('@UserStore:isLogin', 'true');
-        AsyncStorage.setItem('@UserStore:name', response.userName);
-        userStore.setName(response.userName);
-        userStore.setIsLogin(true);
-      } else {
-        Alert.alert(
+  try {
+    const response = await fetchService.post('login', formData);
+    if (response.sc === 0) {
+      AsyncStorage.setItem('@UserStore:isLogin', 'true');
+      AsyncStorage.setItem('@UserStore:name', response.userName);
+      userStore.setName(response.userName);
+      userStore.setIsLogin(true);
+    } else {
+      Alert.alert(
           response.msg
         );
-      }
+    }
 
-      return Promise.resolve(response.sc);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    return Promise.resolve(response.sc);
+  } catch (error) {
+    console.error(error);
+    return Promise.reject(error);
+  }
 };
 
-const logout = () => fetchService.post('logout')
-    .then((response) => {
-      if (response.sc === 0) {
-        AsyncStorage.removeItem('@UserStore:isLogin');
-        userStore.setIsLogin(false);
-        userStore.setPassword('');
-        userStore.setName('');
-      } else {
-        Alert.alert(
-          response.msg
-        );
-      }
-      return Promise.resolve(response.sc);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const logout = async () => {
+  try {
+    const response = await fetchService.post('logout');
+    if (response.sc === 0) {
+      AsyncStorage.removeItem('@UserStore:isLogin');
+      userStore.setIsLogin(false);
+      userStore.setPassword('');
+      userStore.setName('');
+    } else {
+      Alert.alert(
+        response.msg
+      );
+    }
+    return Promise.resolve(response.sc);
+  } catch (error) {
+    console.error(error);
+    return Promise.reject(error);
+  }
+};
 
 export default {
   isLogin,

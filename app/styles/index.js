@@ -9,6 +9,7 @@ import form from './commponents/form';
 import module from './commponents/module';
 import index from './biz/main';
 import post from './biz/post';
+import other from './biz/other';
 
 export { theme };
 export { color };
@@ -21,3 +22,4 @@ export { form };
 export { module };
 export { index };
 export { post };
+export { other };

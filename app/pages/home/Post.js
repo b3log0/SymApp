@@ -60,23 +60,23 @@ class Post extends Component {
     });
   }
 
-  _post = () => {
+  _post = async () => {
     const { article } = this.props;
-    articleAction.post({
+    const msg = await articleAction.post({
       articleTitle: article.title,
       articleContent: article.content,
       articleTags: article.tags
-    }).then((msg) => {
-      if (msg === 0) {
-        this.setState({
-          title: '',
-          content: '',
-          tags: '',
-          showTag: false
-        });
-        this.props.navigation.goBack();
-      }
     });
+
+    if (msg === 0) {
+      this.setState({
+        title: '',
+        content: '',
+        tags: '',
+        showTag: false
+      });
+      this.props.navigation.goBack();
+    }
   };
 
   render() {

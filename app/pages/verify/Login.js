@@ -37,13 +37,12 @@ class Login extends Component {
     });
   }
 
-  _login = () => {
+  _login = async () => {
     const { user } = this.props;
-    userAction.login(user.name, user.password).then((sc) => {
-      if (sc === 0) {
-        user.setShowLogin(false);
-      }
-    });
+    const sc = await userAction.login(user.name, user.password);
+    if (sc === 0) {
+      user.setShowLogin(false);
+    }
   };
 
   render() {

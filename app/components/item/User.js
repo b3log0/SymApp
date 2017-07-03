@@ -53,7 +53,7 @@ class User extends Component {
               onPress={() => {
                 Alert.alert('开发中');
               }}
-              title={'...'}
+              title={rowData.isFollowing ? '取消关注' : '关注'}
             />
           </View>
         </TouchableOpacity>

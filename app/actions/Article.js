@@ -3,28 +3,19 @@ import { Alert, AsyncStorage } from 'react-native';
 import FetchService from '../services/FetchService';
 import articleStore from '../stores/Article';
 
-const getDetail = pageIndex => FetchService.get(pageIndex)
-  .then((response) => {
-    // entityStore.setIsLoading(false);
-    //
-    // const data = response.data;
-    //
-    // paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
-    //
-    // if (pageIndex === 1) {
-    //   entityStore.setList(data.articles);
-    // } else {
-    //   entityStore.setList(entityStore.list.concat(data.articles));
-    // }
-    console.log(response);
-  })
-  .catch((error) => {
+const getDetail = async (pageIndex) => {
+  try {
+    const response = await FetchService.get(pageIndex);
+    return Promise.resolve(response.data);
+  } catch (error) {
     console.error(error);
-  });
+    return Promise.reject(error);
+  }
+};
 
-
-const post = formData => FetchService.post('article', formData)
-  .then((response) => {
+const post = async (formData) => {
+  try {
+    const response = await FetchService.post('article', formData);
     if (response.sc === 0) {
       AsyncStorage.removeItem('@ArticleStore:title');
       AsyncStorage.removeItem('@ArticleStore:content');
@@ -38,10 +29,11 @@ const post = formData => FetchService.post('article', formData)
       );
     }
     return Promise.resolve(response.sc);
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error(error);
-  });
+    return Promise.reject(error);
+  }
+};
 
 export default {
   getDetail,

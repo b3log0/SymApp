@@ -61,15 +61,14 @@ class Index extends Component {
     };
   }
 
-  _goPost = () => {
+  _goPost = async () => {
     const { user } = this.props;
-    userAction.isLogin().then((isLogin) => {
-      if (isLogin) {
-        this.props.navigation.navigate('IndexPost');
-      } else {
-        user.setShowLogin(true);
-      }
-    });
+    const isLogin = await userAction.isLogin();
+    if (isLogin) {
+      this.props.navigation.navigate('IndexPost');
+    } else {
+      user.setShowLogin(true);
+    }
   };
 
   _onRefresh = () => {

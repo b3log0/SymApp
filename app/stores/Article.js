@@ -1,9 +1,9 @@
 import { observable, action } from 'mobx';
 
 class Article {
-  @observable title
-  @observable content
-  @observable tags
+  @observable title;
+  @observable content;
+  @observable tags;
 
   constructor() {
     this.title = '';

@@ -1,10 +1,10 @@
 import { observable, action } from 'mobx';
 
 class User {
-  @observable name
-  @observable isLogin
-  @observable showLogin
-  @observable password
+  @observable name;
+  @observable isLogin;
+  @observable showLogin;
+  @observable password;
 
   constructor() {
     this.name = '';

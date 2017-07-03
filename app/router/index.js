@@ -10,12 +10,13 @@ import {
 import IndexIndex from '../pages/index/Index';
 import IndexPost from '../pages/home/Post';
 import Web from '../components/Web';
-import Other from '../pages/other/Index';
+import OtherIndex from '../pages/other/Index';
+import OtherDomain from '../pages/other/Domain';
 import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
 import HomeSettingNavigation from '../pages/home/setting/SettingNavigation';
 import HomeSettingHelp from '../pages/home/setting/Help';
-import HomeArticles from '../pages/home/Articles';
+import Articles from '../pages/home/Articles';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -64,8 +65,8 @@ const HomeStack = StackNavigator({
       title: '帮助'
     }
   },
-  HomeArticles: {
-    screen: HomeArticles
+  Articles: {
+    screen: Articles
   },
   WebView: WebScreen
 }, {
@@ -83,6 +84,24 @@ const NotificationsStack = StackNavigator({
   headerMode: 'screen'
 });
 
+const OtherStack = StackNavigator({
+  OtherIndex: {
+    screen: OtherIndex,
+    navigationOptions: {
+      header: null
+    }
+  },
+  OtherDomain: {
+    screen: OtherDomain
+  },
+  Articles: {
+    screen: Articles
+  },
+  WebView: WebScreen
+}, {
+  headerMode: 'screen'
+});
+
 const Root = TabNavigator({
   Index: {
     screen: IndexStack,
@@ -94,7 +113,7 @@ const Root = TabNavigator({
     }
   },
   Other: {
-    screen: Other,
+    screen: OtherStack,
     navigationOptions: {
       tabBarIcon: obj => (<Image
         source={compassPng}
@@ -131,10 +150,10 @@ const Root = TabNavigator({
   tabBarOptions: {
     showIcon: true,
     showLabel: false,
-    activeTintColor: color.white,
+    activeTintColor: theme.primary,
     inactiveTintColor: color.fade,
     style: {
-      backgroundColor: theme.primary
+      backgroundColor: color.white
     },
     iconStyle: icon.normal,
     indicatorStyle: {
