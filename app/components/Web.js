@@ -34,7 +34,6 @@ class Web extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    console.log(`${origin}${params.path}`);
     return (
       <View style={utils.flex} {...this._gestureHandlers}>
         <WebView
