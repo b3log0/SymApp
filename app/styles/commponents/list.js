@@ -26,10 +26,10 @@ export default {
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 14
+    fontSize: 15
   },
   content: {
-    fontSize: 12,
+    fontSize: 14,
     color: color.gray
   },
   avatar: {

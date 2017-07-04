@@ -46,7 +46,7 @@ class Web extends Component {
           scrollEnabled={this.state.scrollEnabled}
           startInLoadingState
           renderLoading={this.renderLoading}
-          source={{ uri: `${origin}${params.path}` }}
+          source={{ uri: `${params.path.indexOf('http') === 0 ? '' : origin}${params.path}` }}
         />
       </View>
     );

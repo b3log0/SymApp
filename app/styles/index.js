@@ -1,6 +1,7 @@
 import theme from './themes';
 import color from './common/color';
 import utils from './common/utils';
+import content from './common/content';
 import icon from './commponents/icon';
 import tabs from './commponents/tabs';
 import load from './commponents/load';
@@ -23,3 +24,4 @@ export { module };
 export { index };
 export { post };
 export { other };
+export { content };

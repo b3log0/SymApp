@@ -15,5 +15,8 @@ export default {
     flex: 1,
     justifyContent: 'center',
     height: '100%'
+  },
+  emoji: {
+    marginTop: 2
   }
 };

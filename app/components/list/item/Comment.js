@@ -5,8 +5,8 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import HTMLView from 'react-native-htmlview';
 
+import HTML from '../../../components/html';
 import { list } from '../../../styles/index';
 
 class Comment extends Component {
@@ -27,7 +27,7 @@ class Comment extends Component {
     return (
       <View style={list.normal}>
         <TouchableOpacity onPress={this._goComment}>
-          <Text style={list.title}>{rowData.commentArticleTitle}</Text>
+          <Text style={list.title}>{rowData.commentArticleTitleEmojUnicode}</Text>
           <View style={list.info} >
             <Image
               source={{ uri: rowData.commentArticleAuthorThumbnailURL }}
@@ -37,9 +37,9 @@ class Comment extends Component {
               {rowData.commentArticleAuthorName}
             </Text>
           </View>
-          <HTMLView
+          <HTML
             value={rowData.commentContent}
-            // stylesheet={styles}
+            onLinkPress={url => this.props.navigation.navigate('WebView', { path: url })}
           />
         </TouchableOpacity>
       </View>
