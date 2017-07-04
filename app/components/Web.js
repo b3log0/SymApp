@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {
   WebView,
-  View
+  View,
+  ActivityIndicator
 } from 'react-native';
 
 import { utils } from '../styles/index';
@@ -32,12 +33,19 @@ class Web extends Component {
     };
   }
 
+  renderLoading = () => (<View style={utils.verticalCenter}>
+    <ActivityIndicator />
+  </View>);
+
+
   render() {
     const { params } = this.props.navigation.state;
     return (
       <View style={utils.flex} {...this._gestureHandlers}>
         <WebView
           scrollEnabled={this.state.scrollEnabled}
+          startInLoadingState
+          renderLoading={this.renderLoading}
           source={{ uri: `${origin}${params.path}` }}
         />
       </View>

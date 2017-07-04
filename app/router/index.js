@@ -153,7 +153,9 @@ const Root = TabNavigator({
     activeTintColor: theme.primary,
     inactiveTintColor: color.fade,
     style: {
-      backgroundColor: color.white
+      backgroundColor: color.white,
+      borderTopColor: color.fade,
+      borderTopWidth: 1
     },
     iconStyle: icon.normal,
     indicatorStyle: {
