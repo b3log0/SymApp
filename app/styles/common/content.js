@@ -15,17 +15,12 @@ export default {
     fontStyle: 'italic'
   },
   pre: {
-    fontFamily: 'Menlo',
-    borderColor: 'black',
-    borderWidth: 1
+    fontFamily: 'Menlo'
   },
   code: {
     fontFamily: 'Menlo',
     fontSize: 12,
-    borderColor: 'black',
-    borderWidth: 1,
-    backgroundColor: color.fade,
-    padding: 20
+    color: color.gray
   },
   a: {
     fontWeight: '500',
