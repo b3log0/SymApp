@@ -8,7 +8,7 @@ import {
   Alert
 } from 'react-native';
 
-import { list } from '../../styles';
+import { list } from '../../../styles/index';
 
 class User extends Component {
 

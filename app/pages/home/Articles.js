@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import List from '../../components/article/List';
+import List from '../../components/list/List';
 
 class Articles extends Component {
   static propTypes = {

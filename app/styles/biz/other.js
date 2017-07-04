@@ -1,6 +1,7 @@
 export default {
   domains: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 10
   }
 };

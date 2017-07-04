@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-import articlesAction from '../../actions/Articles';
-import ListItem from '../item/Item';
-import LoadMoreFooter from '../../components/LoadMoreFooter';
+import ListAction from '../../actions/List';
+import ListItem from './item/Item';
+import LoadMoreFooter from '../LoadMoreFooter';
 import { utils } from '../../styles/index';
 
 @inject('pagination', 'entity')
@@ -27,13 +27,13 @@ class List extends Component {
   componentWillMount() {
     const { entity } = this.props;
     entity.setIsLoading(true);
-    articlesAction.getList(1);
+    ListAction.getList(1);
   }
 
   _onRefresh = () => {
     const { entity } = this.props;
     entity.setIsLoading(true);
-    articlesAction.getList(1);
+    ListAction.getList(1);
   };
 
   _toEnd = () => {
@@ -48,7 +48,7 @@ class List extends Component {
 
   _loadMoreData = () => {
     const { pagination } = this.props;
-    articlesAction.getList(pagination.pageIndex + 1);
+    ListAction.getList(pagination.pageIndex + 1);
   };
 
   _renderFooter = () => {

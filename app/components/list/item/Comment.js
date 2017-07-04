@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
-import { list } from '../../styles';
+import { list } from '../../../styles/index';
 
 class Comment extends Component {
 

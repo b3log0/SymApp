@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { utils, list } from '../../styles';
+import { utils, list } from '../../../styles/index';
 
 class Article extends Component {
 

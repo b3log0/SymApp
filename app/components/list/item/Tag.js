@@ -8,8 +8,8 @@ import {
   Alert
 } from 'react-native';
 
-import tagsPng from '../../images/tags.png';
-import { list } from '../../styles';
+import tagsPng from '../../../images/tags.png';
+import { list } from '../../../styles/index';
 
 class Tag extends Component {
 
