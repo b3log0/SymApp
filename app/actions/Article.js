@@ -23,7 +23,6 @@ const getDetail = async (pageIndex) => {
     articleStore.setTitle(data.article.articleTitle);
     articleStore.setContent(data.article.articleContent);
     articleStore.setTags(data.article.articleTagObjs);
-
   } catch (error) {
     console.error(error);
   }
