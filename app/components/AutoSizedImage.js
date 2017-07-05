@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import {
   Image,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 
 import { utils } from '../styles';
@@ -42,15 +43,16 @@ class AutoSizedImage extends Component {
     }
 
     return (<Image
-      onLoadStart={() => this.setState({ loading: true })}
-      onLoad={() => this.setState({ loading: false })}
+      onLoadEnd={() => this.setState({ loading: false })}
       style={style}
       source={this.props.source}
       resizeMethod={'resize'}
     >
-      {this.state.loading ?
-        <ActivityIndicator style={utils.verticalCenter} />
-        : null}
+      {
+        this.state.loading && Platform.OS === 'ios' ?
+          <ActivityIndicator style={utils.verticalCenter} />
+        : null
+      }
     </Image>);
   }
 }

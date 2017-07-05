@@ -88,13 +88,6 @@ export default {
     marginTop: 5,
     flex: 1,
     height: 100,
-    ...Platform.select({
-      ios: {
-        width: width - 20
-      },
-      android: {
-        width: (width * 2) - 20
-      }
-    })
+    width: width - 20
   }
 };

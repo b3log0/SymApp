@@ -8,7 +8,7 @@ import htmlparser from 'htmlparser2-without-node-native';
 import entities from 'entities';
 
 import AutoSizedImage from '../AutoSizedImage';
-import { content, utils } from '../../styles/index';
+import { content } from '../../styles/index';
 
 const htmlToReactNative = (rowHTML, opts, cb) => {
   const LINE_BREAK = '\n';
@@ -86,10 +86,20 @@ const htmlToReactNative = (rowHTML, opts, cb) => {
         }
       }
 
+      let hasBlock = false;
+      if (node.children) {
+        node.children.forEach((data) => {
+          if (data.name === 'img' && data.attribs.class !== 'emoji') {
+            hasBlock = true;
+          }
+        });
+      }
+
       // block element
-      if (node.name === 'blockquote' || node.name === 'ul' || node.name === 'pre' || node.name === 'ol') {
+      if (node.name === 'blockquote' || node.name === 'ul' || node.name === 'pre' || node.name === 'ol'
+        || hasBlock) {
         return (
-          <View key={key} style={content[node.name]}>
+          <View key={key} style={node.name === 'p' ? {} : content[node.name]}>
             {parseDom(node.children, node)}
           </View>
         );
