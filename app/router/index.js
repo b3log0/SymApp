@@ -10,13 +10,14 @@ import {
 import IndexIndex from '../pages/index/Index';
 import IndexPost from '../pages/home/Post';
 import Web from '../components/Web';
+import Article from '../pages/common/Article';
 import OtherIndex from '../pages/other/Index';
 import OtherDomain from '../pages/other/Domain';
 import NotificationNavigation from '../pages/notifications/Navigation';
 import HomeNavigation from '../pages/home/Navigation';
 import HomeSettingNavigation from '../pages/home/setting/SettingNavigation';
 import HomeSettingHelp from '../pages/home/setting/Help';
-import Articles from '../pages/home/Articles';
+import HomeList from '../pages/home/List';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -24,7 +25,10 @@ import settingPng from '../images/setting.png';
 import compassPng from '../images/compass.png';
 
 const WebScreen = {
-  screen: Web
+  screen: Web,
+  navigationOptions: {
+    tabBarVisible: false
+  }
 };
 
 const IndexStack = StackNavigator({
@@ -41,7 +45,10 @@ const IndexStack = StackNavigator({
       tabBarVisible: false
     }
   },
-  WebView: WebScreen
+  WebView: WebScreen,
+  Article: {
+    screen: Article
+  }
 }, {
   headerMode: 'screen'
 });
@@ -65,8 +72,8 @@ const HomeStack = StackNavigator({
       title: '帮助'
     }
   },
-  Articles: {
-    screen: Articles
+  HomeList: {
+    screen: HomeList
   },
   WebView: WebScreen
 }, {
@@ -94,8 +101,8 @@ const OtherStack = StackNavigator({
   OtherDomain: {
     screen: OtherDomain
   },
-  Articles: {
-    screen: Articles
+  OtherArticles: {
+    screen: HomeList
   },
   WebView: WebScreen
 }, {
@@ -155,7 +162,7 @@ const Root = TabNavigator({
     style: {
       backgroundColor: color.white,
       borderTopColor: color.fade,
-      borderTopWidth: 1
+      borderTopWidth: 0.5
     },
     iconStyle: icon.normal,
     indicatorStyle: {

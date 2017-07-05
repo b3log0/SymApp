@@ -14,7 +14,7 @@ const getList = async (pageIndex) => {
     const keys = Object.keys(data);
     let key = '';
     keys.forEach((k) => {
-      if (k !== 'pagination' && k !== 'isFollowing') {
+      if (k !== 'pagination' && k !== 'isFollowing' && k !== 'tag' && k !== 'domain') {
         key = k;
       }
     });

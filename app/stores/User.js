@@ -15,19 +15,19 @@ class User {
 
   @action setName = (name) => {
     this.name = name;
-  }
+  };
 
   @action setIsLogin = (isLogin) => {
     this.isLogin = isLogin;
-  }
+  };
 
   @action setPassword = (password) => {
     this.password = password;
-  }
+  };
 
   @action setShowLogin = (showLogin) => {
     this.showLogin = showLogin;
-  }
+  };
 }
 
 const user = new User();

@@ -17,7 +17,10 @@ class Article extends Component {
 
   _goArticle = () => {
     const rowData = this.props.rowData;
-    this.props.navigation.navigate('WebView', { path: `article/${rowData.oId}` });
+    this.props.navigation.navigate('Article', {
+      oId: rowData.oId,
+      articleType: rowData.articleType
+    });
   };
 
   render() {

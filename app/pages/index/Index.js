@@ -16,7 +16,7 @@ import LoadMoreFooter from '../../components/LoadMoreFooter';
 import ListItem from '../../components/list/item/Item';
 import userAction from '../../actions/User';
 import articlesAction from '../../actions/Articles';
-import Login from '../verify/Login';
+import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
 import { utils, index, icon } from '../../styles/index';
 

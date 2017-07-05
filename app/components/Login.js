@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
 import { inject } from 'mobx-react';
 
-import userAction from '../../actions/User';
-import { form, icon, color, utils } from '../../styles';
-import logoPng from '../../images/logo.png';
+import userAction from '../actions/User';
+import { form, icon, color, utils } from '../styles/index';
+import logoPng from '../images/logo.png';
 
 const {
   KeyboardAvoidingView,

@@ -47,7 +47,7 @@ class Domain extends Component {
     } else {
       entity.setPathname(`articles/domain/${uri}`);
     }
-    this.props.navigation.navigate('Articles', { stackTitle });
+    this.props.navigation.navigate('OtherArticles', { stackTitle });
   };
 
   render() {
@@ -55,7 +55,7 @@ class Domain extends Component {
       <TouchableOpacity
         key={item.oId}
         style={module.list}
-        onPress={() => this._goArticles(item.tagURI, `标签 ${item.tagTitle}`)}
+        onPress={() => this._goArticles(item.tagURI, `${item.tagTitle}`)}
       >
         <Text>{item.tagTitle}</Text>
       </TouchableOpacity>
@@ -69,7 +69,7 @@ class Domain extends Component {
           {tagsJSX}
           <TouchableOpacity
             style={[module.list, module.listLast]}
-            onPress={() => this._goArticles(domain.uri, `领域 ${domain.title}`)}
+            onPress={() => this._goArticles(domain.uri, '全部')}
           >
             <Text>全部</Text>
           </TouchableOpacity>

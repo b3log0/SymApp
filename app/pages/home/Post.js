@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
-import { inject } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
 import { post, utils, icon } from '../../styles';
@@ -20,11 +19,9 @@ const {
   Modal
 } = ReactNative;
 
-@inject('article')
 class Post extends Component {
 
   static propTypes = {
-    article: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
@@ -38,50 +35,24 @@ class Post extends Component {
     };
   }
 
-  componentWillMount() {
-    const { article } = this.props;
-    AsyncStorage.getItem('@ArticleStore:title', (key, value) => {
-      if (value) {
-        article.title = value;
-        this.setState({ title: value });
-      }
-    });
-    AsyncStorage.getItem('@ArticleStore:content', (key, value) => {
-      if (value) {
-        article.content = value;
-        this.setState({ content: value });
-      }
-    });
-    AsyncStorage.getItem('@ArticleStore:tags', (key, value) => {
-      if (value) {
-        article.tags = value;
-        this.setState({ tags: value });
-      }
-    });
+  async componentWillMount() {
+    const title = await AsyncStorage.getItem('@ArticleStore:title');
+    const content = await AsyncStorage.getItem('@ArticleStore:content');
+    const tags = await AsyncStorage.getItem('@ArticleStore:tags');
+
+    this.setState({ title, tags, content });
   }
 
   _post = async () => {
-    const { article } = this.props;
-    const msg = await articleAction.post({
+    const article = this.state;
+    await articleAction.post({
       articleTitle: article.title,
       articleContent: article.content,
       articleTags: article.tags
-    });
-
-    if (msg === 0) {
-      this.setState({
-        title: '',
-        content: '',
-        tags: '',
-        showTag: false
-      });
-      this.props.navigation.goBack();
-    }
+    }, this.props.navigation);
   };
 
   render() {
-    const { article } = this.props;
-
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.flex}>
         <Modal visible={this.state.showTag} onRequestClose={() => null}>
@@ -94,7 +65,6 @@ class Post extends Component {
             numberOfLines={10}
             onChangeText={(text) => {
               this.setState({ tags: text });
-              article.tags = text;
               AsyncStorage.setItem('@ArticleStore:tags', text);
             }}
           />
@@ -114,7 +84,6 @@ class Post extends Component {
             maxLength={40}
             onChangeText={(text) => {
               this.setState({ title: text });
-              article.title = text;
               AsyncStorage.setItem('@ArticleStore:title', text);
             }}
           />
@@ -128,7 +97,6 @@ class Post extends Component {
           numberOfLines={10}
           onChangeText={(text) => {
             this.setState({ content: text });
-            article.content = text;
             AsyncStorage.setItem('@ArticleStore:content', text);
           }}
         />

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-import Login from '../verify/Login';
+import Login from '../../components/Login';
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 

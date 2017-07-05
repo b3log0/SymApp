@@ -24,7 +24,7 @@ class AutoSizedImage extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     Image.getSize(this.props.source.uri, (w, h) => {
       this.setState({ width: w, height: h });
     });

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import List from '../../components/list';
+import ComponentsList from '../../components/list';
 
-class Articles extends Component {
+class List extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   };
@@ -14,9 +14,9 @@ class Articles extends Component {
 
   render() {
     return (
-      <List navigation={this.props.navigation} />
+      <ComponentsList navigation={this.props.navigation} />
     );
   }
 }
 
-export default Articles;
+export default List;
