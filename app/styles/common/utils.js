@@ -1,5 +1,7 @@
 import { Platform } from 'react-native';
 
+import color from './color';
+
 export default {
   statusBar: {
     paddingTop: (Platform.OS === 'ios') ? 20 : 0,
@@ -16,7 +18,8 @@ export default {
     justifyContent: 'center',
     height: '100%'
   },
-  emoji: {
-    marginTop: 2
+  content: {
+    fontSize: 14,
+    color: color.gray
   }
 };

@@ -29,8 +29,7 @@ export default {
     fontSize: 15
   },
   content: {
-    fontSize: 14,
-    color: color.gray
+    fontSize: 14
   },
   avatar: {
     borderRadius: 8,

@@ -32,7 +32,7 @@ class Navigation extends Component {
     const { user } = this.props;
     return (
       <ScrollView style={utils.statusBar}>
-        <Modal visible={user.showLogin}>
+        <Modal visible={user.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <View style={module.wrap}>

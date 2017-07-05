@@ -116,7 +116,7 @@ class Index extends Component {
     const { user } = this.props;
     return (
       <View style={utils.statusBar}>
-        <Modal visible={user.showLogin}>
+        <Modal visible={user.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <VirtualizedList

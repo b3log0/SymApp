@@ -38,7 +38,7 @@ class Comment extends Component {
             </Text>
           </View>
           <HTML
-            value={rowData.commentContent}
+            html={rowData.commentContent}
             onLinkPress={url => this.props.navigation.navigate('WebView', { path: url })}
           />
         </TouchableOpacity>

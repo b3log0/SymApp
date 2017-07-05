@@ -55,7 +55,7 @@ class Navigation extends Component {
     }
     return (
       <ScrollView style={utils.statusBar}>
-        <Modal visible={user.showLogin}>
+        <Modal visible={user.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <View style={module.wrap}>

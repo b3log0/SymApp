@@ -84,7 +84,7 @@ class Post extends Component {
 
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.flex}>
-        <Modal visible={this.state.showTag}>
+        <Modal visible={this.state.showTag} onRequestClose={() => null}>
           <TextInput
             style={[utils.statusBar, post.content]}
             underlineColorAndroid="transparent"

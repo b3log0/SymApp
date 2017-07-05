@@ -1,5 +1,8 @@
+import { Platform, Dimensions } from 'react-native';
+
 import color from './color';
-import list from '../commponents/list';
+
+const { width } = Dimensions.get('window');
 
 export default {
   b: {
@@ -15,12 +18,18 @@ export default {
     fontStyle: 'italic'
   },
   pre: {
-    fontFamily: 'Menlo'
+    marginTop: 10
   },
   code: {
     fontFamily: 'Menlo',
     fontSize: 12,
     color: color.gray
+  },
+  blockquote: {
+    borderLeftColor: color.fade,
+    borderLeftWidth: 5,
+    paddingLeft: 5,
+    marginBottom: 5
   },
   a: {
     fontWeight: '500',
@@ -50,5 +59,42 @@ export default {
     fontWeight: '500',
     fontSize: 12
   },
-  p: Object.assign({}, list.content, { paddingBottom: 10, marginBottom: 10, flex: 1 })
+  p: {
+    fontSize: 14
+  },
+  ...Platform.select({
+    ios: {
+      backgroundColor: 'red'
+    },
+    android: {
+      backgroundColor: 'blue'
+    }
+  }),
+  emoji: {
+    ...Platform.select({
+      ios: {
+        height: 14,
+        width: 14,
+        marginTop: 2
+      },
+      android: {
+        height: 22,
+        width: 22
+      }
+    })
+  },
+  img: {
+    marginBottom: 5,
+    marginTop: 5,
+    flex: 1,
+    height: 100,
+    ...Platform.select({
+      ios: {
+        width: width - 20
+      },
+      android: {
+        width: (width * 2) - 20
+      }
+    })
+  }
 };
