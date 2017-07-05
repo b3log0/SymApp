@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Image,
+  ActivityIndicator,
   Dimensions
 } from 'react-native';
+
+import { utils } from '../styles';
 
 class AutoSizedImage extends Component {
 
@@ -14,8 +17,9 @@ class AutoSizedImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: this.props.style.width || 1,
-      height: this.props.style.height || 1
+      width: this.props.style.width,
+      height: this.props.style.height,
+      loading: true
     };
   }
 
@@ -26,25 +30,28 @@ class AutoSizedImage extends Component {
   }
 
   render() {
-    const width = this.props.style.width;
-    const finalSize = {};
+    const { width } = Dimensions.get('window');
+    const maxWidth = width - 20;
+    const style = this.props.style;
+    style.width = this.state.width;
+    style.height = this.state.height;
 
-    if (this.state.width > width) {
-      finalSize.width = width;
-      finalSize.height = this.state.height * (width / this.state.width);
+    if (this.state.width > maxWidth) {
+      style.width = maxWidth;
+      style.height = this.state.height * (maxWidth / this.state.width);
     }
 
-    const style = Object.assign(
-      this.props.style,
-      this.state,
-      finalSize
-    );
-
     return (<Image
+      onLoadStart={() => this.setState({ loading: true })}
+      onLoad={() => this.setState({ loading: false })}
       style={style}
       source={this.props.source}
       resizeMethod={'resize'}
-    />);
+    >
+      {this.state.loading ?
+        <ActivityIndicator style={utils.verticalCenter} />
+        : null}
+    </Image>);
   }
 }
 
