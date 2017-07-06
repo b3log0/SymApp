@@ -17,9 +17,5 @@ export default {
     flex: 1,
     justifyContent: 'center',
     height: '100%'
-  },
-  content: {
-    fontSize: 14,
-    color: color.gray
   }
 };

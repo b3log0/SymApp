@@ -38,7 +38,7 @@ class Article extends Component {
       <View style={list.normal}>
         <TouchableOpacity onPress={this._goArticle}>
           {thumbanilImg}
-          <Text style={list.title}>{rowData.articleTitle}</Text>
+          <Text style={list.title}>{rowData.articleTitleEmojUnicode}</Text>
           <View style={list.info} >
             <Image
               source={{ uri: rowData.articleAuthorThumbnailURL48 }}

@@ -1,6 +1,7 @@
 import theme from './themes';
 import color from './common/color';
 import utils from './common/utils';
+import common from './common/common';
 import content from './common/content';
 import icon from './commponents/icon';
 import tabs from './commponents/tabs';
@@ -19,6 +20,7 @@ export { tabs };
 export { load };
 export { list };
 export { utils };
+export { common };
 export { form };
 export { module };
 export { home };

@@ -14,6 +14,10 @@ class Web extends Component {
     navigation: PropTypes.object.isRequired
   };
 
+  static navigationOptions = {
+    tabBarVisible: false
+  };
+
   constructor(props) {
     super(props);
     this.state = {

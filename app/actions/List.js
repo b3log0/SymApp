@@ -4,6 +4,10 @@ import entityStore from '../stores/Entity';
 
 const getList = async (pageIndex) => {
   try {
+    if (pageIndex === 1) {
+      entityStore.setIsLoading(true);
+    }
+
     const response = await fetchService.get(`${entityStore.pathname}?p=${pageIndex}`);
     entityStore.setIsLoading(false);
 

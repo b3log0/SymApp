@@ -3,7 +3,11 @@ import homeStore from '../stores/Home';
 
 const getIndex = async (pageIndex) => {
   try {
-    const response = await fetchService.get(`articles/latest?p=${pageIndex}`);
+    if (pageIndex === 1) {
+      homeStore.setIsLoading(true);
+    }
+
+    const response = await fetchService.get(`articles/latest${homeStore.pathname}?p=${pageIndex}`);
     homeStore.setIsLoading(false);
 
     const data = response.data;

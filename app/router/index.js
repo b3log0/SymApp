@@ -10,6 +10,7 @@ import {
 import Web from '../components/Web';
 import Article from '../pages/common/Article';
 import List from '../pages/common/List';
+import TagArticles from '../pages/common/TagArticles';
 import Home from '../pages/home/Home';
 import Other from '../pages/other/Other';
 import OtherDomain from '../pages/other/Domain';
@@ -23,13 +24,6 @@ import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
 import settingPng from '../images/setting.png';
 import compassPng from '../images/compass.png';
-
-const WebScreen = {
-  screen: Web,
-  navigationOptions: {
-    tabBarVisible: false
-  }
-};
 
 const HomeStack = StackNavigator({
   Home: {
@@ -45,7 +39,9 @@ const HomeStack = StackNavigator({
       tabBarVisible: false
     }
   },
-  WebView: WebScreen,
+  WebView: {
+    screen: Web
+  },
   Article: {
     screen: Article
   }
@@ -75,7 +71,9 @@ const MemberStack = StackNavigator({
   List: {
     screen: List
   },
-  WebView: WebScreen,
+  WebView: {
+    screen: Web
+  },
   Article: {
     screen: Article
   }
@@ -107,9 +105,14 @@ const OtherStack = StackNavigator({
   List: {
     screen: List
   },
-  WebView: WebScreen,
+  WebView: {
+    screen: Web
+  },
   Article: {
     screen: Article
+  },
+  TagArticles: {
+    screen: TagArticles
   }
 }, {
   headerMode: 'screen'

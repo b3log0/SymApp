@@ -15,9 +15,5 @@ export default {
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 5
-  },
-  sort: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
   }
 };

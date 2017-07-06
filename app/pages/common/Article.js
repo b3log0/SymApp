@@ -22,7 +22,7 @@ class Article extends Component {
   componentWillMount() {
     const { article } = this.props;
     article.setOId(this.props.navigation.state.params.oId);
-    articleAction.getDetail('article/1488603534762?p=1');
+    articleAction.getDetail(1);
   }
 
   render() {

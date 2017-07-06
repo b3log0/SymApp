@@ -19,7 +19,7 @@ import userAction from '../../actions/User';
 import homeAction from '../../actions/Home';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
-import { utils, home as homeStyle, icon } from '../../styles';
+import { utils, home as homeStyle, icon, common } from '../../styles';
 
 @inject('home', 'user')
 @observer
@@ -40,8 +40,6 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    const { home } = this.props;
-    home.setIsLoading(true);
     homeAction.getIndex(1);
 
     // 向下滚动时隐藏发帖按钮
@@ -74,8 +72,6 @@ class Index extends Component {
   };
 
   _onRefresh = () => {
-    const { home } = this.props;
-    home.setIsLoading(true);
     homeAction.getIndex(1);
   };
 
@@ -107,12 +103,15 @@ class Index extends Component {
 
   _changeSort = (type) => {
     const { home } = this.props;
-    home.setIsLoading(true);
+    home.setPathname(type);
+    home.setList([]);
+    home.setPage(0, 0);
     homeAction.getIndex(1);
   };
 
   render() {
-    const { home } = this.props;
+    const { home, user } = this.props;
+
     let listJSX = (<VirtualizedList
       {...this._gestureHandlers}
       data={home.list}
@@ -134,23 +133,20 @@ class Index extends Component {
     />);
     if (home.isLoading) {
       listJSX = (
-        <View style={utils.verticalCenter}>
-          <ActivityIndicator />
-        </View>
+        <ActivityIndicator style={utils.verticalCenter} />
       );
     }
 
-    const { user } = this.props;
     return (
       <View style={utils.statusBar}>
         <Modal visible={user.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
-        <View style={homeStyle.sort}>
-          <Button title={'默认'} onPress={() => this._changeSort(0)} />
-          <Button title={'热议'} onPress={() => this._changeSort(1)} />
-          <Button title={'好评'} onPress={() => this._changeSort(2)} />
-          <Button title={'最近评论'} onPress={() => this._changeSort(3)} />
+        <View style={common.sort}>
+          <Button title={'默认'} onPress={() => this._changeSort('')} />
+          <Button title={'热议'} onPress={() => this._changeSort('/hot')} />
+          <Button title={'好评'} onPress={() => this._changeSort('/good')} />
+          <Button title={'最近评论'} onPress={() => this._changeSort('/reply')} />
         </View>
         {listJSX}
         {

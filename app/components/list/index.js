@@ -25,14 +25,10 @@ class List extends Component {
   };
 
   componentWillMount() {
-    const { entity } = this.props;
-    entity.setIsLoading(true);
     ListAction.getList(1);
   }
 
   _onRefresh = () => {
-    const { entity } = this.props;
-    entity.setIsLoading(true);
     ListAction.getList(1);
   };
 
@@ -66,9 +62,7 @@ class List extends Component {
     const { entity } = this.props;
     if (entity.isLoading) {
       return (
-        <View style={utils.verticalCenter}>
-          <ActivityIndicator />
-        </View>
+        <ActivityIndicator style={utils.verticalCenter} />
       );
     }
 
