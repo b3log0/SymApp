@@ -4,18 +4,13 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  RefreshControl,
-  VirtualizedList,
-  ActivityIndicator,
-  InteractionManager,
   Button
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-import LoadMoreFooter from '../../components/LoadMoreFooter';
-import ListItem from '../../components/list/item';
+import List from '../../components/list';
 import userAction from '../../actions/User';
-import homeAction from '../../actions/Home';
+import ListAction from '../../actions/List';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
 import { utils, home as homeStyle, icon, common } from '../../styles';
@@ -39,8 +34,6 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    homeAction.getIndex(1);
-
     // 向下滚动时隐藏发帖按钮
     this._gestureHandlers = {
       onStartShouldSetResponder: () => true,
@@ -70,71 +63,16 @@ class Index extends Component {
     }
   };
 
-  _onRefresh = () => {
-    homeAction.getIndex(1);
-  };
-
-  _toEnd = () => {
-    const { home } = this.props;
-    if (home.isLoading || home.pageIndex >= home.pageTotal) {
-      return;
-    }
-    InteractionManager.runAfterInteractions(() => {
-      this._loadMoreData();
-    });
-  };
-
-  _loadMoreData = () => {
-    const { home } = this.props;
-    homeAction.getIndex(home.pageIndex + 1);
-  };
-
-  _renderFooter = () => {
-    const { home } = this.props;
-    if (home.isLoading) {
-      return null;
-    }
-    if (home.pageIndex < home.pageTotal) {
-      return <LoadMoreFooter />;
-    }
-    return <LoadMoreFooter isLoadAll />;
-  };
-
   _changeSort = (type) => {
     const { home } = this.props;
-    home.setPathname(type);
-    home.setList([]);
-    home.setPage(0, 0);
-    homeAction.getIndex(1);
+    home.clearAndSetPathname(`articles/latest${type}`);
+    ListAction.getList(1, home);
   };
 
   render() {
     const { home, user } = this.props;
-
-    let listJSX = (<VirtualizedList
-      {...this._gestureHandlers}
-      data={home.list}
-      onEndReached={this._toEnd}
-      onEndReachedThreshold={1}
-      ListFooterComponent={this._renderFooter}
-      enableEmptySections
-      refreshControl={
-        <RefreshControl
-          refreshing={home.isLoading}
-          onRefresh={this._onRefresh}
-        />
-      }
-      keyExtractor={(item, i) => String(i)}
-      getItemCount={items => items.length}
-      getItem={(items, i) => items[i]}
-      renderItem={rowData =>
-        (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
-    />);
-    if (home.isLoading && home.pageIndex === 0) {
-      listJSX = (
-        <ActivityIndicator style={utils.verticalCenter} />
-      );
-    }
+    // for observer, don't remove!!!
+    console.log(home.isLoading);
 
     return (
       <View style={utils.statusBar}>
@@ -147,7 +85,7 @@ class Index extends Component {
           <Button title={'好评'} onPress={() => this._changeSort('/good')} />
           <Button title={'最近评论'} onPress={() => this._changeSort('/reply')} />
         </View>
-        {listJSX}
+        <List entity={home} navigation={this.props.navigation} {...this._gestureHandlers} />
         {
           this.state.isHidden === false ? (<TouchableOpacity
             onPress={this._goPost}

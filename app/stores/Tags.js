@@ -9,14 +9,16 @@ class Tags {
 
   constructor() {
     this.list = [];
-    this.isLoading = true;
+    this.isLoading = false;
     this.pageIndex = 0;
     this.pageTotal = 0;
     this.pathname = '';
   }
 
-  @action setList = (list) => {
+  @action setList = (list, pageIndex, pageTotal) => {
     this.list = list;
+    this.pageIndex = pageIndex;
+    this.pageTotal = pageTotal;
   };
 
   @action setIsLoading = (isLoading) => {
@@ -27,9 +29,11 @@ class Tags {
     this.pathname = pathname;
   };
 
-  @action setPage = (pageIndex, pageTotal) => {
-    this.pageIndex = pageIndex;
-    this.pageTotal = pageTotal;
+  @action clearAndSetPathname = (pathname) => {
+    this.list = [];
+    this.pageIndex = 0;
+    this.pageTotal = 0;
+    this.pathname = pathname;
   }
 }
 

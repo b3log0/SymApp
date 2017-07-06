@@ -12,11 +12,13 @@ class Home {
     this.isLoading = true;
     this.pageIndex = 0;
     this.pageTotal = 0;
-    this.pathname = '';
+    this.pathname = 'articles/latest';
   }
 
-  @action setList = (list) => {
+  @action setList = (list, pageIndex, pageTotal) => {
     this.list = list;
+    this.pageIndex = pageIndex;
+    this.pageTotal = pageTotal;
   };
 
   @action setIsLoading = (isLoading) => {
@@ -27,10 +29,12 @@ class Home {
     this.pathname = pathname;
   };
 
-  @action setPage = (pageIndex, pageTotal) => {
-    this.pageIndex = pageIndex;
-    this.pageTotal = pageTotal;
-  }
+  @action clearAndSetPathname = (pathname) => {
+    this.list = [];
+    this.pageIndex = 0;
+    this.pageTotal = 0;
+    this.pathname = pathname;
+  };
 }
 
 

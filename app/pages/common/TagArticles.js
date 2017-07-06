@@ -3,13 +3,14 @@ import {
   View,
   Button
 } from 'react-native';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list/index';
 import ListAction from '../../actions/List';
 import { common, utils } from '../../styles';
 
 @inject('tags', 'tag')
+@observer
 class TagArticles extends Component {
 
   static propTypes = {
@@ -25,14 +26,14 @@ class TagArticles extends Component {
 
   _changeSort = (type) => {
     const { tags, tag } = this.props;
-    tags.setPathname(`articles/tag/${tag.uri}${type}`);
-    tags.setList([]);
-    tags.setPage(0, 0);
-    ListAction.getList(1);
+    tags.clearAndSetPathname(`articles/tag/${tag.uri}${type}`);
+    ListAction.getList(1, tags);
   };
 
   render() {
     const { tags } = this.props;
+    // for observer, don't remove!!!
+    console.log(tags.isLoading);
     return (
       <View style={utils.flex}>
         <View style={common.sort}>

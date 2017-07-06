@@ -11,12 +11,13 @@ import { inject } from 'mobx-react';
 import domainsAction from '../../actions/Domains';
 import { utils, module, other } from '../../styles';
 
-@inject('domain', 'entity', 'tag')
+@inject('domain', 'entity', 'tag', 'tags')
 class Other extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     entity: PropTypes.object.isRequired,
+    tags: PropTypes.object.isRequired,
     tag: PropTypes.object.isRequired,
     domain: PropTypes.object.isRequired
   };
@@ -47,7 +48,7 @@ class Other extends Component {
   };
 
   render() {
-    const { entity, tag } = this.props;
+    const { entity, tag, tags } = this.props;
 
     const domainsJSX = this.state.domains.map((item) => {
       const uriArray = item.domainURI.split('/');
@@ -112,7 +113,7 @@ class Other extends Component {
             style={module.list}
             onPress={() => {
               tag.setUri('book_share');
-              entity.setPathname('articles/tag/book_share');
+              tags.setPathname('articles/tag/book_share');
               this.props.navigation.navigate('TagArticles', { stackTitle: '书单' });
             }
             }

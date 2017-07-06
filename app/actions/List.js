@@ -1,14 +1,10 @@
 import fetchService from '../services/FetchService';
-import entityStore from '../stores/Entity';
 
-const getList = async (pageIndex) => {
+const getList = async (pageIndex, entityStore) => {
   try {
     entityStore.setIsLoading(true);
     const response = await fetchService.get(`${entityStore.pathname}?p=${pageIndex}`);
-    entityStore.setIsLoading(false);
-
     const data = response.data;
-    entityStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
     // 适配多个接口，根据规则获取数据内容. key: comments, articles, users
     const keys = Object.keys(data);
@@ -18,11 +14,15 @@ const getList = async (pageIndex) => {
         key = k;
       }
     });
+
     if (pageIndex === 1) {
-      entityStore.setList(data[key]);
+      entityStore.setList(data[key], pageIndex, data.pagination.paginationPageCount);
     } else {
-      entityStore.setList(entityStore.list.concat(data[key]));
+      entityStore.setList(entityStore.list.concat(data[key]),
+        pageIndex, data.pagination.paginationPageCount);
     }
+
+    entityStore.setIsLoading(false);
   } catch (error) {
     console.error(error);
   }

@@ -18,7 +18,8 @@ class List extends Component {
 
   render() {
     const { entity } = this.props;
-    console.log(entity.isLoading)
+    // for observer, don't remove!!!
+    console.log(entity.isLoading);
     return (
       <ComponentsList navigation={this.props.navigation} entity={entity} />
     );

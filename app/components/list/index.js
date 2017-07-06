@@ -19,11 +19,11 @@ class List extends Component {
   };
 
   componentWillMount() {
-    ListAction.getList(1);
+    ListAction.getList(1, this.props.entity);
   }
 
   _onRefresh = () => {
-    ListAction.getList(1);
+    ListAction.getList(1, this.props.entity);
   };
 
   _toEnd = () => {
@@ -38,7 +38,7 @@ class List extends Component {
 
   _loadMoreData = () => {
     const { entity } = this.props;
-    ListAction.getList(entity.pageIndex + 1);
+    ListAction.getList(entity.pageIndex + 1, this.props.entity);
   };
 
   _renderFooter = () => {
