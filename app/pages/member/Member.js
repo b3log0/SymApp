@@ -41,7 +41,7 @@ class Navigation extends Component {
 
     let loginButton = (<TouchableOpacity
       style={[module.list, module.listLast]}
-      onPress={() => this.props.navigation.navigate('HomeSettingNavigation')}
+      onPress={() => this.props.navigation.navigate('Setting')}
     >
       <Text>设置</Text>
     </TouchableOpacity>);
@@ -62,7 +62,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/articles`, '帖子');
+              this._goView('List', `user/${user.name}/articles`, '帖子');
             }}
           >
             <Text>帖子</Text>
@@ -70,7 +70,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/comments`, '回帖');
+              this._goView('List', `user/${user.name}/comments`, '回帖');
             }}
           >
             <Text>回帖</Text>
@@ -86,7 +86,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/watching/articles`, '关注帖子');
+              this._goView('List', `user/${user.name}/watching/articles`, '关注帖子');
             }}
           >
             <Text>关注帖子</Text>
@@ -94,7 +94,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/following/users`, '关注用户');
+              this._goView('List', `user/${user.name}/following/users`, '关注用户');
             }}
           >
             <Text>关注用户</Text>
@@ -102,7 +102,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/following/tags`, '关注标签');
+              this._goView('List', `user/${user.name}/following/tags`, '关注标签');
             }}
           >
             <Text>关注标签</Text>
@@ -110,7 +110,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/following/articles`, '收藏帖子');
+              this._goView('List', `user/${user.name}/following/articles`, '收藏帖子');
             }}
           >
             <Text>收藏帖子</Text>
@@ -118,7 +118,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, module.listLast]}
             onPress={() => {
-              this._goView('HomeList', `user/${user.name}/followers`, '关注者');
+              this._goView('List', `user/${user.name}/followers`, '关注者');
             }}
           >
             <Text>关注者</Text>

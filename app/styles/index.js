@@ -8,7 +8,7 @@ import load from './commponents/load';
 import list from './commponents/list';
 import form from './commponents/form';
 import module from './commponents/module';
-import index from './biz/main';
+import home from './biz/home';
 import post from './biz/post';
 import other from './biz/other';
 
@@ -21,7 +21,7 @@ export { list };
 export { utils };
 export { form };
 export { module };
-export { index };
+export { home };
 export { post };
 export { other };
 export { content };

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import { module } from '../../../styles/index';
+import { module } from '../../styles/index';
 
 class Help extends Component {
 

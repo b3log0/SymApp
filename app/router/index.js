@@ -7,17 +7,17 @@ import {
   Image
 } from 'react-native';
 
-import IndexIndex from '../pages/index/Index';
-import IndexPost from '../pages/home/Post';
 import Web from '../components/Web';
 import Article from '../pages/common/Article';
-import OtherIndex from '../pages/other/Index';
+import List from '../pages/common/List';
+import Home from '../pages/home/Home';
+import Other from '../pages/other/Other';
 import OtherDomain from '../pages/other/Domain';
-import NotificationNavigation from '../pages/notifications/Navigation';
-import HomeNavigation from '../pages/home/Navigation';
-import HomeSettingNavigation from '../pages/home/setting/SettingNavigation';
-import HomeSettingHelp from '../pages/home/setting/Help';
-import HomeList from '../pages/home/List';
+import Notifications from '../pages/notifications/Notifications';
+import Member from '../pages/member/Member';
+import MemberPost from '../pages/member/Post';
+import Setting from '../pages/setting/Setting';
+import SettingHelp from '../pages/setting/Help';
 import { icon, color, theme } from '../styles';
 import articlePng from '../images/article.png';
 import feedPng from '../images/feed.png';
@@ -31,15 +31,15 @@ const WebScreen = {
   }
 };
 
-const IndexStack = StackNavigator({
-  IndexIndex: {
-    screen: IndexIndex,
+const HomeStack = StackNavigator({
+  Home: {
+    screen: Home,
     navigationOptions: {
       header: null
     }
   },
-  IndexPost: {
-    screen: IndexPost,
+  MemberPost: {
+    screen: MemberPost,
     navigationOptions: {
       title: '发帖',
       tabBarVisible: false
@@ -53,36 +53,39 @@ const IndexStack = StackNavigator({
   headerMode: 'screen'
 });
 
-const HomeStack = StackNavigator({
-  HomeNavigation: {
-    screen: HomeNavigation,
+const MemberStack = StackNavigator({
+  Member: {
+    screen: Member,
     navigationOptions: {
       header: null
     }
   },
-  HomeSettingNavigation: {
-    screen: HomeSettingNavigation,
+  Setting: {
+    screen: Setting,
     navigationOptions: {
       title: '设置'
     }
   },
-  HomeSettingHelp: {
-    screen: HomeSettingHelp,
+  SettingHelp: {
+    screen: SettingHelp,
     navigationOptions: {
       title: '帮助'
     }
   },
-  HomeList: {
-    screen: HomeList
+  List: {
+    screen: List
   },
-  WebView: WebScreen
+  WebView: WebScreen,
+  Article: {
+    screen: Article
+  }
 }, {
   headerMode: 'screen'
 });
 
 const NotificationsStack = StackNavigator({
-  NotificationNavigation: {
-    screen: NotificationNavigation,
+  Notifications: {
+    screen: Notifications,
     navigationOptions: {
       header: null
     }
@@ -92,26 +95,29 @@ const NotificationsStack = StackNavigator({
 });
 
 const OtherStack = StackNavigator({
-  OtherIndex: {
-    screen: OtherIndex,
+  Other: {
+    screen: Other,
     navigationOptions: {
       header: null
     }
   },
-  OtherDomain: {
+  Domain: {
     screen: OtherDomain
   },
-  OtherArticles: {
-    screen: HomeList
+  List: {
+    screen: List
   },
-  WebView: WebScreen
+  WebView: WebScreen,
+  Article: {
+    screen: Article
+  }
 }, {
   headerMode: 'screen'
 });
 
 const Root = TabNavigator({
-  Index: {
-    screen: IndexStack,
+  Home: {
+    screen: HomeStack,
     navigationOptions: {
       tabBarIcon: obj => (<Image
         source={articlePng}
@@ -139,8 +145,8 @@ const Root = TabNavigator({
       )
     }
   },
-  Home: {
-    screen: HomeStack,
+  Member: {
+    screen: MemberStack,
     navigationOptions: {
       tabBarIcon: obj => (
         <Image

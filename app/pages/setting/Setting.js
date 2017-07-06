@@ -6,8 +6,8 @@ import {
   View
 } from 'react-native';
 
-import userAction from '../../../actions/User';
-import { module } from '../../../styles/index';
+import userAction from '../../actions/User';
+import { module } from '../../styles/index';
 
 class SettingNavigation extends Component {
 
@@ -71,7 +71,7 @@ class SettingNavigation extends Component {
         <View style={module.wrap}>
           <TouchableOpacity
             style={[module.list, module.listLast]}
-            onPress={() => { this._goView('HomeSettingHelp'); }}
+            onPress={() => { this._goView('SettingHelp'); }}
           >
             <Text>帮助</Text>
           </TouchableOpacity>

@@ -8,26 +8,27 @@ import {
   VirtualizedList,
   ActivityIndicator,
   Text,
-  InteractionManager
+  InteractionManager,
+  Button
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import LoadMoreFooter from '../../components/LoadMoreFooter';
 import ListItem from '../../components/list/item/Item';
 import userAction from '../../actions/User';
-import articlesAction from '../../actions/Articles';
+import homeAction from '../../actions/Home';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
-import { utils, index, icon } from '../../styles/index';
+import { utils, home as homeStyle, icon } from '../../styles';
 
-@inject('indexList', 'user')
+@inject('home', 'user')
 @observer
 class Index extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    indexList: PropTypes.object.isRequired
+    home: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -39,10 +40,11 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    const { indexList } = this.props;
-    indexList.setIsLoading(true);
-    articlesAction.getIndex(1);
+    const { home } = this.props;
+    home.setIsLoading(true);
+    homeAction.getIndex(1);
 
+    // 向下滚动时隐藏发帖按钮
     this._gestureHandlers = {
       onStartShouldSetResponder: () => true,
       onResponderGrant: () => {
@@ -65,21 +67,21 @@ class Index extends Component {
     const { user } = this.props;
     const isLogin = await userAction.isLogin();
     if (isLogin) {
-      this.props.navigation.navigate('IndexPost');
+      this.props.navigation.navigate('MemberPost');
     } else {
       user.setShowLogin(true);
     }
   };
 
   _onRefresh = () => {
-    const { indexList } = this.props;
-    indexList.setIsLoading(true);
-    articlesAction.getIndex(1);
+    const { home } = this.props;
+    home.setIsLoading(true);
+    homeAction.getIndex(1);
   };
 
   _toEnd = () => {
-    const { indexList } = this.props;
-    if (indexList.isLoading || indexList.pageIndex >= indexList.pageTotal) {
+    const { home } = this.props;
+    if (home.isLoading || home.pageIndex >= home.pageTotal) {
       return;
     }
     InteractionManager.runAfterInteractions(() => {
@@ -88,25 +90,50 @@ class Index extends Component {
   };
 
   _loadMoreData = () => {
-    const { indexList } = this.props;
-    articlesAction.getIndex(indexList.pageIndex + 1);
+    const { home } = this.props;
+    homeAction.getIndex(home.pageIndex + 1);
   };
 
   _renderFooter = () => {
-    const { indexList } = this.props;
-    if (indexList.isLoading) {
+    const { home } = this.props;
+    if (home.isLoading) {
       return <Text style={utils.empty} />;
     }
-    if (indexList.pageIndex < indexList.pageTotal) {
+    if (home.pageIndex < home.pageTotal) {
       return <LoadMoreFooter />;
     }
     return <LoadMoreFooter isLoadAll />;
   };
 
+  _changeSort = (type) => {
+    const { home } = this.props;
+    home.setIsLoading(true);
+    homeAction.getIndex(1);
+  };
+
   render() {
-    const { indexList } = this.props;
-    if (indexList.isLoading) {
-      return (
+    const { home } = this.props;
+    let listJSX = (<VirtualizedList
+      {...this._gestureHandlers}
+      data={home.list}
+      onEndReached={this._toEnd}
+      onEndReachedThreshold={1}
+      ListFooterComponent={this._renderFooter}
+      enableEmptySections
+      refreshControl={
+        <RefreshControl
+          refreshing={home.isLoading}
+          onRefresh={this._onRefresh}
+        />
+      }
+      keyExtractor={(item, i) => String(i)}
+      getItemCount={items => items.length}
+      getItem={(items, i) => items[i]}
+      renderItem={rowData =>
+        (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
+    />);
+    if (home.isLoading) {
+      listJSX = (
         <View style={utils.verticalCenter}>
           <ActivityIndicator />
         </View>
@@ -119,32 +146,20 @@ class Index extends Component {
         <Modal visible={user.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
-        <VirtualizedList
-          {...this._gestureHandlers}
-          data={indexList.list}
-          onEndReached={this._toEnd}
-          onEndReachedThreshold={1}
-          ListFooterComponent={this._renderFooter}
-          enableEmptySections
-          refreshControl={
-            <RefreshControl
-              refreshing={indexList.isLoading}
-              onRefresh={this._onRefresh}
-            />
-          }
-          keyExtractor={(item, i) => String(i)}
-          getItemCount={items => items.length}
-          getItem={(items, i) => items[i]}
-          renderItem={rowData =>
-            (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
-        />
+        <View style={homeStyle.sort}>
+          <Button title={'默认'} onPress={() => this._changeSort(0)} />
+          <Button title={'热议'} onPress={() => this._changeSort(1)} />
+          <Button title={'好评'} onPress={() => this._changeSort(2)} />
+          <Button title={'最近评论'} onPress={() => this._changeSort(3)} />
+        </View>
+        {listJSX}
         {
           this.state.isHidden === false ? (<TouchableOpacity
             onPress={this._goPost}
-            style={index.addIconWrap}
+            style={homeStyle.addIconWrap}
           >
             <View >
-              <Image style={[index.addIcon, icon.normal]} source={addfilePng} />
+              <Image style={[homeStyle.addIcon, icon.normal]} source={addfilePng} />
             </View>
           </TouchableOpacity>) : null
         }

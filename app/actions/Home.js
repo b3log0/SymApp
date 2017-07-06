@@ -1,19 +1,19 @@
 import fetchService from '../services/FetchService';
-import indexListStore from '../stores/IndexList';
+import homeStore from '../stores/Home';
 
 const getIndex = async (pageIndex) => {
   try {
     const response = await fetchService.get(`articles/latest?p=${pageIndex}`);
-    indexListStore.setIsLoading(false);
+    homeStore.setIsLoading(false);
 
     const data = response.data;
 
-    indexListStore.setPage(pageIndex, data.pagination.paginationPageCount);
+    homeStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
     if (pageIndex === 1) {
-      indexListStore.setList(data.articles);
+      homeStore.setList(data.articles);
     } else {
-      indexListStore.setList(indexListStore.list.concat(data.articles));
+      homeStore.setList(homeStore.list.concat(data.articles));
     }
   } catch (error) {
     console.error(error);

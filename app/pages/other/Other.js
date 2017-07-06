@@ -37,7 +37,7 @@ class Other extends Component {
     const { domain } = this.props;
     domain.setUri(uri);
     domain.setTitle(stackTitle);
-    this.props.navigation.navigate('OtherDomain', { stackTitle });
+    this.props.navigation.navigate('Domain', { stackTitle });
   };
 
   _goView = (path) => {

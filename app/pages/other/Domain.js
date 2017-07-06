@@ -47,7 +47,7 @@ class Domain extends Component {
     } else {
       entity.setPathname(`articles/domain/${uri}`);
     }
-    this.props.navigation.navigate('OtherArticles', { stackTitle });
+    this.props.navigation.navigate('List', { stackTitle });
   };
 
   render() {

@@ -5,7 +5,6 @@ import entity from './Entity';
 import pagination from './Pagination';
 import user from './User';
 import article from './Article';
-import indexList from './IndexList';
 import home from './Home';
 import domain from './Domain';
 
@@ -25,7 +24,6 @@ export default {
   pagination,
   user,
   article,
-  indexList,
   home,
   domain
 };
