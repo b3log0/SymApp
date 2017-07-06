@@ -17,16 +17,30 @@ class Article extends Component {
 
   _goArticle = () => {
     const rowData = this.props.rowData;
+    let stackTitle = '文章';
+    switch (rowData.articleType) {
+      case 1:
+        stackTitle = '小黑屋';
+        break;
+      case 2:
+        stackTitle = '同城广播';
+        break;
+      case 3:
+        stackTitle = '思绪';
+        break;
+      default:
+        break;
+    }
     this.props.navigation.navigate('Article', {
       oId: rowData.oId,
-      articleType: rowData.articleType
+      stackTitle
     });
   };
 
   render() {
     const rowData = this.props.rowData;
 
-    let thumbanilImg = <Text style={utils.empty} />;
+    let thumbanilImg = null;
     if (rowData.articleThumbnailURL !== '') {
       thumbanilImg = (<Image
         style={list.thumbnailImg}

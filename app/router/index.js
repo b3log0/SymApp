@@ -33,11 +33,7 @@ const HomeStack = StackNavigator({
     }
   },
   MemberPost: {
-    screen: MemberPost,
-    navigationOptions: {
-      title: '发帖',
-      tabBarVisible: false
-    }
+    screen: MemberPost
   },
   WebView: {
     screen: Web
@@ -76,6 +72,9 @@ const MemberStack = StackNavigator({
   },
   Article: {
     screen: Article
+  },
+  MemberPost: {
+    screen: MemberPost
   }
 }, {
   headerMode: 'screen'
@@ -113,6 +112,9 @@ const OtherStack = StackNavigator({
   },
   TagArticles: {
     screen: TagArticles
+  },
+  MemberPost: {
+    screen: MemberPost
   }
 }, {
   headerMode: 'screen'

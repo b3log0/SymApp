@@ -7,9 +7,6 @@ export default {
     paddingTop: (Platform.OS === 'ios') ? 20 : 0,
     flex: 1
   },
-  empty: {
-    height: 0
-  },
   flex: {
     flex: 1
   },

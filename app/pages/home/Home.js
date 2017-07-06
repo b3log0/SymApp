@@ -65,7 +65,7 @@ class Index extends Component {
     const { user } = this.props;
     const isLogin = await userAction.isLogin();
     if (isLogin) {
-      this.props.navigation.navigate('MemberPost');
+      this.props.navigation.navigate('MemberPost', { stackTitle: '发帖' });
     } else {
       user.setShowLogin(true);
     }
@@ -93,7 +93,7 @@ class Index extends Component {
   _renderFooter = () => {
     const { home } = this.props;
     if (home.isLoading) {
-      return <Text style={utils.empty} />;
+      return null;
     }
     if (home.pageIndex < home.pageTotal) {
       return <LoadMoreFooter />;

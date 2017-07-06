@@ -49,7 +49,7 @@ class List extends Component {
   _renderFooter = () => {
     const { entity, pagination } = this.props;
     if (entity.isLoading) {
-      return <Text style={utils.empty} />;
+      return null;
     }
     if (pagination.pageIndex < pagination.pageTotal) {
       return <LoadMoreFooter />;

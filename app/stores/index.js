@@ -8,6 +8,7 @@ import article from './Article';
 import home from './Home';
 import domain from './Domain';
 import tag from './Tag';
+import comments from './Comments';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -27,5 +28,6 @@ export default {
   article,
   home,
   domain,
-  tag
+  tag,
+  comments
 };

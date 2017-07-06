@@ -23,7 +23,21 @@ const post = async (uri, form) => {
   }
 };
 
+const put = async (uri, form) => {
+  try {
+    let response = await fetch(`${api}${uri}`, {
+      method: 'PUT',
+      body: JSON.stringify(form)
+    });
+    response = response.json();
+    return Promise.resolve(response);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   get,
-  post
+  post,
+  put
 };
