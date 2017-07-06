@@ -12,23 +12,23 @@ import { inject } from 'mobx-react';
 import tagsPng from '../../../images/tags.png';
 import { list } from '../../../styles/index';
 
-@inject('entity', 'tag')
+@inject('tags', 'tag')
 class Tag extends Component {
 
   static propTypes = {
     rowData: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired,
+    tags: PropTypes.object.isRequired,
     tag: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
   _goTag = () => {
-    const { entity, tag } = this.props;
+    const { tags, tag } = this.props;
     const rowData = this.props.rowData;
     const uriArray = rowData.tagURI.split('/');
     const tagUri = uriArray[uriArray.length - 1];
     tag.setUri(tagUri);
-    entity.setPathname(`articles/tag/${tagUri}`);
+    tags.setPathname(`articles/tag/${tagUri}`);
     this.props.navigation.navigate('TagArticles', { stackTitle: rowData.tagTitle });
   };
 
