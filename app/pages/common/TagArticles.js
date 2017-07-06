@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  ScrollView,
   View,
   Button
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 import List from '../../components/list/index';
 import ListAction from '../../actions/List';

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  View,
   RefreshControl,
   ActivityIndicator,
   InteractionManager,
@@ -10,7 +9,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import ListAction from '../../actions/List';
-import ListItem from './item/Item';
+import ListItem from './item';
 import LoadMoreFooter from '../LoadMoreFooter';
 import { utils } from '../../styles/index';
 

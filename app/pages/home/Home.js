@@ -14,7 +14,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import LoadMoreFooter from '../../components/LoadMoreFooter';
-import ListItem from '../../components/list/item/Item';
+import ListItem from '../../components/list/item';
 import userAction from '../../actions/User';
 import homeAction from '../../actions/Home';
 import Login from '../../components/Login';
