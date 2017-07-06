@@ -37,9 +37,7 @@ class Web extends Component {
     };
   }
 
-  renderLoading = () => (<View style={utils.verticalCenter}>
-    <ActivityIndicator />
-  </View>);
+  renderLoading = () => <ActivityIndicator style={utils.verticalCenter} />;
 
 
   render() {

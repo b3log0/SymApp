@@ -7,9 +7,7 @@ import FetchService from '../services/FetchService';
 
 const getDetail = async (pageIndex) => {
   try {
-    if (pageIndex === 1) {
-      commentsStore.setIsLoading(true);
-    }
+    commentsStore.setIsLoading(true);
     const response = await FetchService.get(`article/${articleStore.oId}?p=${pageIndex}`);
     commentsStore.setIsLoading(false);
 

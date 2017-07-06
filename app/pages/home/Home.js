@@ -131,7 +131,7 @@ class Index extends Component {
       renderItem={rowData =>
         (<ListItem rowData={rowData.item} navigation={this.props.navigation} />)}
     />);
-    if (home.isLoading) {
+    if (home.isLoading && home.pageIndex === 0) {
       listJSX = (
         <ActivityIndicator style={utils.verticalCenter} />
       );

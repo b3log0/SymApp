@@ -59,7 +59,7 @@ class List extends Component {
 
   render() {
     const { entity } = this.props;
-    if (entity.isLoading) {
+    if (entity.isLoading && entity.pageIndex === 0) {
       return (
         <ActivityIndicator style={utils.verticalCenter} />
       );
