@@ -11,11 +11,13 @@ import { inject } from 'mobx-react';
 import domainsAction from '../../actions/Domains';
 import { utils, module, other } from '../../styles';
 
-@inject('domain')
+@inject('domain', 'entity', 'tag')
 class Other extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
+    entity: PropTypes.object.isRequired,
+    tag: PropTypes.object.isRequired,
     domain: PropTypes.object.isRequired
   };
 
@@ -45,6 +47,8 @@ class Other extends Component {
   };
 
   render() {
+    const { entity, tag } = this.props;
+
     const domainsJSX = this.state.domains.map((item) => {
       const uriArray = item.domainURI.split('/');
       return (<Button
@@ -105,9 +109,24 @@ class Other extends Component {
             <Text>此刻[开发中]</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[module.list, module.listLast]}
+            style={module.list}
+            onPress={() => {
+              tag.setUri('book_share');
+              entity.setPathname('articles/tag/book_share');
+              this.props.navigation.navigate('TagArticles', { stackTitle: '书单' });
+            }
+            }
           >
-            <Text>书单[开发中]</Text>
+            <Text>书单</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => {
+              entity.setPathname('tags');
+              this.props.navigation.navigate('List', { stackTitle: '标签' });
+            }}
+          >
+            <Text>标签</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>);

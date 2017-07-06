@@ -1,5 +1,4 @@
 import fetchService from '../services/FetchService';
-import paginationStore from '../stores/Pagination';
 import entityStore from '../stores/Entity';
 
 const getList = async (pageIndex) => {
@@ -9,7 +8,7 @@ const getList = async (pageIndex) => {
     entityStore.setIsLoading(false);
 
     const data = response.data;
-    paginationStore.setPage(pageIndex, data.pagination.paginationPageCount);
+    entityStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
     // 适配多个接口，根据规则获取数据内容. key: comments, articles, users
     const keys = Object.keys(data);

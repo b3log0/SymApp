@@ -75,6 +75,9 @@ const MemberStack = StackNavigator({
   },
   MemberPost: {
     screen: MemberPost
+  },
+  TagArticles: {
+    screen: TagArticles
   }
 }, {
   headerMode: 'screen'

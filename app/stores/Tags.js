@@ -1,18 +1,18 @@
 import { observable, action } from 'mobx';
 
-class Entity {
+class Tags {
   @observable list;
   @observable isLoading;
-  @observable pathname;
   @observable pageIndex;
   @observable pageTotal;
+  @observable pathname;
 
   constructor() {
     this.list = [];
     this.isLoading = true;
-    this.pathname = '';
     this.pageIndex = 0;
     this.pageTotal = 0;
+    this.pathname = '';
   }
 
   @action setList = (list) => {
@@ -34,6 +34,6 @@ class Entity {
 }
 
 
-const entity = new Entity();
-export default entity;
-export { Entity };
+const tag = new Tags();
+export default tag;
+export { Tags };

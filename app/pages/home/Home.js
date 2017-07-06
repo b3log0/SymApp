@@ -7,7 +7,6 @@ import {
   RefreshControl,
   VirtualizedList,
   ActivityIndicator,
-  Text,
   InteractionManager,
   Button
 } from 'react-native';

@@ -3,4 +3,4 @@ export default {
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
-}
+};

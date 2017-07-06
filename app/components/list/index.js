@@ -3,22 +3,17 @@ import {
   RefreshControl,
   ActivityIndicator,
   InteractionManager,
-  VirtualizedList,
-  Text
+  VirtualizedList
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
 
 import ListAction from '../../actions/List';
 import ListItem from './item';
 import LoadMoreFooter from '../LoadMoreFooter';
 import { utils } from '../../styles/index';
 
-@inject('pagination', 'entity')
-@observer
 class List extends Component {
 
   static propTypes = {
-    pagination: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired,
     entity: PropTypes.object.isRequired
   };
@@ -32,8 +27,8 @@ class List extends Component {
   };
 
   _toEnd = () => {
-    const { pagination, entity } = this.props;
-    if (entity.isLoading || pagination.pageIndex >= pagination.pageTotal) {
+    const { entity } = this.props;
+    if (entity.isLoading || entity.pageIndex >= entity.pageTotal) {
       return;
     }
     InteractionManager.runAfterInteractions(() => {
@@ -42,16 +37,16 @@ class List extends Component {
   };
 
   _loadMoreData = () => {
-    const { pagination } = this.props;
-    ListAction.getList(pagination.pageIndex + 1);
+    const { entity } = this.props;
+    ListAction.getList(entity.pageIndex + 1);
   };
 
   _renderFooter = () => {
-    const { entity, pagination } = this.props;
+    const { entity } = this.props;
     if (entity.isLoading) {
       return null;
     }
-    if (pagination.pageIndex < pagination.pageTotal) {
+    if (entity.pageIndex < entity.pageTotal) {
       return <LoadMoreFooter />;
     }
     return <LoadMoreFooter isLoadAll />;
@@ -59,7 +54,7 @@ class List extends Component {
 
   render() {
     const { entity } = this.props;
-    if (entity.isLoading && entity.pageIndex === 0) {
+    if (entity.isLoading && entity.pageIndex < 1) {
       return (
         <ActivityIndicator style={utils.verticalCenter} />
       );
