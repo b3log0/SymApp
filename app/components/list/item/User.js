@@ -7,19 +7,24 @@ import {
   Button,
   Alert
 } from 'react-native';
+import { inject } from 'mobx-react';
 
 import { list, common } from '../../../styles/index';
 
+@inject('member', 'owner')
 class User extends Component {
 
   static propTypes = {
     rowData: PropTypes.object.isRequired,
+    member: PropTypes.object.isRequired,
+    owner: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
   _goUser = () => {
-    const rowData = this.props.rowData;
-    this.props.navigation.navigate('WebView', { path: `member/${rowData.userName}` });
+    const { rowData, member, owner } = this.props;
+    member.setName(rowData.userName);
+    this.props.navigation.navigate('Member', { isOwner: rowData.userName === owner.name });
   };
 
   render() {

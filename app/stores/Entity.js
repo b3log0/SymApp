@@ -15,8 +15,10 @@ class Entity {
     this.pageTotal = 0;
   }
 
-  @action setList = (list) => {
+  @action setList = (list, pageIndex, pageTotal) => {
     this.list = list;
+    this.pageIndex = pageIndex;
+    this.pageTotal = pageTotal;
   };
 
   @action setIsLoading = (isLoading) => {
@@ -26,11 +28,6 @@ class Entity {
   @action setPathname = (pathname) => {
     this.pathname = pathname;
   };
-
-  @action setPage = (pageIndex, pageTotal) => {
-    this.pageIndex = pageIndex;
-    this.pageTotal = pageTotal;
-  }
 }
 
 

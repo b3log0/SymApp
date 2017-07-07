@@ -47,10 +47,7 @@ const HomeStack = StackNavigator({
 
 const MemberStack = StackNavigator({
   Member: {
-    screen: Member,
-    navigationOptions: {
-      header: null
-    }
+    screen: Member
   },
   Setting: {
     screen: Setting,
