@@ -15,13 +15,13 @@ import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
 import { utils, home as homeStyle, icon, common } from '../../styles';
 
-@inject('home', 'user')
+@inject('home', 'owner')
 @observer
 class Index extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
+    owner: PropTypes.object.isRequired,
     home: PropTypes.object.isRequired
   };
 
@@ -54,12 +54,12 @@ class Index extends Component {
   }
 
   _goPost = async () => {
-    const { user } = this.props;
+    const { owner } = this.props;
     const isLogin = await userAction.isLogin();
     if (isLogin) {
       this.props.navigation.navigate('MemberPost', { stackTitle: '发帖' });
     } else {
-      user.setShowLogin(true);
+      owner.setShowLogin(true);
     }
   };
 
@@ -70,13 +70,13 @@ class Index extends Component {
   };
 
   render() {
-    const { home, user } = this.props;
+    const { home, owner } = this.props;
     // for observer, don't remove!!!
     console.log(home.isLoading);
 
     return (
       <View style={utils.statusBar}>
-        <Modal visible={user.showLogin} onRequestClose={() => null}>
+        <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <View style={common.sort}>

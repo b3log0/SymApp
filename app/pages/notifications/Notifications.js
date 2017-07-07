@@ -12,27 +12,27 @@ import Login from '../../components/Login';
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 
-@inject('user')
+@inject('owner')
 @observer
 class Navigation extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired
   };
 
   _goView = async () => {
-    const { user } = this.props;
+    const { owner } = this.props;
     const isLogin = await userAction.isLogin();
     if (!isLogin) {
-      user.setShowLogin(true);
+      owner.setShowLogin(true);
     }
   };
 
   render() {
-    const { user } = this.props;
+    const { owner } = this.props;
     return (
       <ScrollView style={utils.statusBar}>
-        <Modal visible={user.showLogin} onRequestClose={() => null}>
+        <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <View style={module.wrap}>

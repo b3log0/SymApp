@@ -12,13 +12,13 @@ import Login from '../../components/Login';
 import userAction from '../../actions/User';
 import { utils, module } from '../../styles';
 
-@inject('user', 'entity')
+@inject('owner', 'entity')
 @observer
 class Navigation extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired
   };
 
   async componentWillMount() {
@@ -26,18 +26,18 @@ class Navigation extends Component {
   }
 
   _goView = async (routerName, pathname, stackTitle) => {
-    const { user, entity } = this.props;
+    const { owner, entity } = this.props;
     const isLogin = await userAction.isLogin();
     if (isLogin) {
       entity.setPathname(pathname);
       this.props.navigation.navigate(routerName, { stackTitle });
     } else {
-      user.setShowLogin(true);
+      owner.setShowLogin(true);
     }
   };
 
   render() {
-    const { user } = this.props;
+    const { owner } = this.props;
 
     let loginButton = (<TouchableOpacity
       style={[module.list, module.listLast]}
@@ -45,24 +45,24 @@ class Navigation extends Component {
     >
       <Text>设置</Text>
     </TouchableOpacity>);
-    if (!user.isLogin) {
+    if (!owner.isLogin) {
       loginButton = (<TouchableOpacity
         style={[module.list, module.listLast]}
-        onPress={() => user.setShowLogin(true)}
+        onPress={() => owner.setShowLogin(true)}
       >
         <Text>登录</Text>
       </TouchableOpacity>);
     }
     return (
       <ScrollView style={utils.statusBar}>
-        <Modal visible={user.showLogin} onRequestClose={() => null}>
+        <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <View style={module.wrap}>
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/articles`, '帖子');
+              this._goView('List', `user/${owner.name}/articles`, '帖子');
             }}
           >
             <Text>帖子</Text>
@@ -70,7 +70,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/comments`, '回帖');
+              this._goView('List', `user/${owner.name}/comments`, '回帖');
             }}
           >
             <Text>回帖</Text>
@@ -86,7 +86,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/watching/articles`, '关注帖子');
+              this._goView('List', `user/${owner.name}/watching/articles`, '关注帖子');
             }}
           >
             <Text>关注帖子</Text>
@@ -94,7 +94,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/following/users`, '关注用户');
+              this._goView('List', `user/${owner.name}/following/users`, '关注用户');
             }}
           >
             <Text>关注用户</Text>
@@ -102,7 +102,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/following/tags`, '关注标签');
+              this._goView('List', `user/${owner.name}/following/tags`, '关注标签');
             }}
           >
             <Text>关注标签</Text>
@@ -110,7 +110,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${user.name}/following/articles`, '收藏帖子');
+              this._goView('List', `user/${owner.name}/following/articles`, '收藏帖子');
             }}
           >
             <Text>收藏帖子</Text>
@@ -118,7 +118,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, module.listLast]}
             onPress={() => {
-              this._goView('List', `user/${user.name}/followers`, '关注者');
+              this._goView('List', `user/${owner.name}/followers`, '关注者');
             }}
           >
             <Text>关注者</Text>

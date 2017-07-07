@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import md5 from 'blueimp-md5';
 
-import userStore from '../stores/User';
+import OwnerStore from '../stores/Owner';
 import fetchService from '../services/FetchService';
 
 const isLogin = async () => {
@@ -12,8 +12,8 @@ const isLogin = async () => {
     const isLoginStorage = await AsyncStorage.getItem('@UserStore:isLogin');
     const nameStorage = await AsyncStorage.getItem('@UserStore:name');
     if (isLoginStorage !== null) {
-      userStore.setIsLogin(true);
-      userStore.setName(nameStorage);
+      OwnerStore.setIsLogin(true);
+      OwnerStore.setName(nameStorage);
       return true;
     }
     return false;
@@ -35,8 +35,8 @@ const login = async (name, password) => {
     if (response.sc === 0) {
       AsyncStorage.setItem('@UserStore:isLogin', 'true');
       AsyncStorage.setItem('@UserStore:name', response.userName);
-      userStore.setName(response.userName);
-      userStore.setIsLogin(true);
+      OwnerStore.setName(response.userName);
+      OwnerStore.setIsLogin(true);
     } else {
       Alert.alert(
           response.msg
@@ -55,9 +55,9 @@ const logout = async () => {
     const response = await fetchService.post('logout');
     if (response.sc === 0) {
       AsyncStorage.removeItem('@UserStore:isLogin');
-      userStore.setIsLogin(false);
-      userStore.setPassword('');
-      userStore.setName('');
+      OwnerStore.setIsLogin(false);
+      OwnerStore.setPassword('');
+      OwnerStore.setName('');
     } else {
       Alert.alert(
         response.msg

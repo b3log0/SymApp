@@ -21,14 +21,14 @@ const {
   Modal
 } = ReactNative;
 
-@inject('user', 'article')
+@inject('owner', 'article')
 @observer
 class Post extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     article: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -89,10 +89,10 @@ class Post extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { owner } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.flex}>
-        <Modal visible={user.showLogin} onRequestClose={() => null}>
+        <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         <Modal visible={this.state.showTag} onRequestClose={() => null}>

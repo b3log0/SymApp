@@ -15,11 +15,11 @@ const {
   AsyncStorage
 } = ReactNative;
 
-@inject('user')
+@inject('owner')
 class Login extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -30,23 +30,23 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    const { user } = this.props;
+    const { owner } = this.props;
     AsyncStorage.getItem('@UserStore:name', (key, value) => {
-      user.name = value;
+      owner.name = value;
       this.setState({ name: value });
     });
   }
 
   _login = async () => {
-    const { user } = this.props;
-    const sc = await userAction.login(user.name, user.password);
+    const { owner } = this.props;
+    const sc = await userAction.login(owner.name, owner.password);
     if (sc === 0) {
-      user.setShowLogin(false);
+      owner.setShowLogin(false);
     }
   };
 
   render() {
-    const { user } = this.props;
+    const { owner } = this.props;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.verticalCenter}>
@@ -61,7 +61,7 @@ class Login extends Component {
           placeholder="用户名／邮箱"
           onChangeText={(text) => {
             this.setState({ name: text });
-            user.name = text;
+            owner.name = text;
           }}
         />
         <TextInput
@@ -70,7 +70,7 @@ class Login extends Component {
           placeholder="密码"
           secureTextEntry
           onChangeText={(text) => {
-            user.password = text;
+            owner.password = text;
           }}
         />
         <View style={form.button}>
@@ -84,7 +84,7 @@ class Login extends Component {
         <View style={form.button}>
           <Button
             onPress={() => {
-              user.setShowLogin(false);
+              owner.setShowLogin(false);
             }}
             color={color.green}
             title="取消"

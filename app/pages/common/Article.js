@@ -11,11 +11,11 @@ import articleAction from '../../actions/Article';
 import userAction from '../../actions/User';
 import Login from '../../components/Login';
 
-@inject('article', 'user')
+@inject('article', 'owner')
 @observer
 class Article extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    owner: PropTypes.object.isRequired,
     article: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
@@ -33,24 +33,24 @@ class Article extends Component {
   }
 
   _goUpdate = async () => {
-    const { user } = this.props;
-    if (user.isLogin) {
+    const { owner } = this.props;
+    if (owner.isLogin) {
       this.props.navigation.navigate('MemberPost', { stackTitle: '更新' });
     } else {
-      user.setShowLogin(true);
+      owner.setShowLogin(true);
     }
   };
 
   render() {
-    const { article, user } = this.props;
+    const { article, owner } = this.props;
 
     return (
       <View>
-        <Modal visible={user.showLogin} onRequestClose={() => null}>
+        <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
         {
-          (article.type !== 3 && user.name === article.authorName) ?
+          (article.type !== 3 && owner.name === article.authorName) ?
             <Button title={'更新'} onPress={this._goUpdate} /> :
           null
         }
