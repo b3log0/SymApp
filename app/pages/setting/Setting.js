@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import userAction from '../../actions/User';
+import ownerAction from '../../actions/Owner';
 import { module } from '../../styles/index';
 
 class SettingNavigation extends Component {
@@ -20,7 +20,7 @@ class SettingNavigation extends Component {
   };
 
   _logout = async () => {
-    const sc = await userAction.logout();
+    const sc = await ownerAction.logout();
     if (sc === 0) {
       this.props.navigation.goBack();
     }

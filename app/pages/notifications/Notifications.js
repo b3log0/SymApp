@@ -9,7 +9,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import Login from '../../components/Login';
-import userAction from '../../actions/User';
+import ownerAction from '../../actions/Owner';
 import { utils, module } from '../../styles';
 
 @inject('owner')
@@ -22,7 +22,7 @@ class Navigation extends Component {
 
   _goView = async () => {
     const { owner } = this.props;
-    const isLogin = await userAction.isLogin();
+    const isLogin = await ownerAction.isLogin();
     if (!isLogin) {
       owner.setShowLogin(true);
     }

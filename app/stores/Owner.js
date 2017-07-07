@@ -6,6 +6,7 @@ class Owner {
   @observable showLogin;
   @observable avatarURL;
   @observable password;
+  @observable intro;
 
   constructor() {
     this.name = '';
@@ -13,6 +14,7 @@ class Owner {
     this.isLogin = false;
     this.showLogin = false;
     this.password = '';
+    this.intro = '';
   }
 
   @action setName = (name) => {
@@ -33,6 +35,10 @@ class Owner {
 
   @action setShowLogin = (showLogin) => {
     this.showLogin = showLogin;
+  };
+
+  @action setIntro = (intro) => {
+    this.intro = intro;
   };
 }
 

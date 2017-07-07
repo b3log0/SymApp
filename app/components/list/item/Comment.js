@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import HTML from '../../../components/html';
-import { list } from '../../../styles/index';
+import { list, common } from '../../../styles/index';
 
 class Comment extends Component {
 
@@ -31,7 +31,7 @@ class Comment extends Component {
           <View style={list.info} >
             <Image
               source={{ uri: rowData.commentArticleAuthorThumbnailURL }}
-              style={list.avatar}
+              style={common.avatar}
             />
             <Text style={list.infoText}>
               {rowData.commentArticleAuthorName}

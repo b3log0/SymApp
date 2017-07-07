@@ -9,7 +9,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list';
-import userAction from '../../actions/User';
+import ownerAction from '../../actions/Owner';
 import ListAction from '../../actions/List';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
@@ -55,7 +55,7 @@ class Index extends Component {
 
   _goPost = async () => {
     const { owner } = this.props;
-    const isLogin = await userAction.isLogin();
+    const isLogin = await ownerAction.isLogin();
     if (isLogin) {
       this.props.navigation.navigate('MemberPost', { stackTitle: '发帖' });
     } else {

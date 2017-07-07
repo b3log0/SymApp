@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactNative from 'react-native';
 import { inject } from 'mobx-react';
 
-import userAction from '../actions/User';
+import ownerAction from '../actions/Owner';
 import { form, icon, color, utils } from '../styles/index';
 import logoPng from '../images/logo.png';
 
@@ -39,7 +39,7 @@ class Login extends Component {
 
   _login = async () => {
     const { owner } = this.props;
-    const sc = await userAction.login(owner.name, owner.password);
+    const sc = await ownerAction.login(owner.name, owner.password);
     if (sc === 0) {
       owner.setShowLogin(false);
     }

@@ -2,15 +2,13 @@ import { Alert, AsyncStorage } from 'react-native';
 
 import articleStore from '../stores/Article';
 import commentsStore from '../stores/Comments';
-import userStore from '../stores/User';
+import memberStore from '../stores/Member';
 import FetchService from '../services/FetchService';
 
 const getDetail = async (pageIndex) => {
   try {
     commentsStore.setIsLoading(true);
     const response = await FetchService.get(`article/${articleStore.oId}?p=${pageIndex}`);
-    commentsStore.setIsLoading(false);
-
     const data = response.data;
     commentsStore.setPage(pageIndex, data.pagination.paginationPageCount);
 
@@ -26,6 +24,8 @@ const getDetail = async (pageIndex) => {
     articleStore.setTagObjs(data.article.articleTagObjs);
     articleStore.setTags(data.article.articleTags);
     articleStore.setAuthorName(data.article.articleAuthorName);
+
+    commentsStore.setIsLoading(false);
   } catch (error) {
     console.warn(error);
   }
@@ -46,7 +46,7 @@ const post = async (formData, navigation) => {
             text: '登录',
             onPress: () => {
               AsyncStorage.removeItem('@UserStore:isLogin');
-              userStore.setShowLogin(true);
+              memberStore.setShowLogin(true);
             }
           },
           { text: '取消' }
@@ -78,7 +78,7 @@ const update = async (formData, navigation) => {
             text: '登录',
             onPress: () => {
               AsyncStorage.removeItem('@UserStore:isLogin');
-              userStore.setShowLogin(true);
+              memberStore.setShowLogin(true);
             }
           },
           { text: '取消' }

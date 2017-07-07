@@ -10,7 +10,7 @@ import {
 import { inject } from 'mobx-react';
 
 import tagsPng from '../../../images/tags.png';
-import { list } from '../../../styles/index';
+import { list, common } from '../../../styles/index';
 
 @inject('tags', 'tag')
 class Tag extends Component {
@@ -40,7 +40,7 @@ class Tag extends Component {
           <View style={list.rowFirst}>
             <Image
               source={rowData.tagIconPath === '' ? tagsPng : { uri: rowData.tagIconPath }}
-              style={list.avatarBig}
+              style={common.avatarBig}
             />
           </View>
           <View stlye={list.rowCenter}>

@@ -31,16 +31,6 @@ export default {
   content: {
     fontSize: 14
   },
-  avatar: {
-    borderRadius: 8,
-    height: 16,
-    width: 16
-  },
-  avatarBig: {
-    height: 36,
-    width: 36,
-    borderRadius: 18
-  },
   info: {
     flex: 1,
     flexDirection: 'row',

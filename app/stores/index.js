@@ -2,7 +2,7 @@ import { useStrict } from 'mobx';
 import { enableLogging } from 'mobx-logger';
 
 import entity from './Entity';
-import user from './User';
+import member from './Member';
 import owner from './Owner';
 import article from './Article';
 import home from './Home';
@@ -18,13 +18,13 @@ if (process.env.NODE_ENV === 'dev') {
     action: true,
     reaction: false,
     transaction: false,
-    compute: false,
+    compute: false
   });
 }
 
 export default {
   entity,
-  user,
+  member,
   owner,
   article,
   home,

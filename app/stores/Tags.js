@@ -9,7 +9,7 @@ class Tags {
 
   constructor() {
     this.list = [];
-    this.isLoading = false;
+    this.isLoading = true;
     this.pageIndex = 0;
     this.pageTotal = 0;
     this.pathname = '';

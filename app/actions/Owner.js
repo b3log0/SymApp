@@ -5,7 +5,7 @@ import {
 import md5 from 'blueimp-md5';
 
 import OwnerStore from '../stores/Owner';
-import fetchService from '../services/FetchService';
+import FetchService from '../services/FetchService';
 
 const isLogin = async () => {
   try {
@@ -31,7 +31,7 @@ const login = async (name, password) => {
   };
 
   try {
-    const response = await fetchService.post('login', formData);
+    const response = await FetchService.post('login', formData);
     if (response.sc === 0) {
       AsyncStorage.setItem('@UserStore:isLogin', 'true');
       AsyncStorage.setItem('@UserStore:name', response.userName);
@@ -52,7 +52,7 @@ const login = async (name, password) => {
 
 const logout = async () => {
   try {
-    const response = await fetchService.post('logout');
+    const response = await FetchService.post('logout');
     if (response.sc === 0) {
       AsyncStorage.removeItem('@UserStore:isLogin');
       OwnerStore.setIsLogin(false);

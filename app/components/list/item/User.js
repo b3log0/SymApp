@@ -8,7 +8,7 @@ import {
   Alert
 } from 'react-native';
 
-import { list } from '../../../styles/index';
+import { list, common } from '../../../styles/index';
 
 class User extends Component {
 
@@ -39,7 +39,7 @@ class User extends Component {
           <View style={list.rowFirst}>
             <Image
               source={{ uri: rowData.userAvatarURL48 }}
-              style={list.avatarBig}
+              style={common.avatarBig}
             />
           </View>
           <View stlye={list.rowCenter}>

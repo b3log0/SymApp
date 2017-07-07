@@ -8,7 +8,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
-import userAction from '../../actions/User';
+import ownerAction from '../../actions/Owner';
 import Login from '../../components/Login';
 
 @inject('article', 'owner')
@@ -27,7 +27,7 @@ class Article extends Component {
 
   componentWillMount() {
     const { article } = this.props;
-    userAction.isLogin();
+    ownerAction.isLogin();
     article.setOId(this.props.navigation.state.params.oId);
     articleAction.getDetail(1);
   }

@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { list } from '../../../styles/index';
+import { list, common } from '../../../styles/index';
 
 class Article extends Component {
 
@@ -56,7 +56,7 @@ class Article extends Component {
           <View style={list.info} >
             <Image
               source={{ uri: rowData.articleAuthorThumbnailURL48 }}
-              style={list.avatar}
+              style={common.avatar}
             />
             <Text style={list.infoText}>
               {rowData.articleAuthorName}
