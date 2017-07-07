@@ -5,7 +5,7 @@ const getDomains = async () => {
     const response = await fetchService.get('domains');
     return Promise.resolve(response.data);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
     return Promise.reject(error);
   }
 };
@@ -15,7 +15,7 @@ const getTagsByDomain = async (uri) => {
     const response = await fetchService.get(`domain/${uri}`);
     return Promise.resolve(response.data);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
     return Promise.reject(error);
   }
 };

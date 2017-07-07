@@ -18,7 +18,7 @@ const isLogin = async () => {
     }
     return false;
   } catch (error) {
-    console.error(error);
+    console.warn(error);
     return false;
   }
 };
@@ -45,7 +45,7 @@ const login = async (name, password) => {
 
     return Promise.resolve(response.sc);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
     return Promise.reject(error);
   }
 };
@@ -65,7 +65,7 @@ const logout = async () => {
     }
     return Promise.resolve(response.sc);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
     return Promise.reject(error);
   }
 };

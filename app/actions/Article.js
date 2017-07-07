@@ -23,10 +23,11 @@ const getDetail = async (pageIndex) => {
     articleStore.setType(data.article.articleType);
     articleStore.setTitle(data.article.articleTitle);
     articleStore.setContent(data.article.articleContent);
-    articleStore.setTags(data.article.articleTagObjs);
+    articleStore.setTagObjs(data.article.articleTagObjs);
+    articleStore.setTags(data.article.articleTags);
     articleStore.setAuthorName(data.article.articleAuthorName);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
   }
 };
 
@@ -58,13 +59,13 @@ const post = async (formData, navigation) => {
       );
     }
   } catch (error) {
-    console.error(error);
+    console.warn(error);
   }
 };
 
 const update = async (formData, navigation) => {
   try {
-    const response = await FetchService.put(`article${articleStore.oId}`, formData);
+    const response = await FetchService.put(`article/${articleStore.oId}`, formData);
     if (response.sc === 0) {
       articleStore.setTitle(formData.articleTitle);
       articleStore.setContent(formData.articleContent);
@@ -90,7 +91,7 @@ const update = async (formData, navigation) => {
       );
     }
   } catch (error) {
-    console.error(error);
+    console.warn(error);
   }
 };
 

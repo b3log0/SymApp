@@ -1,10 +1,23 @@
+import { Alert } from 'react-native';
+
 import { api } from '../config/symphony';
+
+const errorProcess = (response) => {
+  if (response.status === 200) {
+    return true;
+  }
+  Alert.alert(response.status.toString(), response.url);
+  return false;
+};
 
 const get = async (uri) => {
   try {
     let response = await fetch(`${api}${uri}`);
-    response = response.json();
-    return Promise.resolve(response);
+    if (errorProcess(response)) {
+      response = response.json();
+      return Promise.resolve(response);
+    }
+    return Promise.reject(response);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -16,8 +29,11 @@ const post = async (uri, form) => {
       method: 'POST',
       body: JSON.stringify(form)
     });
-    response = response.json();
-    return Promise.resolve(response);
+    if (errorProcess(response)) {
+      response = response.json();
+      return Promise.resolve(response);
+    }
+    return Promise.reject(response);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -29,8 +45,11 @@ const put = async (uri, form) => {
       method: 'PUT',
       body: JSON.stringify(form)
     });
-    response = response.json();
-    return Promise.resolve(response);
+    if (errorProcess(response)) {
+      response = response.json();
+      return Promise.resolve(response);
+    }
+    return Promise.reject(response);
   } catch (error) {
     return Promise.reject(error);
   }

@@ -60,10 +60,7 @@ class Post extends Component {
     if (this.state.isUpdate) {
       title = article.title;
       content = article.content;
-      article.tags.forEach((data) => {
-        tags += `${data.tagTitle},`;
-      });
-      tags = tags.substring(0, tags.length - 1);
+      tags = article.tags;
     } else {
       title = await AsyncStorage.getItem('@ArticleStore:title');
       content = await AsyncStorage.getItem('@ArticleStore:content');
@@ -82,14 +79,13 @@ class Post extends Component {
         articleTags: article.tags,
         articleType: this.props.article.type
       }, this.props.navigation);
-      return false;
+    } else {
+      articleAction.post({
+        articleTitle: article.title,
+        articleContent: article.content,
+        articleTags: article.tags
+      }, this.props.navigation);
     }
-    articleAction.post({
-      articleTitle: article.title,
-      articleContent: article.content,
-      articleTags: article.tags
-    }, this.props.navigation);
-    return false;
   };
 
   render() {

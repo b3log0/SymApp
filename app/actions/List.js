@@ -24,7 +24,7 @@ const getList = async (pageIndex, entityStore) => {
 
     entityStore.setIsLoading(false);
   } catch (error) {
-    console.error(error);
+    console.warn(error);
   }
 };
 

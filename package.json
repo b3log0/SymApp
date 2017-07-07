@@ -4,7 +4,7 @@
   "private": true,
   "pre-commit": "lint",
   "scripts": {
-    "lint": "eslint . --fix --format=node_modules/eslint-formatter-pretty --quiet",
+    "lint": "eslint . --fix --format=node_modules/eslint-friendly-formatter --quiet",
     "start": "node node_modules/react-native/local-cli/cli.js start --port 8080",
     "test": "jest",
     "ios": "react-native run-ios",
@@ -28,7 +28,7 @@
     "babel-preset-react-native": "1.9.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
