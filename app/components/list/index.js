@@ -90,7 +90,7 @@ class List extends Component {
       return null;
     }
     if (this.state.pageIndex < this.state.pageTotal) {
-      return <LoadMoreFooter />;
+      return <LoadMoreFooter isLoadAll={false} />;
     }
     return <LoadMoreFooter isLoadAll />;
   };
@@ -106,7 +106,7 @@ class List extends Component {
       <VirtualizedList
         data={this.state.list}
         onEndReached={this._toEnd}
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={1}
         initialListSize={20}
         ListFooterComponent={this._renderFooter}
         enableEmptySections

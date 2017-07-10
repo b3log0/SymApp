@@ -19,7 +19,7 @@ class LoadMoreFooter extends PureComponent {
   render() {
     return (
       <View style={load.footer.content}>
-        <Text style={load.footer.title}>{this.props.isLoadAll ? '已加载全部' : 'Sym 也是有底线的……'}</Text>
+        <Text style={load.footer.title}>{this.props.isLoadAll ? 'Sym 也是有底线的……' : '加载……'}</Text>
       </View>
     );
   }
