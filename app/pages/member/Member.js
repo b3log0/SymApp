@@ -59,7 +59,7 @@ class Navigation extends Component {
       name,
       intro: response.intro,
       avatarURL: response.avatarURL,
-      nickname: response.nickname === '' ? name:response.nickname,
+      nickname: response.nickname === '' ? name : response.nickname,
       isLoading: true
     });
   }
