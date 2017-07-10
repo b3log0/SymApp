@@ -19,8 +19,10 @@ class Comment extends Component {
 
   _goComment = () => {
     const rowData = this.props.rowData;
-    this.props.navigation.navigate('WebView',
-      { path: `article/${rowData.commentOnArticleId}#${rowData.commenter.oId}` });
+    this.props.navigation.navigate('Article', {
+      oId: rowData.commentOnArticleId,
+      stackTitle: rowData.commentArticleTitleEmoj
+    });
   };
 
   render() {

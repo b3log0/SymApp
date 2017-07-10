@@ -1,7 +1,6 @@
 import { useStrict } from 'mobx';
 import { enableLogging } from 'mobx-logger';
 
-import member from './Member';
 import owner from './Owner';
 import article from './Article';
 import home from './Home';
@@ -20,7 +19,6 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 export default {
-  member,
   owner,
   article,
   home,

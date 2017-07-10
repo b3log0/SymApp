@@ -12,7 +12,7 @@ import { inject } from 'mobx-react';
 
 import { list, common } from '../../../styles/index';
 
-@inject('member', 'owner')
+@inject('owner')
 class User extends Component {
 
   static propTypes = {
