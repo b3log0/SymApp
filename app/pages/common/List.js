@@ -1,13 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { inject, observer } from 'mobx-react';
 
 import ComponentsList from '../../components/list/index';
 
-@inject('entity')
-@observer
 class List extends Component {
   static propTypes = {
-    entity: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
@@ -17,11 +13,11 @@ class List extends Component {
   });
 
   render() {
-    const { entity } = this.props;
-    // for observer, don't remove!!!
-    console.log(entity.isLoading);
     return (
-      <ComponentsList navigation={this.props.navigation} entity={entity} />
+      <ComponentsList
+        navigation={this.props.navigation}
+        pathname={this.props.navigation.state.params.pathname}
+      />
     );
   }
 }

@@ -10,15 +10,12 @@ import { inject } from 'mobx-react';
 import domainsAction from '../../actions/Domains';
 import { module } from '../../styles';
 
-@inject('entity', 'domain', 'tag', 'tags')
+@inject('domain')
 class Domain extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired,
-    tags: PropTypes.object.isRequired,
-    domain: PropTypes.object.isRequired,
-    tag: PropTypes.object.isRequired
+    domain: PropTypes.object.isRequired
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -42,16 +39,12 @@ class Domain extends Component {
   }
 
   _goArticles = (uri, stackTitle) => {
-    const { entity, tag, tags } = this.props;
     const uriArray = uri.split('/');
     if (uriArray.length > 1) {
       const tagUri = uriArray[uriArray.length - 1];
-      tag.setUri(tagUri);
-      tags.setPathname(`articles/tag/${tagUri}`);
-      this.props.navigation.navigate('TagArticles', { stackTitle });
+      this.props.navigation.navigate('TagArticles', { stackTitle, pathname: `articles/tag/${tagUri}` });
     } else {
-      entity.setPathname(`articles/domain/${uri}`);
-      this.props.navigation.navigate('List', { stackTitle });
+      this.props.navigation.navigate('List', { stackTitle, pathname: `articles/domain/${uri}` });
     }
   };
 

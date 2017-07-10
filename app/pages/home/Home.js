@@ -10,48 +10,45 @@ import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list';
 import ownerAction from '../../actions/Owner';
-import ListAction from '../../actions/List';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
 import { utils, home as homeStyle, icon, common } from '../../styles';
 
-@inject('home', 'owner')
+@inject('owner')
 @observer
 class Index extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    owner: PropTypes.object.isRequired,
-    home: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
       pageYs: [],
-      isHidden: false
+      isHidden: false,
+      pathname: 'articles/latest'
     };
   }
 
-  componentWillMount() {
-    // 向下滚动时隐藏发帖按钮
-    this._gestureHandlers = {
-      onStartShouldSetResponder: () => true,
-      onResponderGrant: () => {
-        this.setState({ pageYs: [] });
-      },
-      onResponderMove: (evt) => {
-        this.state.pageYs.push(evt.nativeEvent.pageY);
-        if (this.state.pageYs[0] - evt.nativeEvent.pageY > 20) {
-          this.setState({ isHidden: true });
-        } else if (evt.nativeEvent.pageY - this.state.pageYs[0] > 10) {
-          this.setState({ isHidden: false });
-        } else {
-          this.setState({ isHidden: null });
-        }
+  // 向下滚动时隐藏发帖按钮
+  _gestureHandlers = {
+    onStartShouldSetResponder: () => true,
+    onResponderGrant: () => {
+      this.setState({ pageYs: [] });
+    },
+    onResponderMove: (evt) => {
+      this.state.pageYs.push(evt.nativeEvent.pageY);
+      if (this.state.pageYs[0] - evt.nativeEvent.pageY > 20) {
+        this.setState({ isHidden: true });
+      } else if (evt.nativeEvent.pageY - this.state.pageYs[0] > 10) {
+        this.setState({ isHidden: false });
+      } else {
+        this.setState({ isHidden: null });
       }
-    };
-  }
+    }
+  };
 
   _goPost = async () => {
     const { owner } = this.props;
@@ -64,16 +61,13 @@ class Index extends Component {
   };
 
   _changeSort = (type) => {
-    const { home } = this.props;
-    home.clearAndSetPathname(`articles/latest${type}`);
-    ListAction.getList(1, home);
+    this.setState({
+      pathname: `articles/latest${type}`
+    });
   };
 
   render() {
-    const { home, owner } = this.props;
-    // for observer, don't remove!!!
-    console.log(home.isLoading);
-
+    const { owner } = this.props;
     return (
       <View style={utils.statusBar}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
@@ -85,7 +79,11 @@ class Index extends Component {
           <Button title={'好评'} onPress={() => this._changeSort('/good')} />
           <Button title={'最近评论'} onPress={() => this._changeSort('/reply')} />
         </View>
-        <List entity={home} navigation={this.props.navigation} {...this._gestureHandlers} />
+        <List
+          pathname={this.state.pathname}
+          navigation={this.props.navigation}
+          {...this._gestureHandlers}
+        />
         {
           this.state.isHidden === false ? (<TouchableOpacity
             onPress={this._goPost}

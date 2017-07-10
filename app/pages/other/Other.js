@@ -11,14 +11,11 @@ import { inject } from 'mobx-react';
 import domainsAction from '../../actions/Domains';
 import { utils, module, other } from '../../styles';
 
-@inject('domain', 'entity', 'tag', 'tags')
+@inject('domain')
 class Other extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired,
-    tags: PropTypes.object.isRequired,
-    tag: PropTypes.object.isRequired,
     domain: PropTypes.object.isRequired
   };
 
@@ -48,8 +45,6 @@ class Other extends Component {
   };
 
   render() {
-    const { entity, tag, tags } = this.props;
-
     const domainsJSX = this.state.domains.map((item) => {
       const uriArray = item.domainURI.split('/');
       return (<Button
@@ -112,9 +107,7 @@ class Other extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              tag.setUri('book_share');
-              tags.setPathname('articles/tag/book_share');
-              this.props.navigation.navigate('TagArticles', { stackTitle: '书单' });
+              this.props.navigation.navigate('TagArticles', { stackTitle: '书单', pathname: 'articles/tag/book_share' });
             }
             }
           >
@@ -123,8 +116,7 @@ class Other extends Component {
           <TouchableOpacity
             style={[module.list, module.listLast]}
             onPress={() => {
-              entity.setPathname('tags');
-              this.props.navigation.navigate('List', { stackTitle: '标签' });
+              this.props.navigation.navigate('List', { stackTitle: '标签', pathname: 'tags' });
             }}
           >
             <Text>标签</Text>

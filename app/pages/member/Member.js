@@ -5,11 +5,9 @@ import {
   Text,
   View,
   Modal,
-  Image,
-  Button
+  Image
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { NavigationActions } from 'react-navigation';
 
 import Login from '../../components/Login';
 import ownerAction from '../../actions/Owner';
@@ -17,82 +15,78 @@ import memberAction from '../../actions/Member';
 import logoPng from '../../images/logo.png';
 import { utils, module, member as memberStyle, common } from '../../styles';
 
-@inject('owner', 'entity', 'member')
+@inject('owner')
 @observer
 class Navigation extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    member: PropTypes.object.isRequired,
     owner: PropTypes.object.isRequired
   };
 
   static navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-    if (navigation.state.params && !navigation.state.params.isOwner) {
-      tabBarVisible = false;
+    if (navigation.state.params) {
+      return {
+        title: navigation.state.params.name,
+        tabBarVisible: false
+      };
     }
     return {
       header: null,
-      tabBarVisible
+      tabBarVisible: true
     };
   };
 
   constructor(props) {
     super(props);
-    const { owner, member } = this.props;
     this.state = {
-      isOwner: owner.name === member.name
+      isOwner: !this.props.navigation.state.params,
+      name: '',
+      intro: '',
+      avatarURL: '',
+      isLoading: true,
+      nickname: ''
     };
   }
 
   async componentWillMount() {
     await ownerAction.isLogin();
-    const { owner, member } = this.props;
+    const { owner } = this.props;
+    const name = this.state.isOwner
+      ? owner.name : this.props.navigation.state.params.name;
+    const response = await memberAction.getDetail(name);
     this.setState({
-      isOwner: owner.name === member.name || member.name === ''
+      name,
+      intro: response.intro,
+      avatarURL: response.avatarURL,
+      nickname: response.nickname === '' ? name:response.nickname,
+      isLoading: true
     });
-
-    memberAction.getDetail(this.state.isOwner ? owner.name : member.name);
   }
 
   _goView = async (routerName, pathname, stackTitle) => {
-    const { owner, entity } = this.props;
+    const { owner } = this.props;
     const isLogin = await ownerAction.isLogin();
     if (isLogin) {
-      entity.setPathname(pathname);
-      this.props.navigation.navigate(routerName, { stackTitle });
+      this.props.navigation.navigate(routerName, {
+        stackTitle,
+        pathname
+      });
     } else {
       owner.setShowLogin(true);
     }
   };
 
-  _goMember = () => {
-    const { member } = this.props;
-    member.setName('');
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Member' })
-      ]
-    });
-    this.props.navigation.dispatch(resetAction);
-  };
-
   render() {
-    const { owner, member } = this.props;
-    const name = this.state.isOwner ? owner.name : member.name;
-    const intro = this.state.isOwner ? owner.intro : member.intro;
-    let avatarURL = this.state.isOwner ? owner.avatarURL : member.avatarURL;
-    if (avatarURL === '') {
+    const { owner } = this.props;
+    let avatarURL = { uri: this.state.avatarURL };
+
+    if (this.state.avatarURL === '') {
       avatarURL = logoPng;
-    } else {
-      avatarURL = { uri: avatarURL };
     }
 
-    let loginButton = <Button title={'返回'} onPress={this._goMember} />;
-
-    if (this.state.isOwner) {
+    let loginButton = null;
+    if (!this.props.navigation.state.params) {
       loginButton = (<View style={module.wrap}><TouchableOpacity
         style={[module.list, module.listLast]}
         onPress={() => this.props.navigation.navigate('Setting')}
@@ -111,7 +105,7 @@ class Navigation extends Component {
     }
 
     return (
-      <ScrollView style={utils.statusBar}>
+      <ScrollView style={this.state.isOwner ? utils.statusBar : {}}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
@@ -119,16 +113,16 @@ class Navigation extends Component {
           <Image style={common.avatarBigger} source={avatarURL} />
           <View style={utils.flex}>
             <Text style={[memberStyle.introText, memberStyle.introName]}>
-              {name}
+              {this.state.nickname}
             </Text>
-            <Text style={memberStyle.introText}>{intro}</Text>
+            <Text style={memberStyle.introText}>{this.state.intro}</Text>
           </View>
         </View>
         <View style={module.wrap}>
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/articles`, '帖子');
+              this._goView('List', `user/${this.state.name}/articles`, '帖子');
             }}
           >
             <Text>帖子</Text>
@@ -136,7 +130,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/comments`, '回帖');
+              this._goView('List', `user/${this.state.name}/comments`, '回帖');
             }}
           >
             <Text>回帖</Text>
@@ -152,7 +146,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/watching/articles`, '关注帖子');
+              this._goView('List', `user/${this.state.name}/watching/articles`, '关注帖子');
             }}
           >
             <Text>关注帖子</Text>
@@ -160,7 +154,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/following/users`, '关注用户');
+              this._goView('List', `user/${this.state.name}/following/users`, '关注用户');
             }}
           >
             <Text>关注用户</Text>
@@ -168,7 +162,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/following/tags`, '关注标签');
+              this._goView('List', `user/${this.state.name}/following/tags`, '关注标签');
             }}
           >
             <Text>关注标签</Text>
@@ -176,7 +170,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={module.list}
             onPress={() => {
-              this._goView('List', `user/${name}/following/articles`, '收藏帖子');
+              this._goView('List', `user/${this.state.name}/following/articles`, '收藏帖子');
             }}
           >
             <Text>收藏帖子</Text>
@@ -184,7 +178,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, module.listLast]}
             onPress={() => {
-              this._goView('List', `user/${name}/followers`, '关注者');
+              this._goView('List', `user/${this.state.name}/followers`, '关注者');
             }}
           >
             <Text>关注者</Text>

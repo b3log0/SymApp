@@ -15,20 +15,57 @@ class List extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired
+    pathname: PropTypes.string.isRequired
   };
 
-  componentWillMount() {
-    ListAction.getList(1, this.props.entity);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pageTotal: 0,
+      pageIndex: 0,
+      isLoading: true,
+      list: []
+    };
   }
 
-  _onRefresh = () => {
-    ListAction.getList(1, this.props.entity);
+  async componentWillMount() {
+    const response = await ListAction.getList(1, this.props.pathname);
+    this.setState({
+      pageIndex: 1,
+      pageTotal: response.pageTotal,
+      list: response.list,
+      isLoading: false
+    });
+  }
+
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.pathname === this.props.pathname) {
+      return;
+    }
+    this.setState({ isLoading: true, pageIndex: 0 });
+    const response = await ListAction.getList(1, nextProps.pathname);
+    this.setState({
+      pageIndex: 1,
+      pageTotal: response.pageTotal,
+      list: response.list,
+      isLoading: false
+    });
+  }
+
+  _onRefresh = async () => {
+    this.setState({ isLoading: true });
+    const response = await ListAction.getList(1, this.props.pathname);
+    this.setState({
+      pageIndex: 1,
+      pageTotal: response.pageTotal,
+      list: response.list,
+      isLoading: false
+    });
   };
 
   _toEnd = () => {
-    const { entity } = this.props;
-    if (entity.isLoading || entity.pageIndex >= entity.pageTotal) {
+    if (this.state.isLoading || this.state.pageIndex >= this.state.pageTotal) {
       return;
     }
     InteractionManager.runAfterInteractions(() => {
@@ -36,25 +73,29 @@ class List extends Component {
     });
   };
 
-  _loadMoreData = () => {
-    const { entity } = this.props;
-    ListAction.getList(entity.pageIndex + 1, this.props.entity);
+  _loadMoreData = async () => {
+    this.setState({ isLoading: true });
+    const response = await ListAction.getList(this.state.pageIndex + 1, this.props.pathname);
+    this.setState({
+      pageIndex: this.state.pageIndex + 1,
+      pageTotal: response.pageTotal,
+      list: this.state.list.concat(response.list),
+      isLoading: false
+    });
   };
 
   _renderFooter = () => {
-    const { entity } = this.props;
-    if (entity.isLoading) {
+    if (this.state.isLoading) {
       return null;
     }
-    if (entity.pageIndex < entity.pageTotal) {
+    if (this.state.pageIndex < this.state.pageTotal) {
       return <LoadMoreFooter />;
     }
     return <LoadMoreFooter isLoadAll />;
   };
 
   render() {
-    const { entity } = this.props;
-    if (entity.isLoading && entity.pageIndex < 1) {
+    if (this.state.isLoading && this.state.pageIndex < 1) {
       return (
         <ActivityIndicator style={utils.verticalCenter} />
       );
@@ -62,14 +103,15 @@ class List extends Component {
 
     return (
       <VirtualizedList
-        data={entity.list}
+        data={this.state.list}
         onEndReached={this._toEnd}
-        onEndReachedThreshold={1}
+        onEndReachedThreshold={0}
+        initialListSize={20}
         ListFooterComponent={this._renderFooter}
         enableEmptySections
         refreshControl={
           <RefreshControl
-            refreshing={entity.isLoading}
+            refreshing={this.state.isLoading}
             onRefresh={this._onRefresh}
           />
           }

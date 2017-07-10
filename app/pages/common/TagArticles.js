@@ -3,20 +3,14 @@ import {
   View,
   Button
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list/index';
-import ListAction from '../../actions/List';
 import { common, utils } from '../../styles';
 
-@inject('tags', 'tag')
-@observer
 class TagArticles extends Component {
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    tags: PropTypes.object.isRequired,
-    tag: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -24,16 +18,20 @@ class TagArticles extends Component {
     tabBarVisible: false
   });
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      pathname: `${this.props.navigation.state.params.pathname}`
+    };
+  }
+
   _changeSort = (type) => {
-    const { tags, tag } = this.props;
-    tags.clearAndSetPathname(`articles/tag/${tag.uri}${type}`);
-    ListAction.getList(1, tags);
+    this.setState({
+      pathname: `${this.props.navigation.state.params.pathname}${type}`
+    });
   };
 
   render() {
-    const { tags } = this.props;
-    // for observer, don't remove!!!
-    console.log(tags.isLoading);
     return (
       <View style={utils.flex}>
         <View style={common.sort}>
@@ -43,7 +41,7 @@ class TagArticles extends Component {
           <Button title={'优选'} onPress={() => this._changeSort('/perfect')} />
           <Button title={'最近回帖'} onPress={() => this._changeSort('/reply')} />
         </View>
-        <List navigation={this.props.navigation} entity={tags} />
+        <List navigation={this.props.navigation} pathname={this.state.pathname} />
       </View>);
   }
 }
