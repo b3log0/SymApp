@@ -25,8 +25,9 @@ class Web extends Component {
     };
   }
 
-  componentWillMount() {
-    this._gestureHandlers = {
+  render() {
+    const { params } = this.props.navigation.state;
+    const gestureHandlers = {
       onStartShouldSetResponder: () => true,
       onResponderGrant: () => {
         this.setState({ scrollEnabled: true });
@@ -35,19 +36,13 @@ class Web extends Component {
         this.setState({ scrollEnabled: false });
       }
     };
-  }
 
-  renderLoading = () => <ActivityIndicator style={utils.verticalCenter} />;
-
-
-  render() {
-    const { params } = this.props.navigation.state;
     return (
-      <View style={utils.flex} {...this._gestureHandlers}>
+      <View style={utils.flex} {...gestureHandlers}>
         <WebView
           scrollEnabled={this.state.scrollEnabled}
           startInLoadingState
-          renderLoading={this.renderLoading}
+          renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
           source={{ uri: `${params.path.indexOf('http') === 0 ? '' : origin}${params.path}` }}
         />
       </View>

@@ -13,6 +13,7 @@ import home from './biz/home';
 import post from './biz/post';
 import other from './biz/other';
 import member from './biz/member';
+import article from './biz/article';
 
 export { theme };
 export { color };
@@ -29,3 +30,4 @@ export { home };
 export { post };
 export { other };
 export { member };
+export { article };

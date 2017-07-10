@@ -1,15 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Text,
-  View,
+  ScrollView,
   Button,
-  Modal
+  Modal,
+  ActivityIndicator,
+  WebView,
+  Dimensions,
+  View
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-import articleAction from '../../actions/Article';
+import List from '../../components/list';
 import ownerAction from '../../actions/Owner';
 import Login from '../../components/Login';
+import { utils, color, article as articleStyle } from '../../styles';
 
 @inject('article', 'owner')
 @observer
@@ -25,11 +29,18 @@ class Article extends Component {
     tabBarVisible: false
   });
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      height: Dimensions.get('window').height.toString(),
+      pathname: `article/${this.props.navigation.state.params.oId}`
+    };
+  }
+
   componentWillMount() {
     const { article } = this.props;
     ownerAction.isLogin();
     article.setOId(this.props.navigation.state.params.oId);
-    articleAction.getDetail(1);
   }
 
   _goUpdate = async () => {
@@ -41,11 +52,34 @@ class Article extends Component {
     }
   };
 
+  _onMessage = (e) => {
+    this.setState({
+      height: e.nativeEvent.data,
+      scrollEnabled: true
+    });
+  };
+
   render() {
     const { article, owner } = this.props;
 
+    const injectJS = `
+    $("body").addClass("content-reset").html($(".article-content").last().html());
+    $(window).ready(function () {
+      postMessage($('body').height().toString());
+    })`;
+
+    const gestureHandlers = {
+      onStartShouldSetResponder: () => true,
+      onResponderGrant: () => {
+        this.setState({ scrollEnabled: true });
+      },
+      onResponderTerminate: () => {
+        this.setState({ scrollEnabled: false });
+      }
+    };
+
     return (
-      <View>
+      <ScrollView {...gestureHandlers} scrollEnabled={this.state.scrollEnabled}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
@@ -54,8 +88,20 @@ class Article extends Component {
             <Button title={'更新'} onPress={this._goUpdate} /> :
           null
         }
-        <Text>{article.content}</Text>
-      </View>
+        <View style={{ backgroundColor: color.white }}>
+          <WebView
+            style={[{
+              height: Math.floor(this.state.height)
+            }, articleStyle.content]}
+            scrollEnabled={false}
+            renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
+            onMessage={this._onMessage}
+            injectedJavaScript={injectJS}
+            source={{ uri: `https://hacpai.com/article/${article.oId}` }}
+          />
+        </View>
+        <List navigation={this.props.navigation} pathname={this.state.pathname} />
+      </ScrollView>
     );
   }
 }
