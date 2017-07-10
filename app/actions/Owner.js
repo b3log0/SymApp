@@ -38,9 +38,7 @@ const login = async (name, password) => {
       OwnerStore.setName(response.userName);
       OwnerStore.setIsLogin(true);
     } else {
-      Alert.alert(
-          response.msg
-        );
+      Alert.alert(response.msg);
     }
 
     return Promise.resolve(response.sc);
@@ -59,9 +57,7 @@ const logout = async () => {
       OwnerStore.setPassword('');
       OwnerStore.setName('');
     } else {
-      Alert.alert(
-        response.msg
-      );
+      Alert.alert(response.msg);
     }
     return Promise.resolve(response.sc);
   } catch (error) {

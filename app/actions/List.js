@@ -5,17 +5,25 @@ const getList = async (pageIndex, pathname) => {
     const response = await fetchService.get(`${pathname}?p=${pageIndex}`);
     const data = response.data;
 
-    // 适配多个接口，根据规则获取数据内容. key: comments, articles, users
+    // 适配多个接口，根据规则获取数据内容.
     const keys = Object.keys(data);
-    let key = '';
+    let list = [];
     keys.forEach((k) => {
-      if (k !== 'pagination' && k !== 'isFollowing' && k !== 'tag' && k !== 'domain') {
-        key = k;
+      if (k === 'comments' || k === 'users' || k === 'tags' || k === 'articles') {
+        list = data[k];
+      }
+
+      if (k === 'article') {
+        if (typeof data[k].articleComments === 'object') {
+          list = data[k].articleComments;
+        } else {
+          list = data[k];
+        }
       }
     });
 
     return Promise.resolve({
-      list: data[key],
+      list,
       pageTotal: data.pagination.paginationPageCount
     });
   } catch (error) {

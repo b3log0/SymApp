@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ArticleItem from './Article';
 import CommentItem from './Comment';
+import ArticleCommentItem from './ArticleComment';
 import UserItem from './User';
 import TagItem from './Tag';
 
@@ -17,6 +18,10 @@ class Item extends PureComponent {
 
     if (typeof (rowData.commentArticleAuthorName) === 'string') {
       return <CommentItem navigation={this.props.navigation} rowData={rowData} />;
+    }
+
+    if (typeof (rowData.commentAuthorThumbnailURL) === 'string') {
+      return <ArticleCommentItem navigation={this.props.navigation} rowData={rowData} />;
     }
 
     if (typeof (rowData.userNo) === 'number') {

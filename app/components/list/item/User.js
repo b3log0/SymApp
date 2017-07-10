@@ -17,13 +17,11 @@ class User extends Component {
 
   static propTypes = {
     rowData: PropTypes.object.isRequired,
-    member: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
   _goUser = () => {
-    const { rowData, member } = this.props;
-    member.setName(rowData.userName);
+    const { rowData } = this.props;
     this.props.navigation.navigate('Member', { name: rowData.userName });
   };
 

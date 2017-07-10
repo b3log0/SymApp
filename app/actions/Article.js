@@ -2,7 +2,6 @@ import { Alert, AsyncStorage } from 'react-native';
 
 import articleStore from '../stores/Article';
 import commentsStore from '../stores/Comments';
-import memberStore from '../stores/Member';
 import FetchService from '../services/FetchService';
 
 const getDetail = async (pageIndex) => {
@@ -39,24 +38,8 @@ const post = async (formData, navigation) => {
       AsyncStorage.removeItem('@ArticleStore:content');
       AsyncStorage.removeItem('@ArticleStore:tags');
       navigation.goBack();
-    } else if (response.msg === '403') {
-      Alert.alert('请重新登录', '',
-        [
-          {
-            text: '登录',
-            onPress: () => {
-              AsyncStorage.removeItem('@UserStore:isLogin');
-              memberStore.setShowLogin(true);
-            }
-          },
-          { text: '取消' }
-        ],
-        { cancelable: true }
-      );
     } else {
-      Alert.alert(
-        response.msg
-      );
+      Alert.alert(response.msg);
     }
   } catch (error) {
     console.warn(error);
@@ -71,32 +54,40 @@ const update = async (formData, navigation) => {
       articleStore.setContent(formData.articleContent);
       articleStore.setTags(formData.articleTags);
       navigation.goBack();
-    } else if (response.msg === '403') {
-      Alert.alert('请重新登录', '',
-        [
-          {
-            text: '登录',
-            onPress: () => {
-              AsyncStorage.removeItem('@UserStore:isLogin');
-              memberStore.setShowLogin(true);
-            }
-          },
-          { text: '取消' }
-        ],
-        { cancelable: true }
-      );
     } else {
-      Alert.alert(
-        response.msg
-      );
+      Alert.alert(response.msg);
     }
   } catch (error) {
     console.warn(error);
   }
 };
 
+const comment = async () => {
+  try {
+    const formData =
+      {
+        articleId: articleStore.oId,
+        commentContent: await AsyncStorage.getItem('@ArticleStore:comment'),
+        commentOriginalCommentId: articleStore.commentOriginalCommentId // 可选，如果是回复则传入原回帖 id
+      };
+
+    const response = await FetchService.post('comment', formData);
+    if (response.sc === 0) {
+      articleStore.setCommentOriginalCommentId('');
+      AsyncStorage.removeItem('@ArticleStore:comment');
+      return Promise.resolve(true);
+    }
+    Alert.alert(response.msg);
+    return null;
+  } catch (error) {
+    console.warn(error);
+    return null;
+  }
+};
+
 export default {
   getDetail,
   post,
-  update
+  update,
+  comment
 };

@@ -8,6 +8,7 @@ class Article {
   @observable oId;
   @observable type;
   @observable authorName;
+  @observable commentOriginalCommentId;
 
   constructor() {
     this.title = '';
@@ -17,6 +18,7 @@ class Article {
     this.oId = '';
     this.authorName = '';
     this.type = 0; // 0: 帖子; 1: 小黑屋 ; 2: 同城广播 ; 3: 思绪
+    this.commentOriginalCommentId = '';
   }
 
   @action setTitle = (title) => {
@@ -45,6 +47,10 @@ class Article {
 
   @action setAuthorName = (authorName) => {
     this.authorName = authorName;
+  };
+
+  @action setCommentOriginalCommentId = (commentOriginalCommentId) => {
+    this.commentOriginalCommentId = commentOriginalCommentId;
   };
 
 }

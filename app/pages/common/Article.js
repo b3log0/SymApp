@@ -7,13 +7,19 @@ import {
   ActivityIndicator,
   WebView,
   Dimensions,
-  View
+  View,
+  Text,
+  TextInput,
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list';
 import ownerAction from '../../actions/Owner';
+import articleAction from '../../actions/Article';
 import Login from '../../components/Login';
+import { origin } from '../../config/symphony';
 import { utils, color, article as articleStyle } from '../../styles';
 
 @inject('article', 'owner')
@@ -34,14 +40,19 @@ class Article extends Component {
     super(props);
     this.state = {
       height: Dimensions.get('window').height.toString(),
-      pathname: `article/${this.props.navigation.state.params.oId}`
+      pathname: `article/${this.props.navigation.state.params.oId}`,
+      comment: ''
     };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const { article } = this.props;
     ownerAction.isLogin();
     article.setOId(this.props.navigation.state.params.oId);
+    articleAction.getDetail(1);
+
+    const comment = await AsyncStorage.getItem('@ArticleStore:comment');
+    this.setState({ comment });
   }
 
   _goUpdate = async () => {
@@ -58,6 +69,15 @@ class Article extends Component {
       height: e.nativeEvent.data,
       scrollEnabled: true
     });
+  };
+
+  _submitComment = async () => {
+    const response = await articleAction.comment();
+    if (response) {
+      this.setState({
+        comment: ''
+      });
+    }
   };
 
   render() {
@@ -98,10 +118,31 @@ class Article extends Component {
             renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
             onMessage={this._onMessage}
             injectedJavaScript={injectJS}
-            source={{ uri: `https://hacpai.com/article/${article.oId}` }}
+            source={{ uri: `${origin}article/${article.oId}` }}
           />
         </View>
-        <List navigation={this.props.navigation} pathname={this.state.pathname} />
+        <Text style={articleStyle.commentTitle}>评论</Text>
+        <List pathname={this.state.pathname} navigation={this.props.navigation} />
+        <KeyboardAvoidingView behavior="padding">
+          <View style={articleStyle.commentSubmit}>
+            <View style={articleStyle.commentInputWrap}>
+              <TextInput
+                style={articleStyle.commentInput}
+                underlineColorAndroid="transparent"
+                placeholder={this.state.commentPlaceholder}
+                value={this.state.comment}
+                maxLength={2000}
+                onChangeText={(text) => {
+                  this.setState({ comment: text });
+                  AsyncStorage.setItem('@ArticleStore:comment', text);
+                }}
+              />
+            </View>
+            <View style={articleStyle.commentBtn}>
+              <Button title={'提交'} onPress={this._submitComment} />
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }
