@@ -41,7 +41,9 @@ class Article extends Component {
     this.state = {
       height: Dimensions.get('window').height.toString(),
       pathname: `article/${this.props.navigation.state.params.oId}`,
-      comment: ''
+      comment: '',
+      scrollEnabled: true,
+      loadEnd: false
     };
   }
 
@@ -67,7 +69,7 @@ class Article extends Component {
   _onMessage = (e) => {
     this.setState({
       height: e.nativeEvent.data,
-      scrollEnabled: true
+      loadEnd: true
     });
   };
 
@@ -84,9 +86,9 @@ class Article extends Component {
     const { article, owner } = this.props;
 
     const injectJS = `
-    $("body").addClass("content-reset").html($(".article-content").last().html());
     $(window).ready(function () {
-      postMessage($('body').height().toString());
+      $("body").addClass("content-reset").html($(".article-content").last().html());
+      postMessage($("body").height().toString());
     })`;
 
     const gestureHandlers = {
@@ -111,15 +113,23 @@ class Article extends Component {
         }
         <View style={{ backgroundColor: color.white }}>
           <WebView
-            style={[{
-              height: Math.floor(this.state.height)
-            }, articleStyle.content]}
+            style={[
+              {
+                height: Math.floor(this.state.height)
+              },
+              articleStyle.content,
+              this.state.loadEnd ? null : articleStyle.webViewHidden
+            ]}
             scrollEnabled={false}
             renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
             onMessage={this._onMessage}
             injectedJavaScript={injectJS}
             source={{ uri: `${origin}article/${article.oId}` }}
           />
+          {
+              this.state.loadEnd ? null :
+              <ActivityIndicator style={[utils.verticalCenter, { height: Dimensions.get('window').height / 2 }]} />
+          }
         </View>
         <Text style={articleStyle.commentTitle}>评论</Text>
         <List pathname={this.state.pathname} navigation={this.props.navigation} />

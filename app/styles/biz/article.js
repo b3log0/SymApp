@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import color from '../common/color';
 
 export default {
@@ -21,7 +23,9 @@ export default {
     borderBottomColor: color.gray,
     flex: 1
   },
-  commentBtn: {
-
+  webViewHidden: {
+    position: 'absolute',
+    left: 1000,
+    width: Dimensions.get('window').width - 20
   }
 };

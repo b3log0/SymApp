@@ -55,14 +55,16 @@ class Navigation extends Component {
     const { owner } = this.props;
     const name = this.state.isOwner
       ? owner.name : this.props.navigation.state.params.name;
-    const response = await memberAction.getDetail(name);
-    this.setState({
-      name,
-      intro: response.intro,
-      avatarURL: response.avatarURL,
-      nickname: response.nickname === '' ? name : response.nickname,
-      isLoading: true
-    });
+    if (name !== '') {
+      const response = await memberAction.getDetail(name);
+      this.setState({
+        name,
+        intro: response.intro,
+        avatarURL: response.avatarURL,
+        nickname: response.nickname === '' ? name : response.nickname,
+        isLoading: true
+      });
+    }
   }
 
   _goView = async (routerName, pathname, stackTitle) => {

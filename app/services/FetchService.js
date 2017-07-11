@@ -9,7 +9,7 @@ const errorProcess = (response) => {
 
   if (response.status === 403) {
     AsyncStorage.removeItem('@UserStore:isLogin');
-    Alert.alert('403', '数据已保存，请重新登录');
+    Alert.alert('403', '请登录');
   } else {
     Alert.alert(response.status.toString(), response.url);
   }

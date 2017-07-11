@@ -21,7 +21,7 @@ class Comment extends Component {
     const rowData = this.props.rowData;
     this.props.navigation.navigate('Article', {
       oId: rowData.commentOnArticleId,
-      stackTitle: rowData.commentArticleTitleEmoj
+      stackTitle: rowData.commentArticleTitleEmojUnicode
     });
   };
 

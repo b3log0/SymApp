@@ -6,9 +6,12 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import { inject } from 'mobx-react';
 
+import ownerAction from '../../../actions/Owner';
 import { list, common } from '../../../styles/index';
 
+@inject('owner')
 class Article extends Component {
 
   static propTypes = {
@@ -16,7 +19,14 @@ class Article extends Component {
     navigation: PropTypes.object.isRequired
   };
 
-  _goArticle = () => {
+  _goArticle = async () => {
+    const isLogin = await ownerAction.isLogin();
+    const { owner } = this.props;
+    if (!isLogin) {
+      owner.setShowLogin(true);
+      return;
+    }
+
     const rowData = this.props.rowData;
     let stackTitle = '文章';
     switch (rowData.articleType) {
