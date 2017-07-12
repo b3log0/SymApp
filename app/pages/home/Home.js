@@ -70,7 +70,7 @@ class Index extends Component {
   render() {
     const { owner } = this.props;
     return (
-      <View style={utils.statusBar}>
+      <View style={[utils.statusBar, utils.flex]}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>

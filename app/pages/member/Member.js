@@ -108,7 +108,7 @@ class Navigation extends Component {
     }
 
     return (
-      <ScrollView style={this.state.isOwner ? utils.statusBar : {}}>
+      <ScrollView style={this.state.isOwner ? [utils.statusBar, utils.flex] : {}}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>

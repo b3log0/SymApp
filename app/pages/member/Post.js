@@ -8,6 +8,7 @@ import { post, utils, icon, common } from '../../styles';
 import uploadPng from '../../images/upload.png';
 import atPng from '../../images/at.png';
 import tagsPng from '../../images/tags.png';
+import goodsPng from '../../images/goods.png';
 
 const {
   KeyboardAvoidingView,
@@ -40,7 +41,10 @@ class Post extends Component {
       title: '',
       content: '',
       tags: '',
+      rewardContent: '',
+      rewardPoint: '',
       showTag: false,
+      showReward: false,
       isUpdate: false
     };
   }
@@ -55,17 +59,23 @@ class Post extends Component {
     let title = '';
     let content = '';
     let tags = '';
+    let rewardContent = '';
+    let rewardPoint = '';
     if (this.state.isUpdate) {
       title = article.title;
       content = article.content;
       tags = article.tags;
+      rewardContent = article.rewardContent;
+      rewardPoint = article.rewardPoint;
     } else {
       title = await AsyncStorage.getItem('@ArticleStore:title');
       content = await AsyncStorage.getItem('@ArticleStore:content');
       tags = await AsyncStorage.getItem('@ArticleStore:tags');
+      rewardContent = await AsyncStorage.getItem('@ArticleStore:rewardContent');
+      rewardPoint = await AsyncStorage.getItem('@ArticleStore:rewardPoint');
     }
 
-    this.setState({ title, tags, content });
+    this.setState({ title, tags, content, rewardContent, rewardPoint });
   }
 
   _post = () => {
@@ -75,20 +85,24 @@ class Post extends Component {
         articleTitle: article.title,
         articleContent: article.content,
         articleTags: article.tags,
-        articleType: this.props.article.type
+        articleType: this.props.article.type,
+        articleRewardContent: article.rewardContent,
+        articleRewardPoint: Math.floor(article.rewardPoint)
       }, this.props.navigation);
     } else {
       articleAction.post({
         articleTitle: article.title,
         articleContent: article.content,
-        articleTags: article.tags
+        articleTags: article.tags,
+        articleRewardContent: article.rewardContent,
+        articleRewardPoint: Math.floor(article.rewardPoint)
       }, this.props.navigation);
     }
   };
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={utils.flex}>
+      <KeyboardAvoidingView behavior="padding" style={utils.column}>
         <Modal visible={this.state.showTag} onRequestClose={() => null}>
           <TextInput
             style={[utils.statusBar, post.content]}
@@ -96,7 +110,6 @@ class Post extends Component {
             placeholder="标签，请用英文逗号分割"
             multiline
             value={this.state.tags}
-            numberOfLines={10}
             onChangeText={(text) => {
               this.setState({ tags: text });
               if (!this.state.isUpdate) {
@@ -109,6 +122,52 @@ class Post extends Component {
             onPress={() => this.setState({ showTag: false })}
             title={'确定'}
           />
+        </Modal>
+        <Modal visible={this.state.showReward} onRequestClose={() => null}>
+          <View style={[post.titleWrap, utils.statusBar]}>
+            <TextInput
+              style={post.title}
+              value={this.state.rewardPoint}
+              underlineColorAndroid="transparent"
+              placeholder="打赏积分"
+              autoFocus
+              keyboardType={'numeric'}
+              maxLength={40}
+              onChangeText={(text) => {
+                this.setState({ rewardPoint: text });
+                if (!this.state.isUpdate) {
+                  AsyncStorage.setItem('@ArticleStore:rewardPoint', text);
+                }
+              }}
+            />
+          </View>
+          <TextInput
+            style={post.content}
+            underlineColorAndroid="transparent"
+            placeholder="打赏区"
+            multiline
+            value={this.state.rewardContent}
+            numberOfLines={10}
+            onChangeText={(text) => {
+              this.setState({ rewardContent: text });
+              if (!this.state.isUpdate) {
+                AsyncStorage.setItem('@ArticleStore:rewardContent', text);
+              }
+            }}
+          />
+          <View style={common.statusBar}>
+            <TouchableOpacity
+              style={common.statusBarItem}
+              onPress={() => {
+                Alert.alert('开发中');
+              }}
+            >
+              <Image source={uploadPng} style={icon.normal} />
+            </TouchableOpacity>
+            <View style={post.button}>
+              <Button title={'确定'} onPress={() => this.setState({ showReward: false })} />
+            </View>
+          </View>
         </Modal>
         <View style={post.titleWrap}>
           <TextInput
@@ -132,7 +191,6 @@ class Post extends Component {
           placeholder="正文"
           multiline
           value={this.state.content}
-          numberOfLines={10}
           onChangeText={(text) => {
             this.setState({ content: text });
             if (!this.state.isUpdate) {
@@ -141,6 +199,12 @@ class Post extends Component {
           }}
         />
         <View style={common.statusBar}>
+          <TouchableOpacity
+            style={common.statusBarItem}
+            onPress={() => this.setState({ showReward: true })}
+          >
+            <Image source={goodsPng} style={icon.normal} />
+          </TouchableOpacity>
           <TouchableOpacity
             style={common.statusBarItem}
             onPress={() => {

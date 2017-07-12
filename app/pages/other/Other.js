@@ -59,7 +59,7 @@ class Other extends Component {
     );
 
     return (
-      <ScrollView style={utils.statusBar}>
+      <ScrollView style={[utils.statusBar, utils.flex]}>
         <View style={module.wrap}>
           <TouchableOpacity
             style={module.list}

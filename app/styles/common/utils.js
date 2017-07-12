@@ -3,7 +3,6 @@ import { Platform } from 'react-native';
 export default {
   statusBar: {
     paddingTop: (Platform.OS === 'ios') ? 20 : 0,
-    flex: 1
   },
   flex: {
     flex: 1
@@ -18,5 +17,9 @@ export default {
   },
   hidden: {
     display: 'none'
-  }
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column'
+  },
 };

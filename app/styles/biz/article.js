@@ -1,10 +1,6 @@
 import color from '../common/color';
 
 export default {
-  articleWrap: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   commentSubmit: {
     flexDirection: 'row'
   },

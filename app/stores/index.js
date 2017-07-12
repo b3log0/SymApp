@@ -5,7 +5,6 @@ import owner from './Owner';
 import article from './Article';
 import home from './Home';
 import domain from './Domain';
-import comments from './Comments';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -22,6 +21,5 @@ export default {
   owner,
   article,
   home,
-  domain,
-  comments
+  domain
 };

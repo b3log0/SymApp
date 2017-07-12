@@ -1,30 +1,20 @@
 import { Alert, AsyncStorage } from 'react-native';
 
 import articleStore from '../stores/Article';
-import commentsStore from '../stores/Comments';
 import FetchService from '../services/FetchService';
 
-const getDetail = async (pageIndex) => {
+const getDetail = async () => {
   try {
-    commentsStore.setIsLoading(true);
-    const response = await FetchService.get(`article/${articleStore.oId}?p=${pageIndex}`);
-    const data = response.data;
-    commentsStore.setPage(pageIndex, data.pagination.paginationPageCount);
+    const response = await FetchService.get(`article/update/${articleStore.oId}`);
+    const article = response.data.article;
 
-    if (pageIndex === 1) {
-      commentsStore.setList(data.article.articleComments);
-    } else {
-      commentsStore.setList(commentsStore.list.concat(data.article.articleComments));
-    }
-
-    articleStore.setType(data.article.articleType);
-    articleStore.setTitle(data.article.articleTitle);
-    articleStore.setContent(data.article.articleContent);
-    articleStore.setTagObjs(data.article.articleTagObjs);
-    articleStore.setTags(data.article.articleTags);
-    articleStore.setAuthorName(data.article.articleAuthorName);
-
-    commentsStore.setIsLoading(false);
+    articleStore.setForm({
+      title: article.articleTitleEmojUnicode,
+      content: article.articleContent,
+      tags: article.articleTags,
+      rewardContent: article.articleRewardContent,
+      rewardPoint: article.articleRewardPoint === 0 ? '' : article.articleRewardPoint.toString()
+    });
   } catch (error) {
     console.warn(error);
   }
@@ -37,6 +27,8 @@ const post = async (formData, navigation) => {
       AsyncStorage.removeItem('@ArticleStore:title');
       AsyncStorage.removeItem('@ArticleStore:content');
       AsyncStorage.removeItem('@ArticleStore:tags');
+      AsyncStorage.removeItem('@ArticleStore:rewardPoint');
+      AsyncStorage.removeItem('@ArticleStore:rewardContent');
       navigation.goBack();
     } else {
       Alert.alert(response.msg);
@@ -50,9 +42,7 @@ const update = async (formData, navigation) => {
   try {
     const response = await FetchService.put(`article/${articleStore.oId}`, formData);
     if (response.sc === 0) {
-      articleStore.setTitle(formData.articleTitle);
-      articleStore.setContent(formData.articleContent);
-      articleStore.setTags(formData.articleTags);
+      articleStore.clearForm();
       navigation.goBack();
     } else {
       Alert.alert(response.msg);

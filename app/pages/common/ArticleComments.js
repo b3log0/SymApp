@@ -58,7 +58,7 @@ class ArticleComments extends Component {
   render() {
     const { article } = this.props;
     return (
-      <View style={articleStyle.articleWrap}>
+      <View style={utils.column}>
         <List
           reload={this.state.reload}
           pathname={`article/${article.oId}`}

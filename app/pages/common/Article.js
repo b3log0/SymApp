@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
+import articleAction from '../../actions/Article';
 import { origin } from '../../config/symphony';
-import { utils, common, icon, article as articleStyle } from '../../styles';
-import removepng from '../../images/remove.png';
-import editpng from '../../images/edit.png';
-import cmtspng from '../../images/cmts.png';
+import { utils, common, icon } from '../../styles';
+import removePng from '../../images/remove.png';
+import editPng from '../../images/edit.png';
+import cmtsPng from '../../images/cmts.png';
 
 @inject('article', 'owner')
 class Article extends Component {
@@ -36,7 +37,8 @@ class Article extends Component {
     };
   }
 
-  _goUpdate = () => {
+  _goUpdate = async () => {
+    await articleAction.getDetail();
     this.props.navigation.navigate('MemberPost', { stackTitle: '更新' });
   };
 
@@ -77,7 +79,7 @@ class Article extends Component {
 
     return (
       <View
-        style={articleStyle.articleWrap}
+        style={utils.column}
         {...gestureHandlers}
       >
         {
@@ -101,7 +103,7 @@ class Article extends Component {
                 style={common.statusBarItem}
                 onPress={this._goUpdate}
               >
-                <Image source={editpng} style={icon.normal} />
+                <Image source={editPng} style={icon.normal} />
               </TouchableOpacity>
               :
               null
@@ -112,7 +114,7 @@ class Article extends Component {
                 style={common.statusBarItem}
                 onPress={this._remove}
               >
-                <Image source={removepng} style={icon.normal} />
+                <Image source={removePng} style={icon.normal} />
               </TouchableOpacity>
               :
               null
@@ -121,7 +123,7 @@ class Article extends Component {
             style={common.statusBarItem}
             onPress={this._goComments}
           >
-            <Image source={cmtspng} style={icon.normal} />
+            <Image source={cmtsPng} style={icon.normal} />
           </TouchableOpacity>
         </View>
       </View>

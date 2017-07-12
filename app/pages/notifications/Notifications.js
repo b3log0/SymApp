@@ -32,7 +32,7 @@ class Navigation extends Component {
   render() {
     const { owner } = this.props;
     return (
-      <ScrollView style={utils.statusBar}>
+      <ScrollView style={[utils.statusBar, utils.flex]}>
         <Modal visible={owner.showLogin} onRequestClose={() => null}>
           <Login />
         </Modal>
