@@ -21,5 +21,9 @@ export default {
   column: {
     flex: 1,
     flexDirection: 'column'
+  },
+  rowSpaceBetween: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   }
 };

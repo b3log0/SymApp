@@ -4,6 +4,7 @@ import { enableLogging } from 'mobx-logger';
 import owner from './Owner';
 import article from './Article';
 import domain from './Domain';
+import notification from './Notification';
 
 useStrict(true);
 if (process.env.NODE_ENV === 'dev') {
@@ -19,5 +20,6 @@ if (process.env.NODE_ENV === 'dev') {
 export default {
   owner,
   article,
-  domain
+  domain,
+  notification
 };

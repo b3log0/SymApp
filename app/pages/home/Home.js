@@ -5,14 +5,17 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Button
+  Button,
+  InteractionManager
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 import List from '../../components/list';
 import ownerAction from '../../actions/Owner';
+import notificationAction from '../../actions/Notification';
 import Login from '../../components/Login';
 import addfilePng from '../../images/addfile.png';
+import { notificationDuration } from '../../config/symphony';
 import { utils, home as homeStyle, icon, common } from '../../styles';
 
 @inject('owner')
@@ -31,6 +34,23 @@ class Index extends Component {
       isHidden: false,
       pathname: 'articles/latest'
     };
+  }
+
+  componentDidMount() {
+    this._notificationTimer = setInterval(
+      () => {
+        InteractionManager.runAfterInteractions(() => {
+          notificationAction.getCntx();
+        });
+      },
+      notificationDuration
+    );
+  }
+
+  componentWillUnmount() {
+    if (this._notificationTimer) {
+      clearTimeout(this._notificationTimer);
+    }
   }
 
   // 向下滚动时隐藏发帖按钮
