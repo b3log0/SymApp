@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactNative from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
-import Login from '../../components/Login';
 import articleAction from '../../actions/Article';
-import { post, utils, icon } from '../../styles';
+import { post, utils, icon, common } from '../../styles';
 import uploadPng from '../../images/upload.png';
 import atPng from '../../images/at.png';
 import tagsPng from '../../images/tags.png';
@@ -22,14 +21,12 @@ const {
   Modal
 } = ReactNative;
 
-@inject('owner', 'article')
-@observer
+@inject('article')
 class Post extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    article: PropTypes.object.isRequired,
-    owner: PropTypes.object.isRequired
+    article: PropTypes.object.isRequired
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -90,12 +87,8 @@ class Post extends Component {
   };
 
   render() {
-    const { owner } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" style={utils.flex}>
-        <Modal visible={owner.showLogin} onRequestClose={() => null}>
-          <Login />
-        </Modal>
         <Modal visible={this.state.showTag} onRequestClose={() => null}>
           <TextInput
             style={[utils.statusBar, post.content]}
@@ -147,9 +140,9 @@ class Post extends Component {
             }
           }}
         />
-        <View style={post.statusBar}>
+        <View style={common.statusBar}>
           <TouchableOpacity
-            style={post.statusBarItem}
+            style={common.statusBarItem}
             onPress={() => {
               Alert.alert('开发中');
             }}
@@ -157,7 +150,7 @@ class Post extends Component {
             <Image source={uploadPng} style={icon.normal} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={post.statusBarItem}
+            style={common.statusBarItem}
             onPress={() => {
               Alert.alert('开发中，请先手动输入 @');
             }}
@@ -165,7 +158,7 @@ class Post extends Component {
             <Image source={atPng} style={icon.normal} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={post.statusBarItem}
+            style={common.statusBarItem}
             onPress={() => this.setState({ showTag: true })}
           >
             <Image source={tagsPng} style={icon.normal} />

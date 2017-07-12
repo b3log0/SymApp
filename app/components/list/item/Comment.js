@@ -6,19 +6,26 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import { inject } from 'mobx-react';
 
 import HTML from '../../../components/html';
 import { list, common } from '../../../styles/index';
 
+@inject('article')
 class Comment extends Component {
 
   static propTypes = {
     rowData: PropTypes.object.isRequired,
+    article: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired
   };
 
   _goComment = () => {
-    const rowData = this.props.rowData;
+    const { rowData, article } = this.props;
+    article.preSet({
+      oId: rowData.commentOnArticleId,
+      authorName: rowData.commentArticleAuthorName
+    });
     this.props.navigation.navigate('Article', {
       oId: rowData.commentOnArticleId,
       stackTitle: rowData.commentArticleTitleEmojUnicode

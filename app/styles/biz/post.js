@@ -16,21 +16,6 @@ export default {
     marginBottom: 10,
     fontSize: 14
   },
-  statusBar: {
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: color.fade,
-    borderTopWidth: 0.5,
-    borderTopColor: color.fade,
-    flexDirection: 'row',
-    width: '100%',
-    height: 48,
-    justifyContent: 'flex-end'
-  },
-  statusBarItem: {
-    alignSelf: 'center',
-    marginRight: 20
-  },
   button: {
     paddingTop: 5
   },

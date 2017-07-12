@@ -11,7 +11,7 @@ import { inject } from 'mobx-react';
 import ownerAction from '../../../actions/Owner';
 import { list, common } from '../../../styles/index';
 
-@inject('owner')
+@inject('owner', 'article')
 class Article extends Component {
 
   static propTypes = {
@@ -21,7 +21,7 @@ class Article extends Component {
 
   _goArticle = async () => {
     const isLogin = await ownerAction.isLogin();
-    const { owner } = this.props;
+    const { owner, article } = this.props;
     if (!isLogin) {
       owner.setShowLogin(true);
       return;
@@ -42,6 +42,11 @@ class Article extends Component {
       default:
         break;
     }
+    article.preSet({
+      oId: rowData.oId,
+      authorName: rowData.articleAuthorName,
+      type: rowData.articleType
+    });
     this.props.navigation.navigate('Article', {
       oId: rowData.oId,
       stackTitle

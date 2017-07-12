@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ScrollView,
-  Button,
-  Modal,
   ActivityIndicator,
   WebView,
-  Dimensions,
   View,
-  Text,
-  TextInput,
-  AsyncStorage,
-  KeyboardAvoidingView
+  Image,
+  TouchableOpacity
 } from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 
-import List from '../../components/list';
-import ownerAction from '../../actions/Owner';
-import articleAction from '../../actions/Article';
-import Login from '../../components/Login';
 import { origin } from '../../config/symphony';
-import { utils, color, article as articleStyle } from '../../styles';
+import { utils, common, icon, article as articleStyle } from '../../styles';
+import removepng from '../../images/remove.png';
+import editpng from '../../images/edit.png';
+import cmtspng from '../../images/cmts.png';
 
 @inject('article', 'owner')
-@observer
 class Article extends Component {
   static propTypes = {
     owner: PropTypes.object.isRequired,
@@ -39,47 +31,19 @@ class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: Dimensions.get('window').height.toString(),
-      pathname: `article/${this.props.navigation.state.params.oId}`,
-      comment: '',
       scrollEnabled: true,
       loadEnd: false
     };
   }
 
-  async componentWillMount() {
-    const { article } = this.props;
-    ownerAction.isLogin();
-    article.setOId(this.props.navigation.state.params.oId);
-    articleAction.getDetail(1);
-
-    const comment = await AsyncStorage.getItem('@ArticleStore:comment');
-    this.setState({ comment });
-  }
-
   _goUpdate = async () => {
-    const { owner } = this.props;
-    if (owner.isLogin) {
-      this.props.navigation.navigate('MemberPost', { stackTitle: '更新' });
-    } else {
-      owner.setShowLogin(true);
-    }
+    this.props.navigation.navigate('MemberPost', { stackTitle: '更新' });
   };
 
-  _onMessage = (e) => {
+  _onMessage = () => {
     this.setState({
-      height: e.nativeEvent.data,
       loadEnd: true
     });
-  };
-
-  _submitComment = async () => {
-    const response = await articleAction.comment();
-    if (response) {
-      this.setState({
-        comment: ''
-      });
-    }
   };
 
   render() {
@@ -87,8 +51,12 @@ class Article extends Component {
 
     const injectJS = `
     $(window).ready(function () {
-      $("body").addClass("content-reset").html($(".article-content").last().html());
-      postMessage($("body").height().toString());
+      $('body').addClass('content-reset').html($('.article-content').last().html());
+      $('html').css({
+        'background-color': '#fff',
+        'padding': '10px'
+      });
+      postMessage();
     })`;
 
     const gestureHandlers = {
@@ -102,58 +70,55 @@ class Article extends Component {
     };
 
     return (
-      <ScrollView {...gestureHandlers} scrollEnabled={this.state.scrollEnabled}>
-        <Modal visible={owner.showLogin} onRequestClose={() => null}>
-          <Login />
-        </Modal>
+      <View
+        style={articleStyle.articleWrap}
+        {...gestureHandlers}
+      >
         {
-          (article.type !== 3 && owner.name === article.authorName) ?
-            <Button title={'更新'} onPress={this._goUpdate} /> :
-          null
+          this.state.loadEnd ? null :
+          <ActivityIndicator style={[utils.verticalCenter, utils.flex]} />
         }
-        <View style={{ backgroundColor: color.white }}>
-          <WebView
-            style={[
-              {
-                height: Math.floor(this.state.height)
-              },
-              articleStyle.content,
-              this.state.loadEnd ? null : articleStyle.webViewHidden
-            ]}
-            scrollEnabled={false}
-            renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
-            onMessage={this._onMessage}
-            injectedJavaScript={injectJS}
-            source={{ uri: `${origin}article/${article.oId}` }}
-          />
+        <WebView
+          style={[
+            utils.flex,
+            this.state.loadEnd ? utils.show : utils.hidden
+          ]}
+          scrollEnabled={this.state.scrollEnabled}
+          onMessage={this._onMessage}
+          injectedJavaScript={injectJS}
+          source={{ uri: `${origin}article/${article.oId}` }}
+        />
+        <View style={common.statusBar}>
           {
-              this.state.loadEnd ? null :
-              <ActivityIndicator style={[utils.verticalCenter, { height: Dimensions.get('window').height / 2 }]} />
+            (article.type !== 3 && owner.name === article.authorName) ?
+              <TouchableOpacity
+                style={common.statusBarItem}
+                onPress={this._goUpdate}
+              >
+                <Image source={editpng} style={icon.normal} />
+              </TouchableOpacity>
+              :
+              null
           }
+          {
+            (owner.name === article.authorName) ?
+              <TouchableOpacity
+                style={common.statusBarItem}
+                onPress={this._remove}
+              >
+                <Image source={removepng} style={icon.normal} />
+              </TouchableOpacity>
+              :
+              null
+          }
+          <TouchableOpacity
+            style={common.statusBarItem}
+            onPress={this._goComments}
+          >
+            <Image source={cmtspng} style={icon.normal} />
+          </TouchableOpacity>
         </View>
-        <Text style={articleStyle.commentTitle}>评论</Text>
-        <List pathname={this.state.pathname} navigation={this.props.navigation} />
-        <KeyboardAvoidingView behavior="padding">
-          <View style={articleStyle.commentSubmit}>
-            <View style={articleStyle.commentInputWrap}>
-              <TextInput
-                style={articleStyle.commentInput}
-                underlineColorAndroid="transparent"
-                placeholder={this.state.commentPlaceholder}
-                value={this.state.comment}
-                maxLength={2000}
-                onChangeText={(text) => {
-                  this.setState({ comment: text });
-                  AsyncStorage.setItem('@ArticleStore:comment', text);
-                }}
-              />
-            </View>
-            <View style={articleStyle.commentBtn}>
-              <Button title={'提交'} onPress={this._submitComment} />
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      </View>
     );
   }
 }

@@ -21,36 +21,10 @@ class Article {
     this.commentOriginalCommentId = '';
   }
 
-  @action setTitle = (title) => {
-    this.title = title;
-  };
-
-  @action setContent = (content) => {
-    this.content = content;
-  };
-
-  @action setTags = (tags) => {
-    this.tags = tags;
-  };
-
-  @action setTagObjs = (tagObjs) => {
-    this.tagObjs = tagObjs;
-  };
-
-  @action setOId = (oId) => {
+  @action preSet = ({ oId, type, authorName }) => {
     this.oId = oId;
-  };
-
-  @action setType = (type) => {
     this.type = type;
-  };
-
-  @action setAuthorName = (authorName) => {
     this.authorName = authorName;
-  };
-
-  @action setCommentOriginalCommentId = (commentOriginalCommentId) => {
-    this.commentOriginalCommentId = commentOriginalCommentId;
   };
 
 }

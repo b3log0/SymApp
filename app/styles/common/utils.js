@@ -12,5 +12,11 @@ export default {
     flex: 1,
     justifyContent: 'center',
     height: '100%'
+  },
+  show: {
+    display: 'flex'
+  },
+  hidden: {
+    display: 'none'
   }
 };
