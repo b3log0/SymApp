@@ -96,6 +96,9 @@ const NotificationsStack = StackNavigator({
   },
   List: {
     screen: List
+  },
+  Article: {
+    screen: Article
   }
 }, {
   headerMode: 'screen'
