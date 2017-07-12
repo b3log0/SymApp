@@ -12,8 +12,7 @@ const isLogin = async () => {
     const isLoginStorage = await AsyncStorage.getItem('@UserStore:isLogin');
     const nameStorage = await AsyncStorage.getItem('@UserStore:name');
     if (isLoginStorage !== null) {
-      OwnerStore.setIsLogin(true);
-      OwnerStore.setName(nameStorage);
+      OwnerStore.setNameAndLogin(nameStorage, true);
       return true;
     }
     return false;
@@ -35,8 +34,7 @@ const login = async (name, password) => {
     if (response.sc === 0) {
       AsyncStorage.setItem('@UserStore:isLogin', 'true');
       AsyncStorage.setItem('@UserStore:name', response.userName);
-      OwnerStore.setName(response.userName);
-      OwnerStore.setIsLogin(true);
+      OwnerStore.setNameAndLogin(response.userName, true);
     } else {
       Alert.alert(response.msg);
     }
@@ -53,9 +51,7 @@ const logout = async () => {
     const response = await FetchService.post('logout');
     if (response.sc === 0) {
       AsyncStorage.removeItem('@UserStore:isLogin');
-      OwnerStore.setIsLogin(false);
-      OwnerStore.setPassword('');
-      OwnerStore.setName('');
+      OwnerStore.setNameAndLogin('', false);
     } else {
       Alert.alert(response.msg);
     }

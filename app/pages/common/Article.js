@@ -26,6 +26,7 @@ class Article extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.stackTitle,
+    headerTruncatedBackTitle: '返回',
     tabBarVisible: false
   });
 

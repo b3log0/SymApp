@@ -3,7 +3,6 @@ import { enableLogging } from 'mobx-logger';
 
 import owner from './Owner';
 import article from './Article';
-import home from './Home';
 import domain from './Domain';
 
 useStrict(true);
@@ -20,6 +19,5 @@ if (process.env.NODE_ENV === 'dev') {
 export default {
   owner,
   article,
-  home,
   domain
 };

@@ -1,21 +1,15 @@
-import { observable, action } from 'mobx';
+import { action } from 'mobx';
 
 class Domain {
-  @observable uri;
-  @observable title;
-
   constructor() {
     this.uri = '';
     this.title = '';
   }
 
-  @action setUri = (uri) => {
-    this.uri = uri;
-  }
-
-  @action setTitle = (title) => {
-    this.title = title;
-  }
+  @action setData = (data) => {
+    this.uri = data.uri;
+    this.title = data.title;
+  };
 
 }
 
