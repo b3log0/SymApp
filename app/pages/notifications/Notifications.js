@@ -18,14 +18,20 @@ import { utils, module } from '../../styles';
 class Navigation extends Component {
 
   static propTypes = {
-    owner: PropTypes.object.isRequired
+    owner: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired
   };
 
-  _goView = async () => {
+  _goView = async (routerName, pathname, stackTitle) => {
     const { owner } = this.props;
     const isLogin = await ownerAction.isLogin();
     if (!isLogin) {
       owner.setShowLogin(true);
+    } else {
+      this.props.navigation.navigate(routerName, {
+        stackTitle,
+        pathname
+      });
     }
   };
 
@@ -37,11 +43,21 @@ class Navigation extends Component {
           <Login />
         </Modal>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>收到的回帖[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('List', 'notifications/commented', '收到的回帖');
+            }}
+          >
+            <Text>收到的回帖</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>收到的回复[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this._goView('List', 'notifications/reply', '收到的回复');
+            }}
+          >
+            <Text>收到的回复</Text>
           </TouchableOpacity>
           <TouchableOpacity style={module.list} onPress={this._goView}>
             <Text>提及我的[开发中]</Text>

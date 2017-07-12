@@ -9,7 +9,8 @@ const getList = async (pageIndex, pathname) => {
     const keys = Object.keys(data);
     let list = [];
     keys.forEach((k) => {
-      if (k === 'comments' || k === 'users' || k === 'tags' || k === 'articles') {
+      if (k === 'comments' || k === 'users' || k === 'tags' || k === 'articles'
+        || k === 'commentedNotifications' || k === 'replyNotifications') {
         list = data[k];
       }
 

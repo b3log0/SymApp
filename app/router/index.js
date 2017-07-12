@@ -93,6 +93,9 @@ const NotificationsStack = StackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  List: {
+    screen: List
   }
 }, {
   headerMode: 'screen'
