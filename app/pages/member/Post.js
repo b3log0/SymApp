@@ -11,7 +11,6 @@ import tagsPng from '../../images/tags.png';
 import goodsPng from '../../images/goods.png';
 
 const {
-  KeyboardAvoidingView,
   Image,
   TextInput,
   View,
@@ -102,7 +101,7 @@ class Post extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={utils.column}>
+      <View style={utils.column}>
         <Modal visible={this.state.showTag} onRequestClose={() => null}>
           <TextInput
             style={[utils.statusBar, post.content]}
@@ -118,7 +117,6 @@ class Post extends Component {
             }}
           />
           <Button
-            style={post.tagBtn}
             onPress={() => this.setState({ showTag: false })}
             title={'确定'}
           />
@@ -164,8 +162,11 @@ class Post extends Component {
             >
               <Image source={uploadPng} style={icon.normal} />
             </TouchableOpacity>
-            <View style={post.button}>
-              <Button title={'确定'} onPress={() => this.setState({ showReward: false })} />
+            <View style={common.statusBarBtn}>
+              <Button
+                title={'确定'}
+                onPress={() => this.setState({ showReward: false })}
+              />
             </View>
           </View>
         </Modal>
@@ -227,11 +228,11 @@ class Post extends Component {
           >
             <Image source={tagsPng} style={icon.normal} />
           </TouchableOpacity>
-          <View style={post.button}>
+          <View style={common.statusBarBtn}>
             <Button title={'提交'} onPress={this._post} />
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }

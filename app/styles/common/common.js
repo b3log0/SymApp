@@ -31,5 +31,9 @@ export default {
   statusBarItem: {
     alignSelf: 'center',
     marginRight: 20
+  },
+  statusBarBtn: {
+    marginTop: 5,
+    marginRight: 5
   }
 };

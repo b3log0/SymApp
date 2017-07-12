@@ -15,13 +15,7 @@ export default {
     height: 120,
     marginBottom: 10,
     fontSize: 14,
-    flex: 1
-  },
-  button: {
-    paddingTop: 5
-  },
-  tagBtn: {
-    position: 'absolute',
-    bottom: 0
+    flex: 1,
+    textAlignVertical: 'top'
   }
 };

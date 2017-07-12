@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 
 class Owner {
   @observable showLogin;
+  @observable isLogin;
 
   constructor() {
     this.name = '';

@@ -30,12 +30,11 @@ class Login extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const { owner } = this.props;
-    AsyncStorage.getItem('@UserStore:name', (key, value) => {
-      owner.name = value;
-      this.setState({ name: value });
-    });
+    const name = await AsyncStorage.getItem('@UserStore:name');
+    owner.name = name;
+    this.setState({ name });
   }
 
   _login = async () => {

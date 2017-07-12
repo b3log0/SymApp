@@ -82,6 +82,20 @@ class Navigation extends Component {
 
   render() {
     const { owner } = this.props;
+
+    // process first login, reload owner info
+    if (owner.isLogin && this.state.name === '') {
+      memberAction.getDetail(owner.name).then((response) => {
+        this.setState({
+          name: owner.name,
+          intro: response.intro,
+          avatarURL: response.avatarURL,
+          nickname: response.nickname === '' ? owner.name : response.nickname,
+          isLoading: true
+        });
+      });
+    }
+
     let avatarURL = { uri: this.state.avatarURL };
 
     if (this.state.avatarURL === '') {

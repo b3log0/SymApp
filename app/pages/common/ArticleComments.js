@@ -58,16 +58,15 @@ class ArticleComments extends Component {
   render() {
     const { article } = this.props;
     return (
-      <View style={utils.column}>
+      <KeyboardAvoidingView style={utils.column}>
         <List
           reload={this.state.reload}
           pathname={`article/${article.oId}`}
           navigation={this.props.navigation}
           style={utils.flex}
         />
-        <KeyboardAvoidingView
-          behavior="padding"
-          style={[articleStyle.commentSubmit, common.statusBar]}
+        <View
+          style={common.statusBar}
         >
           <View style={articleStyle.commentInputWrap}>
             <TextInput
@@ -82,11 +81,11 @@ class ArticleComments extends Component {
               }}
             />
           </View>
-          <View style={articleStyle.commentBtn}>
+          <View style={common.statusBarBtn}>
             <Button title={'提交'} onPress={this._submitComment} />
           </View>
-        </KeyboardAvoidingView>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
