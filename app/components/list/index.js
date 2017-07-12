@@ -41,7 +41,11 @@ class List extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    if (nextProps.pathname === this.props.pathname) {
+    let reload = false;
+    if (typeof nextProps.reload !== 'undefined' && nextProps.reload) {
+      reload = true;
+    }
+    if (nextProps.pathname === this.props.pathname && !reload) {
       return;
     }
     this.setState({ isLoading: true, pageIndex: 0 });

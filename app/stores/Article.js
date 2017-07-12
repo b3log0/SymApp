@@ -27,6 +27,10 @@ class Article {
     this.authorName = authorName;
   };
 
+  @action setCommentOriginalCommentId = (commentOriginalCommentId) => {
+    this.commentOriginalCommentId = commentOriginalCommentId;
+  };
+
 }
 
 const article = new Article();

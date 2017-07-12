@@ -9,6 +9,7 @@ import {
 
 import Web from '../components/Web';
 import Article from '../pages/common/Article';
+import ArticleComments from '../pages/common/ArticleComments';
 import List from '../pages/common/List';
 import TagArticles from '../pages/common/TagArticles';
 import Home from '../pages/home/Home';
@@ -40,6 +41,9 @@ const HomeStack = StackNavigator({
   },
   Article: {
     screen: Article
+  },
+  ArticleComments: {
+    screen: ArticleComments
   }
 }, {
   headerMode: 'screen'
@@ -69,6 +73,9 @@ const MemberStack = StackNavigator({
   },
   Article: {
     screen: Article
+  },
+  ArticleComments: {
+    screen: ArticleComments
   },
   MemberPost: {
     screen: MemberPost
@@ -109,6 +116,9 @@ const OtherStack = StackNavigator({
   },
   Article: {
     screen: Article
+  },
+  ArticleComments: {
+    screen: ArticleComments
   },
   TagArticles: {
     screen: TagArticles

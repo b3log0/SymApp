@@ -14,8 +14,12 @@ export default {
     fontSize: 16
   },
   commentInputWrap: {
+    margin: 5,
     borderBottomWidth: 1,
     borderBottomColor: color.gray,
     flex: 1
+  },
+  commentBtn: {
+    marginTop: 5
   }
 };

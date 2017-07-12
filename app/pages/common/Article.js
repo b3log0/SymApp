@@ -36,8 +36,14 @@ class Article extends Component {
     };
   }
 
-  _goUpdate = async () => {
+  _goUpdate = () => {
     this.props.navigation.navigate('MemberPost', { stackTitle: '更新' });
+  };
+
+  _goComments = () => {
+    const { article } = this.props;
+    article.setCommentOriginalCommentId('');
+    this.props.navigation.navigate('ArticleComments', { stackTitle: '更新' });
   };
 
   _onMessage = () => {
