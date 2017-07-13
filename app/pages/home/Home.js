@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
+import Notification from '../../components/Notification';
 import List from '../../components/list';
 import ownerAction from '../../actions/Owner';
 import notificationAction from '../../actions/Notification';
@@ -39,8 +40,15 @@ class Index extends Component {
   componentDidMount() {
     this._notificationTimer = setInterval(
       () => {
-        InteractionManager.runAfterInteractions(() => {
-          notificationAction.getCntx();
+        InteractionManager.runAfterInteractions(async () => {
+          const unreadCnt = await notificationAction.getCntx();
+
+          Notification.localNotification({
+            id: '1',
+            title: '黑客派',
+            message: `你有 ${unreadCnt} 条新消息`
+          });
+          Notification.setApplicationIconBadgeNumber(unreadCnt);
         });
       },
       notificationDuration
