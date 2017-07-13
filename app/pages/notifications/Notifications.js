@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
+import Notification from '../../components/Notification';
 import Login from '../../components/Login';
 import ownerAction from '../../actions/Owner';
 import { utils, module, color } from '../../styles';
@@ -37,6 +38,9 @@ class Navigation extends Component {
   };
 
   render() {
+    // clear icon badge number
+    Notification.setApplicationIconBadgeNumber(0);
+
     const { owner, notification } = this.props;
     return (
       <ScrollView style={[utils.statusBar, utils.flex]}>
