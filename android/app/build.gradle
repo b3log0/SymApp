@@ -102,6 +102,10 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+            JPUSH_APPKEY: "304b6453d07c772cbd6922d6", //在此替换你的APPKey
+            APP_CHANNEL: "developer-default"    //应用渠道号
+        ]
     }
     splits {
         abi {
@@ -111,17 +115,17 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        release {
-            storeFile file("../symapp-release-key.keystore")
-            storePassword SYMAPP_RELEASE_STORE_PASSWORD
-            keyAlias "symapp"
-            keyPassword SYMAPP_KEY_PASSWORD
-        }
-    }
+    // signingConfigs {
+    //     release {
+    //         storeFile file("../symapp-release-key.keystore")
+    //         storePassword SYMAPP_RELEASE_STORE_PASSWORD
+    //         keyAlias "symapp"
+    //         keyPassword SYMAPP_KEY_PASSWORD
+    //     }
+    // }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -143,6 +147,8 @@ android {
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
+    compile project(':jpush-react-native')
+    compile project(':jcore-react-native')
     compile "com.android.support:appcompat-v7:25.3.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     // 支持 GIF 动图
