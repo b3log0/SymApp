@@ -37,8 +37,10 @@ class Index extends Component {
     };
   }
 
-  componentDidMount() {
-    this._notificationTimer = setInterval(
+  async componentDidMount() {
+    const isLogin = await ownerAction.isLogin();
+    if (isLogin) {
+      this._notificationTimer = setInterval(
       () => {
         InteractionManager.runAfterInteractions(async () => {
           const unreadCnt = await notificationAction.getCntx();
@@ -53,6 +55,7 @@ class Index extends Component {
       },
       notificationDuration
     );
+    }
   }
 
   componentWillUnmount() {

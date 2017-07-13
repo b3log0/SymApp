@@ -55,9 +55,12 @@ class Navigation extends Component {
             }}
           >
             <Text>收到的回帖</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadCommentedNotificationCnt}
-            </Text>
+            {
+              notification.unreadCommentedNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadCommentedNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
@@ -66,47 +69,65 @@ class Navigation extends Component {
             }}
           >
             <Text>收到的回复</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadReplyNotificationCnt}
-            </Text>
+            {
+              notification.unreadReplyNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadReplyNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>提及我的[开发中]</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadAtNotificationCnt}
-            </Text>
+            {
+              notification.unreadAtNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadAtNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, module.listLast, utils.rowSpaceBetween]}
             onPress={this._goView}
           >
             <Text>我关注的[开发中]</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadFollowingNotificationCnt}
-            </Text>
+            {
+              notification.unreadFollowingNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadFollowingNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>积分[开发中]</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadPointNotificationCnt}
-            </Text>
+            {
+              notification.unreadPointNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadPointNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>同城[开发中]</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadBroadcastNotificationCnt}
-            </Text>
+            {
+              notification.unreadBroadcastNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadBroadcastNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, module.listLast, utils.rowSpaceBetween]}
             onPress={this._goView}
           >
             <Text>系统[开发中]</Text>
-            <Text style={{ color: color.red }}>
-              {notification.unreadSysAnnounceNotificationCnt}
-            </Text>
+            {
+              notification.unreadSysAnnounceNotificationCnt === '0' ?
+                <Text style={{ color: color.red }}>
+                  {notification.unreadSysAnnounceNotificationCnt}
+                </Text> : null
+            }
           </TouchableOpacity>
         </View>
       </ScrollView>);
