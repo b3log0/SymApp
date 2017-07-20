@@ -100,6 +100,9 @@ const NotificationsStack = StackNavigator({
   Article: {
     screen: Article
   },
+  WebView: {
+    screen: Web
+  },
   ArticleComments: {
     screen: ArticleComments
   }

@@ -152,11 +152,35 @@ class Navigation extends Component {
           >
             <Text>回帖</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={module.list} onPress={this._goView}>
-            <Text>匿贴[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: `member/${this.state.name}/articles/anonymous`,
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '匿贴'
+              });
+            }}
+          >
+            <Text>匿贴</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, module.listLast]} onPress={this._goView}>
-            <Text>匿回[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: `member/${this.state.name}/comments/anonymous`,
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '匿回'
+              });
+            }}
+          >
+            <Text>匿回</Text>
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
@@ -202,11 +226,35 @@ class Navigation extends Component {
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
-          <TouchableOpacity style={module.list} >
-            <Text>积分[开发中]</Text>
+          <TouchableOpacity
+            style={module.list}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: `member/${this.state.name}/points`,
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '积分'
+              });
+            }}
+          >
+            <Text>积分</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, module.listLast]}>
-            <Text>链接熔炉[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, module.listLast]}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: `member/${this.state.name}/comments/anonymous`,
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '链接熔炉'
+              });
+            }}
+          >
+            <Text>链接熔炉</Text>
           </TouchableOpacity>
         </View>
         {loginButton}

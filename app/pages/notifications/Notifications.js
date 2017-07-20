@@ -76,8 +76,20 @@ class Navigation extends Component {
               </Text>
             }
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
-            <Text>提及我的[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, utils.rowSpaceBetween]}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: 'notifications/at',
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '提及我的'
+              });
+            }}
+          >
+            <Text>提及我的</Text>
             {
               notification.unreadAtNotificationCnt === 0 ? null :
               <Text style={{ color: color.red }}>
@@ -87,9 +99,18 @@ class Navigation extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, module.listLast, utils.rowSpaceBetween]}
-            onPress={this._goView}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: 'notifications/following',
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '我关注的'
+              });
+            }}
           >
-            <Text>我关注的[开发中]</Text>
+            <Text>我关注的</Text>
             {
               notification.unreadFollowingNotificationCnt === 0 ? null :
               <Text style={{ color: color.red }}>
@@ -99,8 +120,20 @@ class Navigation extends Component {
           </TouchableOpacity>
         </View>
         <View style={module.wrap}>
-          <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
-            <Text>积分[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, utils.rowSpaceBetween]}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: 'notifications/point',
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '积分'
+              });
+            }}
+          >
+            <Text>积分</Text>
             {
               notification.unreadPointNotificationCnt === 0 ? null :
               <Text style={{ color: color.red }}>
@@ -108,8 +141,20 @@ class Navigation extends Component {
               </Text>
             }
           </TouchableOpacity>
-          <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
-            <Text>同城[开发中]</Text>
+          <TouchableOpacity
+            style={[module.list, utils.rowSpaceBetween]}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: 'notifications/broadcast',
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '同城'
+              });
+            }}
+          >
+            <Text>同城</Text>
             {
               notification.unreadBroadcastNotificationCnt === 0 ? null :
               <Text style={{ color: color.red }}>
@@ -119,9 +164,18 @@ class Navigation extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
-            onPress={this._goView}
+            onPress={() => {
+              this.props.navigation.navigate('WebView', {
+                path: 'notifications/sys-announce',
+                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                $('html').css({
+                  'background-color': '#fff'
+                });`,
+                stackTitle: '系统'
+              });
+            }}
           >
-            <Text>系统[开发中]</Text>
+            <Text>系统</Text>
             {
               notification.unreadSysAnnounceNotificationCnt === 0 ? null :
               <Text style={{ color: color.red }}>
