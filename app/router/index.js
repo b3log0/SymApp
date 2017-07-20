@@ -99,6 +99,9 @@ const NotificationsStack = StackNavigator({
   },
   Article: {
     screen: Article
+  },
+  ArticleComments: {
+    screen: ArticleComments
   }
 }, {
   headerMode: 'screen'

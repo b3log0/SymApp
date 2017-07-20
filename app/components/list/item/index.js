@@ -6,6 +6,7 @@ import CommentItem from './Comment';
 import ArticleCommentItem from './ArticleComment';
 import UserItem from './User';
 import TagItem from './Tag';
+import NotificationItem from './Notification';
 
 class Item extends PureComponent {
   static propTypes = {
@@ -15,6 +16,9 @@ class Item extends PureComponent {
 
   render() {
     const rowData = this.props.rowData;
+    if (typeof (rowData.dataId) === 'string') {
+      return <NotificationItem navigation={this.props.navigation} rowData={rowData} />;
+    }
 
     if (typeof (rowData.commentArticleAuthorName) === 'string') {
       return <CommentItem navigation={this.props.navigation} rowData={rowData} />;
