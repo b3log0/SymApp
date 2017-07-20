@@ -15,9 +15,10 @@ class Web extends Component {
     navigation: PropTypes.object.isRequired
   };
 
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.stackTitle,
     tabBarVisible: false
-  };
+  });
 
   constructor(props) {
     super(props);
@@ -43,6 +44,7 @@ class Web extends Component {
         <WebView
           scrollEnabled={this.state.scrollEnabled}
           startInLoadingState
+          injectedJavaScript={params.injectJS}
           renderLoading={() => <ActivityIndicator style={utils.verticalCenter} />}
           source={{ uri: `${params.path.indexOf('http') === 0 ? '' : origin}${params.path}` }}
         />

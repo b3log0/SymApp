@@ -21,7 +21,6 @@ class Notification {
     this.unreadPointNotificationCnt = 0;
     this.unreadReplyNotificationCnt = 0;
     this.unreadSysAnnounceNotificationCnt = 0;
-    this.unreadCnt = 0;
   }
 
   @action setCnts = (data) => {
@@ -34,16 +33,6 @@ class Notification {
     this.unreadPointNotificationCnt = data.unreadPointNotificationCnt;
     this.unreadReplyNotificationCnt = data.unreadReplyNotificationCnt;
     this.unreadSysAnnounceNotificationCnt = data.unreadSysAnnounceNotificationCnt;
-
-    this.unreadCnt = data.unreadAtNotificationCnt +
-    data.unreadBroadcastNotificationCnt +
-    data.unreadCommentedNotificationCnt +
-    data.unreadFollowingNotificationCnt +
-    data.unreadNewFollowerNotificationCnt +
-    data.unreadNotificationCnt +
-    data.unreadPointNotificationCnt +
-    data.unreadReplyNotificationCnt +
-    data.unreadSysAnnounceNotificationCnt;
   };
 }
 

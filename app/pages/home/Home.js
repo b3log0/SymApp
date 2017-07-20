@@ -40,17 +40,18 @@ class Index extends Component {
   async componentDidMount() {
     const isLogin = await ownerAction.isLogin();
     if (isLogin) {
+      notificationAction.getCntx();
       this._notificationTimer = setInterval(
       () => {
         InteractionManager.runAfterInteractions(async () => {
-          const unreadCnt = await notificationAction.getCntx();
+          const response = await notificationAction.getCntx();
 
           Notification.localNotification({
             id: '1',
             title: '黑客派',
-            message: `你有 ${unreadCnt} 条新消息`
+            message: `你有 ${response.unreadNotificationCnt} 条新消息`
           });
-          Notification.setApplicationIconBadgeNumber(unreadCnt);
+          Notification.setApplicationIconBadgeNumber(response.unreadNotificationCnt);
         });
       },
       notificationDuration

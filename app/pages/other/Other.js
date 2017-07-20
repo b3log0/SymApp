@@ -43,8 +43,8 @@ class Other extends Component {
     this.props.navigation.navigate('Domain', { stackTitle });
   };
 
-  _goView = (path) => {
-    this.props.navigation.navigate('WebView', { path });
+  _goView = (path, injectJS, stackTitle) => {
+    this.props.navigation.navigate('WebView', { path, injectJS, stackTitle });
   };
 
   render() {
@@ -77,13 +77,33 @@ class Other extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={module.list}
-            onPress={() => { this._goView('activity/1A0001'); }}
+            onPress={() => {
+              this._goView(
+                'activity/1A0001',
+                `$('body').html($('.activity').html()).addClass('content activity');
+                $('html').css({
+                  'background-color': '#fff',
+                  'padding': '10px'
+                });`,
+                '上证博彩'
+              );
+            }}
           >
             <Text>上证博彩</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[module.list, module.listLast]}
-            onPress={() => { this._goView('activity/character'); }}
+            onPress={() => {
+              this._goView(
+                'activity/character',
+                `$('body').html($('.activity').html()).addClass('content activity');
+                $('html').css({
+                  'background-color': '#fff',
+                  'padding': '10px'
+                });`,
+                '字'
+              );
+            }}
           >
             <Text>字</Text>
           </TouchableOpacity>
@@ -94,18 +114,51 @@ class Other extends Component {
         <View style={module.wrap}>
           <TouchableOpacity
             style={module.list}
+            onPress={() => {
+              this._goView(
+                'perfect',
+                `$('body').html($('.content').html()).addClass('content');
+                $('html').css({
+                  'background-color': '#fff',
+                  'padding': '10px'
+                });`,
+                '优选'
+              );
+            }}
           >
-            <Text>优选[开发中]</Text>
+            <Text>优选</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={module.list}
+            onPress={() => {
+              this._goView(
+                'city/my',
+                `$('body').html($('.content').html()).addClass('content');
+                $('html').css({
+                  'background-color': '#fff',
+                  'padding': '10px'
+                });`,
+                '同城'
+              );
+            }}
           >
-            <Text>同城[开发中]</Text>
+            <Text>同城</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={module.list}
+            onPress={() => {
+              this._goView(
+                'timeline',
+                `$('body').html($('.content').html()).addClass('content');
+                $('html').css({
+                  'background-color': '#fff',
+                  'padding': '10px'
+                });`,
+                '此刻'
+              );
+            }}
           >
-            <Text>此刻[开发中]</Text>
+            <Text>此刻</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={module.list}

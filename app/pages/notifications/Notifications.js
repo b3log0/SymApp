@@ -56,10 +56,10 @@ class Navigation extends Component {
           >
             <Text>收到的回帖</Text>
             {
-              notification.unreadCommentedNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadCommentedNotificationCnt}
-                </Text> : null
+              notification.unreadCommentedNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadCommentedNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
           <TouchableOpacity
@@ -70,19 +70,19 @@ class Navigation extends Component {
           >
             <Text>收到的回复</Text>
             {
-              notification.unreadReplyNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadReplyNotificationCnt}
-                </Text> : null
+              notification.unreadReplyNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadReplyNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>提及我的[开发中]</Text>
             {
-              notification.unreadAtNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadAtNotificationCnt}
-                </Text> : null
+              notification.unreadAtNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadAtNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
           <TouchableOpacity
@@ -91,10 +91,10 @@ class Navigation extends Component {
           >
             <Text>我关注的[开发中]</Text>
             {
-              notification.unreadFollowingNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadFollowingNotificationCnt}
-                </Text> : null
+              notification.unreadFollowingNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadFollowingNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
         </View>
@@ -102,31 +102,45 @@ class Navigation extends Component {
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>积分[开发中]</Text>
             {
-              notification.unreadPointNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadPointNotificationCnt}
-                </Text> : null
+              notification.unreadPointNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadPointNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
           <TouchableOpacity style={[module.list, utils.rowSpaceBetween]} onPress={this._goView}>
             <Text>同城[开发中]</Text>
             {
-              notification.unreadBroadcastNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadBroadcastNotificationCnt}
-                </Text> : null
+              notification.unreadBroadcastNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadBroadcastNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
           <TouchableOpacity
-            style={[module.list, module.listLast, utils.rowSpaceBetween]}
+            style={[module.list, utils.rowSpaceBetween]}
             onPress={this._goView}
           >
             <Text>系统[开发中]</Text>
             {
-              notification.unreadSysAnnounceNotificationCnt === '0' ?
-                <Text style={{ color: color.red }}>
-                  {notification.unreadSysAnnounceNotificationCnt}
-                </Text> : null
+              notification.unreadSysAnnounceNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadSysAnnounceNotificationCnt}
+              </Text>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[module.list, module.listLast, utils.rowSpaceBetween]}
+            onPress={() => {
+              this._goView('List', `user/${owner.name}/followers`, '关注者');
+            }}
+          >
+            <Text>新增关注者</Text>
+            {
+              notification.unreadNewFollowerNotificationCnt === 0 ? null :
+              <Text style={{ color: color.red }}>
+                {notification.unreadNewFollowerNotificationCnt}
+              </Text>
             }
           </TouchableOpacity>
         </View>

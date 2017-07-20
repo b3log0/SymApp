@@ -6,7 +6,7 @@ const getCntx = async () => {
     const response = await FetchService.get('notification/unread/count');
     notificationStore.setCnts(response.data);
 
-    return Promise.resolve(notificationStore.unreadCnt);
+    return Promise.resolve(notificationStore);
   } catch (error) {
     console.warn(error);
     return null;

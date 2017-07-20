@@ -6,6 +6,7 @@ import md5 from 'blueimp-md5';
 
 import OwnerStore from '../stores/Owner';
 import FetchService from '../services/FetchService';
+import notificationAction from './Notification';
 
 const isLogin = async () => {
   try {
@@ -35,6 +36,7 @@ const login = async (name, password) => {
       AsyncStorage.setItem('@UserStore:isLogin', 'true');
       AsyncStorage.setItem('@UserStore:name', response.userName);
       OwnerStore.setNameAndLogin(response.userName, true);
+      notificationAction.getCntx();
     } else {
       Alert.alert(response.msg);
     }
