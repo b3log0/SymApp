@@ -10,6 +10,7 @@ import {
 import { inject } from 'mobx-react';
 
 import articleAction from '../../actions/Article';
+import notificationAction from '../../actions/Notification';
 import { origin } from '../../config/symphony';
 import { utils, common, icon } from '../../styles';
 import removePng from '../../images/remove.png';
@@ -50,6 +51,7 @@ class Article extends Component {
   };
 
   _onMessage = () => {
+    notificationAction.getCntx();
     this.setState({
       loadEnd: true
     });

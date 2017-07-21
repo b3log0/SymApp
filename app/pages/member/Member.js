@@ -157,7 +157,7 @@ class Navigation extends Component {
             onPress={() => {
               this.props.navigation.navigate('WebView', {
                 path: `member/${this.state.name}/articles/anonymous`,
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                injectJS: `$('body').html($('.list').html()).addClass('list');
                 $('html').css({
                   'background-color': '#fff'
                 });`,
@@ -172,7 +172,7 @@ class Navigation extends Component {
             onPress={() => {
               this.props.navigation.navigate('WebView', {
                 path: `member/${this.state.name}/comments/anonymous`,
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                injectJS: `$('body').html($('.list').html()).addClass('list');
                 $('html').css({
                   'background-color': '#fff'
                 });`,
@@ -231,7 +231,8 @@ class Navigation extends Component {
             onPress={() => {
               this.props.navigation.navigate('WebView', {
                 path: `member/${this.state.name}/points`,
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                injectJS: `$('body').html($('.tab-current').next().html());
+                $('.ranking').remove();
                 $('html').css({
                   'background-color': '#fff'
                 });`,
@@ -245,10 +246,11 @@ class Navigation extends Component {
             style={[module.list, module.listLast]}
             onPress={() => {
               this.props.navigation.navigate('WebView', {
-                path: `member/${this.state.name}/comments/anonymous`,
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
+                path: `member/${this.state.name}/forge/link`,
+                injectJS: `$('body').html($('.link-forge').html()).addClass('link-forge');
                 $('html').css({
-                  'background-color': '#fff'
+                  'background-color': '#fff',
+                  'padding': '10px'
                 });`,
                 stackTitle: '链接熔炉'
               });
