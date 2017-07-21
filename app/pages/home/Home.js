@@ -45,13 +45,15 @@ class Index extends Component {
       () => {
         InteractionManager.runAfterInteractions(async () => {
           const response = await notificationAction.getCntx();
-
+          Notification.setApplicationIconBadgeNumber(response.unreadNotificationCnt);
+          if (response.unreadNotificationCnt === 0) {
+            return;
+          }
           Notification.localNotification({
             id: '1',
             title: '黑客派',
             message: `你有 ${response.unreadNotificationCnt} 条新消息`
           });
-          Notification.setApplicationIconBadgeNumber(response.unreadNotificationCnt);
         });
       },
       notificationDuration
