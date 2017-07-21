@@ -5,8 +5,8 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Button,
-  InteractionManager
+  InteractionManager,
+  Text
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
@@ -109,10 +109,42 @@ class Index extends Component {
           <Login />
         </Modal>
         <View style={common.sort}>
-          <Button title={'默认'} onPress={() => this._changeSort('')} />
-          <Button title={'热议'} onPress={() => this._changeSort('/hot')} />
-          <Button title={'好评'} onPress={() => this._changeSort('/good')} />
-          <Button title={'最近评论'} onPress={() => this._changeSort('/reply')} />
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === 'articles/latest' ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('')}
+          >
+            <Text style={common.sortItemText}>默认</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === 'articles/latest/hot' ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/hot')}
+          >
+            <Text style={common.sortItemText}>热议</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === 'articles/latest/good' ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/good')}
+          >
+            <Text style={common.sortItemText}>好评</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === 'articles/latest/reply' ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/reply')}
+          >
+            <Text style={common.sortItemText}>最近回帖</Text>
+          </TouchableOpacity>
         </View>
         <List
           pathname={this.state.pathname}

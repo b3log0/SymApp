@@ -3,7 +3,21 @@ import color from './color';
 export default {
   sort: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
+  },
+  sortItem: {
+    backgroundColor: color.black,
+    flex: 1
+  },
+  sortItemText: {
+    color: color.white,
+    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  sortItemTextCurrent: {
+    borderBottomWidth: 2,
+    borderBottomColor: color.red
   },
   avatar: {
     borderRadius: 8,

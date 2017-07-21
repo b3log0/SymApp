@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
-  Button
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 import List from '../../components/list/index';
@@ -36,11 +37,56 @@ class TagArticles extends Component {
     return (
       <View style={utils.flex}>
         <View style={common.sort}>
-          <Button title={'默认'} onPress={() => this._changeSort('')} />
-          <Button title={'热议'} onPress={() => this._changeSort('/hot')} />
-          <Button title={'好评'} onPress={() => this._changeSort('/good')} />
-          <Button title={'优选'} onPress={() => this._changeSort('/perfect')} />
-          <Button title={'最近回帖'} onPress={() => this._changeSort('/reply')} />
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === `${this.props.navigation.state.params.pathname}`
+                ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('')}
+          >
+            <Text style={common.sortItemText}>默认</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === `${this.props.navigation.state.params.pathname}/hot`
+                ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/hot')}
+          >
+            <Text style={common.sortItemText}>热议</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === `${this.props.navigation.state.params.pathname}/good`
+                ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/good')}
+          >
+            <Text style={common.sortItemText}>好评</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === `${this.props.navigation.state.params.pathname}/perfect`
+                ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/perfect')}
+          >
+            <Text style={common.sortItemText}>优选</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              common.sortItem,
+              this.state.pathname === `${this.props.navigation.state.params.pathname}/reply`
+                ? common.sortItemTextCurrent : ''
+            ]}
+            onPress={() => this._changeSort('/reply')}
+          >
+            <Text style={common.sortItemText}>最近回帖</Text>
+          </TouchableOpacity>
         </View>
         <List navigation={this.props.navigation} pathname={this.state.pathname} />
       </View>);
