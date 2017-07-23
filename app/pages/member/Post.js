@@ -10,6 +10,9 @@ import atPng from '../../images/at.png';
 import tagsPng from '../../images/tags.png';
 import goodsPng from '../../images/goods.png';
 
+import ImgUpload from '../../components/ImgUpload';
+
+
 const {
   Image,
   TextInput,
@@ -20,6 +23,7 @@ const {
   Button,
   Modal
 } = ReactNative;
+
 
 @inject('article')
 class Post extends Component {
@@ -99,6 +103,12 @@ class Post extends Component {
     }
   };
 
+  _imgPicker = () => {
+    ImgUpload.upload().then((res) => {
+      console.log(res);
+      Alert.alert('上传成功');
+    });
+  }
   render() {
     return (
       <View style={utils.column}>
@@ -208,9 +218,10 @@ class Post extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={common.statusBarItem}
-            onPress={() => {
-              Alert.alert('开发中');
-            }}
+            onPress={this._imgPicker}
+          // onPress={() => {
+          //  Alert.alert('开发中');
+          // }}
           >
             <Image source={uploadPng} style={icon.normal} />
           </TouchableOpacity>
