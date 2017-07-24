@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactNative from 'react-native';
-import { inject } from 'mobx-react';
-
-import articleAction from '../../actions/Article';
-import { post, utils, icon, common } from '../../styles';
-import uploadPng from '../../images/upload.png';
-import atPng from '../../images/at.png';
-import tagsPng from '../../images/tags.png';
-import goodsPng from '../../images/goods.png';
-
-import ImgUpload from '../../components/ImgUpload';
-
-
-const {
+import {
   Image,
   TextInput,
   View,
@@ -22,8 +9,16 @@ const {
   Alert,
   Button,
   Modal
-} = ReactNative;
+} from 'react-native';
+import { inject } from 'mobx-react';
 
+import articleAction from '../../actions/Article';
+import { post, utils, icon, common } from '../../styles';
+import uploadPng from '../../images/upload.png';
+import atPng from '../../images/at.png';
+import tagsPng from '../../images/tags.png';
+import goodsPng from '../../images/goods.png';
+import ImgUpload from '../../components/ImgUpload';
 
 @inject('article')
 class Post extends Component {

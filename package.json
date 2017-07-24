@@ -4,7 +4,6 @@
   "private": true,
   "pre-commit": "lint",
   "scripts": {
-    "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
     "lint": "eslint . --fix --format=node_modules/eslint-friendly-formatter --quiet",
     "start": "node node_modules/react-native/local-cli/cli.js start --port 8080",
     "test": "jest",

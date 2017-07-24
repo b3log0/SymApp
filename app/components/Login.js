@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactNative from 'react-native';
-import { inject } from 'mobx-react';
-
-import ownerAction from '../actions/Owner';
-import { form, icon, color, utils } from '../styles/index';
-import logoPng from '../images/logo.png';
-
-const {
+import {
   KeyboardAvoidingView,
   Image,
   Button,
   TextInput,
   View,
   AsyncStorage
-} = ReactNative;
+} from 'react-native';
+import { inject } from 'mobx-react';
+
+import ownerAction from '../actions/Owner';
+import { form, icon, color, utils } from '../styles/index';
+import logoPng from '../images/logo.png';
 
 @inject('owner')
 class Login extends Component {
