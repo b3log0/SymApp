@@ -18,6 +18,7 @@ const genUUID = () => {
   ret = ret.replace(new RegExp('-', 'g'), '');
   return ret;
 };
+
 const ImgUpload = {
   upload() {
     const options = {
