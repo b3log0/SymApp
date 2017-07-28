@@ -1,6 +1,7 @@
-import { Alert, AsyncStorage } from 'react-native';
+import { Alert } from 'react-native';
 
 import { api } from '../config/symphony';
+import ownerAction from '../actions/Owner';
 
 const errorProcess = (response) => {
   if (response.status === 200) {
@@ -8,8 +9,7 @@ const errorProcess = (response) => {
   }
 
   if (response.status === 403) {
-    AsyncStorage.removeItem('@UserStore:isLogin');
-    Alert.alert('403', '请登录');
+    ownerAction.logout();
   } else {
     Alert.alert(response.status.toString(), response.url);
   }

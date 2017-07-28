@@ -96,6 +96,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
             onPress={() => {
+              // this._goView('List', 'notifications/at', '提及我的');
               this._goWebView({
                 path: 'notifications/at',
                 injectJS: `$('body').html($('.content').html()).addClass('content list');
