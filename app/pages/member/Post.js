@@ -19,6 +19,7 @@ import atPng from '../../images/at.png';
 import tagsPng from '../../images/tags.png';
 import goodsPng from '../../images/goods.png';
 import ImgUpload from '../../components/ImgUpload';
+import { qiniu } from '../../config/symphony';
 
 @inject('article')
 class Post extends Component {
@@ -98,12 +99,25 @@ class Post extends Component {
     }
   };
 
-  _imgPicker = () => {
-    ImgUpload.upload().then((res) => {
-      console.log(res);
-      Alert.alert('上传成功');
-    });
-  }
+  _uploadImg = async (type) => {
+    try {
+      const response = await ImgUpload.upload();
+      const path = JSON.parse(response.responseText).key;
+      const pathList = path.split('/');
+      const content = `${this.state[type] || ''}
+![${pathList[pathList.length - 1]}](${qiniu.origin}${path})`;
+
+      const state = {};
+      state[type] = content;
+      this.setState(state);
+      if (!this.state.isUpdate) {
+        AsyncStorage.setItem(`@ArticleStore:${type}`, content);
+      }
+    } catch (e) {
+      console.log('Image Upload Error:', e);
+    }
+  };
+
   render() {
     return (
       <View style={utils.column}>
@@ -162,7 +176,7 @@ class Post extends Component {
             <TouchableOpacity
               style={common.statusBarItem}
               onPress={() => {
-                Alert.alert('开发中');
+                this._uploadImg('rewardContent');
               }}
             >
               <Image source={uploadPng} style={icon.normal} />
@@ -213,10 +227,9 @@ class Post extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={common.statusBarItem}
-            onPress={this._imgPicker}
-          // onPress={() => {
-          //  Alert.alert('开发中');
-          // }}
+            onPress={() => {
+              this._uploadImg('content');
+            }}
           >
             <Image source={uploadPng} style={icon.normal} />
           </TouchableOpacity>
