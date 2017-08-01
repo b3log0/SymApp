@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Image,
-  Dimensions,
+  Dimensions
 } from 'react-native';
 
 class AutoSizedImage extends Component {
