@@ -18,7 +18,7 @@ import { utils, module, member as memberStyle, common } from '../../styles';
 
 @inject('owner')
 @observer
-class Navigation extends Component {
+class Member extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
@@ -264,4 +264,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default Member;

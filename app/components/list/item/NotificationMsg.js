@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
-import { list, common } from '../../../styles/index';
+import { list } from '../../../styles/index';
 
 @inject('article')
 class NotificationMsg extends Component {
@@ -21,12 +21,13 @@ class NotificationMsg extends Component {
 
   _goComment = () => {
     const { rowData, article } = this.props;
+    const id = /href="\/article\/(\d{13})"/.exec(rowData.content)[1];
     article.preSet({
-      oId: rowData.dataId,
+      oId: id,
       authorName: rowData.authorName
     });
     this.props.navigation.navigate('Article', {
-      oId: rowData.dataId,
+      oId: id,
       stackTitle: rowData.title
     });
   };
@@ -36,14 +37,13 @@ class NotificationMsg extends Component {
     return (
       <View style={list.normal}>
         <TouchableOpacity onPress={this._goComment}>
-          <Text style={list.title}>{rowData.description}</Text>
-          <View style={list.info} >
+          <View style={list.info}>
             <Image
-              source={{ uri: rowData.thumbnailURL }}
-              style={common.avatar}
+              source={{ uri: rowData.authorAvatarURL }}
+              style={list.infoAvatar}
             />
-            <Text style={list.infoText}>
-              {rowData.userName}
+            <Text style={list.title}>
+              {rowData.content.replace(/<\/a>/g, '').replace(/<a href="\S+">/g, '')}
             </Text>
           </View>
         </TouchableOpacity>

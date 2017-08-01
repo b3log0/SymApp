@@ -8,6 +8,7 @@ import UserItem from './User';
 import TagItem from './Tag';
 import NotificationItem from './Notification';
 import NotificationMsgItem from './NotificationMsg';
+import NotificationPointItem from './NotificationPoint';
 
 class Item extends PureComponent {
   static propTypes = {
@@ -17,12 +18,14 @@ class Item extends PureComponent {
 
   render() {
     const rowData = this.props.rowData;
-    if (typeof (rowData.dataId) === 'string' || rowData.dataType === 2) {
+    if (typeof (rowData.dataId) === 'string') {
+      if (rowData.dataType && rowData.dataType !== 2) {
+        if (typeof (rowData.authorName) === 'undefined') {
+          return <NotificationPointItem navigation={this.props.navigation} rowData={rowData} />;
+        }
+        return <NotificationMsgItem navigation={this.props.navigation} rowData={rowData} />;
+      }
       return <NotificationItem navigation={this.props.navigation} rowData={rowData} />;
-    }
-
-    if (typeof (rowData.dataType) === 'number' && rowData.dataType !== 2) {
-      return <NotificationMsgItem navigation={this.props.navigation} rowData={rowData} />;
     }
 
     if (typeof (rowData.commentArticleAuthorName) === 'string') {

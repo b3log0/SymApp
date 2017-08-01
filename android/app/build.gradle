@@ -111,17 +111,17 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    // signingConfigs {
-    //     release {
-    //         storeFile file("../symapp-release-key.keystore")
-    //         storePassword SYMAPP_RELEASE_STORE_PASSWORD
-    //         keyAlias "symapp"
-    //         keyPassword SYMAPP_KEY_PASSWORD
-    //     }
-    // }
+    signingConfigs {
+        release {
+            storeFile file("../symapp-release-key.keystore")
+            storePassword SYMAPP_RELEASE_STORE_PASSWORD
+            keyAlias "symapp"
+            keyPassword SYMAPP_KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
-            // signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -131,7 +131,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -148,7 +148,7 @@ dependencies {
     // 支持 GIF 动图
     compile 'com.facebook.fresco:animated-gif:1.0.1'
     compile project(':react-native-push-notification')
-    compile ('com.google.android.gms:play-services-gcm:8.1.0') {
+    compile('com.google.android.gms:play-services-gcm:8.1.0') {
         force = true;
     }
 

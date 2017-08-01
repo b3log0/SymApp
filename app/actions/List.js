@@ -11,7 +11,8 @@ const getList = async (pageIndex, pathname) => {
     keys.forEach((k) => {
       if (k === 'comments' || k === 'users' || k === 'tags' || k === 'articles'
         || k === 'commentedNotifications' || k === 'replyNotifications'
-        || k === 'atNotifications') {
+        || k === 'atNotifications' || k === 'followingNotifications' || k === 'pointNotifications'
+        || k === 'broadcastNotifications' || k === 'sysAnnounceNotifications') {
         list = data[k];
       }
 

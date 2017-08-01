@@ -37,6 +37,12 @@ export default {
     paddingTop: 5,
     paddingBottom: 5
   },
+  infoAvatar: {
+    borderRadius: 10,
+    height: 20,
+    width: 20,
+    marginRight: 5
+  },
   infoText: {
     paddingLeft: 5,
     fontSize: 13,

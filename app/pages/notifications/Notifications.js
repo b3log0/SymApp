@@ -47,16 +47,6 @@ class Navigation extends Component {
     }
   };
 
-  _goWebView = async (data) => {
-    const { owner } = this.props;
-    const isLogin = await ownerAction.isLogin();
-    if (!isLogin) {
-      owner.setShowLogin(true);
-    } else {
-      this.props.navigation.navigate('WebView', data);
-    }
-  };
-
   render() {
     const { owner, notification } = this.props;
     return (
@@ -96,15 +86,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
             onPress={() => {
-              // this._goView('List', 'notifications/at', '提及我的');
-              this._goWebView({
-                path: 'notifications/at',
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
-                $('html').css({
-                  'background-color': '#fff'
-                });`,
-                stackTitle: '提及我的'
-              });
+              this._goView('List', 'notifications/at', '提及我的');
             }}
           >
             <Text>提及我的</Text>
@@ -118,14 +100,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, module.listLast, utils.rowSpaceBetween]}
             onPress={() => {
-              this._goWebView({
-                path: 'notifications/following',
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
-                $('html').css({
-                  'background-color': '#fff'
-                });`,
-                stackTitle: '我关注的'
-              });
+              this._goView('List', 'notifications/following', '我关注的');
             }}
           >
             <Text>我关注的</Text>
@@ -141,14 +116,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
             onPress={() => {
-              this._goWebView({
-                path: 'notifications/point',
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
-                $('html').css({
-                  'background-color': '#fff'
-                });`,
-                stackTitle: '积分'
-              });
+              this._goView('List', 'notifications/point', '积分');
             }}
           >
             <Text>积分</Text>
@@ -162,14 +130,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
             onPress={() => {
-              this._goWebView({
-                path: 'notifications/broadcast',
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
-                $('html').css({
-                  'background-color': '#fff'
-                });`,
-                stackTitle: '同城'
-              });
+              this._goView('List', 'notifications/broadcast', '同城');
             }}
           >
             <Text>同城</Text>
@@ -183,14 +144,7 @@ class Navigation extends Component {
           <TouchableOpacity
             style={[module.list, utils.rowSpaceBetween]}
             onPress={() => {
-              this._goWebView({
-                path: 'notifications/sys-announce',
-                injectJS: `$('body').html($('.content').html()).addClass('content list');
-                $('html').css({
-                  'background-color': '#fff'
-                });`,
-                stackTitle: '系统'
-              });
+              this._goView('List', 'notifications/sys-announce', '系统');
             }}
           >
             <Text>系统</Text>

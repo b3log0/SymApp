@@ -105,6 +105,9 @@ const NotificationsStack = StackNavigator({
   },
   ArticleComments: {
     screen: ArticleComments
+  },
+  Member: {
+    screen: Member
   }
 }, {
   headerMode: 'screen'
