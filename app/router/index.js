@@ -175,7 +175,7 @@ const Root = TabNavigator({
       )
     }
   },
-  Member: {
+  MemberTab: {
     screen: MemberStack,
     navigationOptions: {
       tabBarIcon: obj => (
