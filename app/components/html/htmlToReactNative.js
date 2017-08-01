@@ -8,7 +8,7 @@ import htmlparser from 'htmlparser2-without-node-native';
 import entities from 'entities';
 
 import AutoSizedImage from '../AutoSizedImage';
-import { content } from '../../styles/index';
+import { content } from '../../styles';
 
 const htmlToReactNative = (rowHTML, opts, cb) => {
   const LINE_BREAK = '\n';

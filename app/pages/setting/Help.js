@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
-import { module } from '../../styles/index';
+import { module } from '../../styles';
 
 @inject('article')
 class Help extends Component {

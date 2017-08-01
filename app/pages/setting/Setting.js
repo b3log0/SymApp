@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import ownerAction from '../../actions/Owner';
-import { module } from '../../styles/index';
+import { module } from '../../styles';
 
 class SettingNavigation extends Component {
 

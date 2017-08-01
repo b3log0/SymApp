@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
-import { list } from '../../../styles/index';
+import { list } from '../../../styles';
 
 @inject('article')
 class NotificationPoint extends Component {
@@ -20,7 +20,7 @@ class NotificationPoint extends Component {
 
   _goComment = () => {
     const { rowData, article } = this.props;
-    const execResult = /\/article\/(\d+)"/.exec(rowData.content);
+    const execResult = /\/article\/(\d+)"/.exec(rowData.contentEmojUnicode);
     if (execResult) {
       const id = execResult[1];
       article.preSet({
@@ -29,20 +29,20 @@ class NotificationPoint extends Component {
       });
       this.props.navigation.navigate('Article', {
         oId: id,
-        stackTitle: /<a href="\/article\/\d{13}">(.+)<\/a>/.exec(rowData.content)[1]
+        stackTitle: /<a href="\/article\/\d{13}">(.+)<\/a>/.exec(rowData.contentEmojUnicode)[1]
       });
     } else {
-      this.props.navigation.navigate('Member', { name: /\/member\/(\w+)"/.exec(rowData.content)[1] });
+      this.props.navigation.navigate('Member', { name: /\/member\/(\w+)"/.exec(rowData.contentEmojUnicode)[1] });
     }
   };
 
   render() {
     const rowData = this.props.rowData;
     return (
-      <View style={list.normal}>
+      <View style={[list.normal, rowData.hasRead ? list.read : '']}>
         <TouchableOpacity onPress={this._goComment}>
           <Text style={list.title}>
-            {rowData.content.replace(/<\/a>/g, '').replace(/<a href="\S+">/g, '')
+            {rowData.contentEmojUnicode.replace(/<\/a>/g, '').replace(/<a href="\S+">/g, '')
               .replace('<font style="color: red;">', '').replace('</font>', '')}
           </Text>
         </TouchableOpacity>

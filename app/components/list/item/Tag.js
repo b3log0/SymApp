@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import tagsPng from '../../../images/tags.png';
-import { list, common } from '../../../styles/index';
+import { list, common } from '../../../styles';
 
 class Tag extends Component {
 

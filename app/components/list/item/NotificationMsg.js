@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
-import { list } from '../../../styles/index';
+import { list, utils } from '../../../styles';
 
 @inject('article')
 class NotificationMsg extends Component {
@@ -21,29 +21,29 @@ class NotificationMsg extends Component {
 
   _goComment = () => {
     const { rowData, article } = this.props;
-    const id = /href="\/article\/(\d{13})"/.exec(rowData.content)[1];
+    const id = /href="\/article\/(\d{13})"/.exec(rowData.contentEmojUnicode)[1];
     article.preSet({
       oId: id,
       authorName: rowData.authorName
     });
     this.props.navigation.navigate('Article', {
       oId: id,
-      stackTitle: rowData.title
+      stackTitle: rowData.titleEmojUnicode
     });
   };
 
   render() {
     const rowData = this.props.rowData;
     return (
-      <View style={list.normal}>
+      <View style={[list.normal, rowData.hasRead ? list.read : '']}>
         <TouchableOpacity onPress={this._goComment}>
           <View style={list.info}>
             <Image
               source={{ uri: rowData.authorAvatarURL }}
               style={list.infoAvatar}
             />
-            <Text style={list.title}>
-              {rowData.content.replace(/<\/a>/g, '').replace(/<a href="\S+">/g, '')}
+            <Text style={[list.title, utils.flex]}>
+              {rowData.contentEmojUnicode.replace(/<\/a>/g, '').replace(/<a href="\S+">/g, '')}
             </Text>
           </View>
         </TouchableOpacity>

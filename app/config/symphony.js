@@ -1,5 +1,5 @@
-const api = 'http://localhost:8084/api/v2/';
-const origin = 'http://localhost:8084/';
+const api = 'http://localhost:8080/api/v2/';
+const origin = 'http://localhost:8080/';
 const notificationDuration = 1000 * 60 * 5;
 const theme = 'black';
 const qiniu = {

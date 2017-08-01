@@ -7,6 +7,9 @@ export default {
     padding: 10,
     backgroundColor: color.white
   },
+  read: {
+    backgroundColor: color.fadeLight
+  },
   row: {
     flexDirection: 'row',
     flex: 1

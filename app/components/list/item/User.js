@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react';
 
-import { list, common } from '../../../styles/index';
+import { list, common } from '../../../styles';
 
 @inject('owner')
 class User extends Component {

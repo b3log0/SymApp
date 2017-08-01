@@ -9,7 +9,7 @@ import {
 import { inject } from 'mobx-react';
 
 import HTML from '../../../components/html';
-import { list, common } from '../../../styles/index';
+import { list, common } from '../../../styles';
 
 @inject('article')
 class Comment extends Component {

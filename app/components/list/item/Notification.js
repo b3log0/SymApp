@@ -9,7 +9,7 @@ import {
 import { inject } from 'mobx-react';
 
 import HTML from '../../../components/html';
-import { list, common } from '../../../styles/index';
+import { list, common } from '../../../styles';
 
 @inject('article')
 class Notification extends Component {
@@ -28,16 +28,16 @@ class Notification extends Component {
     });
     this.props.navigation.navigate('Article', {
       oId: rowData.dataId,
-      stackTitle: rowData.title
+      stackTitle: rowData.titleEmojUnicode
     });
   };
 
   render() {
     const rowData = this.props.rowData;
     return (
-      <View style={list.normal}>
+      <View style={[list.normal, rowData.hasRead ? list.read : '']}>
         <TouchableOpacity onPress={this._goComment}>
-          <Text style={list.title}>{rowData.title}</Text>
+          <Text style={list.title}>{rowData.titleEmojUnicode}</Text>
           <View style={list.info} >
             <Image
               source={{ uri: rowData.authorAvatarURL }}

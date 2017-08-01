@@ -6,7 +6,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import { utils } from '../styles/index';
+import { utils } from '../styles';
 import { origin } from '../config/symphony';
 
 class Web extends Component {

@@ -9,7 +9,7 @@ import {
 import { inject } from 'mobx-react';
 
 import ownerAction from '../../../actions/Owner';
-import { list, common } from '../../../styles/index';
+import { list, common } from '../../../styles';
 
 @inject('owner', 'article')
 class Article extends Component {

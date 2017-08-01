@@ -5,6 +5,7 @@ const COLOR = {
   red: '#d23f31',
   redLight: '#ffdce0',
   green: '#569e3d',
+  fadeLight: '#f2f2f2',
   fade: '#999',
   gray: '#666',
   black: '#3b3e43',

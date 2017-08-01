@@ -11,7 +11,7 @@ import {
 import { inject } from 'mobx-react';
 
 import ownerAction from '../actions/Owner';
-import { form, icon, color, utils } from '../styles/index';
+import { form, icon, color, utils } from '../styles';
 import logoPng from '../images/logo.png';
 
 @inject('owner')

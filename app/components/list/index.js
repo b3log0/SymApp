@@ -10,7 +10,7 @@ import {
 import ListAction from '../../actions/List';
 import ListItem from './item';
 import LoadMoreFooter from '../LoadMoreFooter';
-import { utils } from '../../styles/index';
+import { utils } from '../../styles';
 
 class List extends Component {
 
