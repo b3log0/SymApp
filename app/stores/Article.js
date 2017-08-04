@@ -32,7 +32,7 @@ class Article {
     this.rewardContent = '';
     this.type = 0;
     this.tags = '';
-  }
+  };
 
   @action setForm = (data) => {
     this.title = data.title;
