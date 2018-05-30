@@ -16,7 +16,12 @@ class List extends Component {
 
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    pathname: PropTypes.string.isRequired
+    pathname: PropTypes.string.isRequired,
+    reload: PropTypes.boolean
+  };
+
+  static defaultProps = {
+    reload: false
   };
 
   constructor(props) {
